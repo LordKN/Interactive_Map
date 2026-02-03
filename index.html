@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weights by Category (3 Years)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Weights by Category (ELK + MAR + SJ) — 2023 / 2024 / 2025</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>2023</h2>
+      <canvas id="pie2023"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>2024</h2>
+      <canvas id="pie2024"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>2025</h2>
+      <canvas id="pie2025"></canvas>
+    </section>
+  </main>
+
+  <div class="hint" style="padding: 0 16px 16px;">
+    Run with a local server so fetch() works (VS Code Live Server or <code>python -m http.server 8000</code>).
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script src = "/app.js"></script>
+</body>
+</html>
