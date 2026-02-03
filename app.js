@@ -154,6 +154,6 @@ async function addCountyBoundaries(map) {
 
 document.addEventListener("DOMContentLoaded", async () => {  // Wait for the DOM to be fully loaded
   const map = await initBaseMap();                                        // Initialize the base map
-  await addCountyBoundaries(map);                     // Add county boundaries to the map
+  await addCountyBoundaries(map);                                           // Add county boundaries to the map
   main().catch(err => console.error(err));                                 // Run the main function and catch any errors
 });
