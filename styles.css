@@ -15,14 +15,6 @@ header h1 {
     font-size: 18px;
 }
 
-main {
-    padding: 16px;
-    display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    align-items: start;
-}
-
 .card {
     background: #fff;
     border-radius: 14px;
@@ -39,4 +31,26 @@ main {
 canvas {
     width: 100%;
     max-width: 520px;
+}
+
+main{
+  padding: 16px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
+}
+
+/* Make the map section span full width */
+.card--map{
+  grid-column: 1 / -1;
+}
+
+/* Make the map big */
+#map{
+  height: 520px;         /* make it bigger if you want */
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #eee;
 }
