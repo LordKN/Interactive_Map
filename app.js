@@ -199,31 +199,115 @@ function povertyColor(pct) {
   return "#de2d26";                    // Red for very high poverty
 }
 
+async function buildPovertyLayer(geojsonPath = "tracts_acs_2023_elk_mar_sj.geojson") {
+  const res = await fetch(geojsonPath);
+  if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
+  const geojson = await res.json();
+
+  console.log("Poverty tracts:", geojson.features?.length);
+
+  const layer = L.geoJSON(geojson, {
+    style: (feature) => {
+      const pct = Number(feature.properties?.PovertyPct);
+      return {
+        color: "#ffffff",
+        weight: 0.3,
+        fillOpacity: 0.55,
+        fillColor: povertyColor(pct),
+      };
+    },
+    onEachFeature: (feature, leafletLayer) => {
+      const p = feature.properties || {};
+      const name = p.NAME ?? p.NAMELSAD ?? "Tract";
+
+      const pct = Number(p.PovertyPct);
+      const pctLabel = Number.isFinite(pct) ? `${pct.toFixed(1)}%` : "NA";
+
+      leafletLayer.bindPopup(`
+        <b>${name}</b><br>
+        Poverty: ${pctLabel}
+      `);
+    },
+  });
+
+  return layer;
+}
+
+function addPovertyLegend(map) {
+  const legend = L.control({ position: "bottomright" });
+
+  legend.onAdd = function () {
+    const div = L.DomUtil.create("div", "legend");
+    const grades = [0, 10, 20, 30];
+
+    div.innerHTML = `<b>Poverty %</b><br>`;
+    for (let i = 0; i < grades.length; i++) {
+      const from = grades[i];
+      const to = grades[i + 1];
+      const color = povertyColor(from + 0.01);
+
+      div.innerHTML += `
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+          <span style="width:14px;height:14px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          ${from}${to ? `–${to}` : "+"}
+        </div>
+      `;
+    }
+    return div;
+  };
+
+  legend.addTo(map);
+  return legend; // important so we can remove it later
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const map = initBaseMap();
 
   // Always on
   await addCountyBoundaries(map);
 
-  // Tracts toggle
-  const tractLayer = await addTractLayer(map);
-  
-  // Tract visibility
-  let tractsOn = true;                                    // start with tracts on
-  
-  const btn = document.getElementById("toggleTracts");
-  btn.addEventListener("click", () => {
-    if (!tractsOn) {
-      tractLayer.addTo(map);
-      btn.textContent = "Hide Tracts";
-      tractsOn = true;
-    } else {
-      map.removeLayer(tractLayer);
-      btn.textContent = "Show Tracts";
-      tractsOn = false;
-    }
-  })
+  // Poverty toggle state
+  let povertyLayer = null;
+  let povertyLegend = null;
+  let povertyOn = false;
 
-  
+  const btn_poverty = document.getElementById("togglePoverty");
+  if (!btn_poverty) {
+    console.warn('Button with id="togglePoverty" not found in HTML.');
+    return;
+  }
+
+  btn_poverty.addEventListener("click", async () => {
+    // Build layer only once (first click)
+    if (!povertyLayer) {
+      povertyLayer = await buildPovertyLayer();
+    }
+
+    if (!povertyOn) {
+      povertyLayer.addTo(map);
+      map.fitBounds(povertyLayer.getBounds());
+
+      if (!povertyLegend) povertyLegend = addPovertyLegend(map);
+
+      btn_poverty.textContent = "Hide Poverty Layer";
+      povertyOn = true;
+    } else {
+      map.removeLayer(povertyLayer);
+
+      if (povertyLegend) {
+        map.removeControl(povertyLegend);
+        povertyLegend = null;
+      }
+
+      btn_poverty.textContent = "Show Poverty Layer";
+      povertyOn = false;
+    }
+
+    // Tracts toggle (show all the time)
+    const tractLayer = await addTractLayer(map);
+    tractLayer.addTo(map);          // show it
+  });
+
+
   main().catch(err => console.error("Error in main:", err)); // Run the main function to load charts, with error handling
 });
