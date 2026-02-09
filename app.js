@@ -152,8 +152,78 @@ async function addCountyBoundaries(map) {
   map.fitBounds(layer.getBounds());
 }
 
-document.addEventListener("DOMContentLoaded", async () => {  // Wait for the DOM to be fully loaded
-  const map = await initBaseMap();                                        // Initialize the base map
-  await addCountyBoundaries(map);                                           // Add county boundaries to the map
-  main().catch(err => console.error(err));                                 // Run the main function and catch any errors
+async function addTractLayer(map) {
+  const res = await fetch("tracts_elk_mar_sj.geojson");
+  if (!res.ok) throw new Error("Failed to load tracts_elk_mar_sj.geojson");
+  const geojson = await res.json();
+
+  console.log("Tract features:", geojson.features?.length);
+
+  const tractLayer = L.geoJSON(geojson, {
+    style: () => ({
+      weight: 1,
+      color: "#000000",
+      fillOpacity: 0.05, // lighter fill so roads still visible
+    }),
+    onEachFeature: (feature, layer) => {
+      const p = feature.properties || {};
+      const name = p.NAME ?? p.NAMELSAD ?? "Tract";
+
+      // These may not exist in your TIGER tract file (will show N/A)
+      const povNum = Number(p.PovertyPct);
+      const povLabel = Number.isFinite(povNum) ? `${povNum.toFixed(1)}%` : "N/A";
+
+      const incNum = Number(p.MedianIncomeNum);
+      const incLabel = Number.isFinite(incNum) ? `$${incNum.toLocaleString()}` : "N/A";
+
+      layer.bindPopup(`
+        <b>${name}</b><br>
+        Poverty: ${povLabel}<br>
+        Median Income: ${incLabel}
+      `);
+    }
+  });
+
+  return tractLayer; // return only, don't add here
+}
+
+function povertyColor(pct) {
+  //Missing data
+  if (!Number.isFinite(pct)) return "#cccccc";
+
+  // Define thresholds and corresponding colors
+  if (pct < 10) return "#2ca25f";       // Green for low poverty
+  if (pct < 20) return "#99d8c9";      // Light green
+  if (pct < 30) return "#ffffb2";      // Yellow for moderate poverty
+  if (pct < 40) return "#fecc5c";      // Orange for high poverty
+  return "#de2d26";                    // Red for very high poverty
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const map = initBaseMap();
+
+  // Always on
+  await addCountyBoundaries(map);
+
+  // Tracts toggle
+  const tractLayer = await addTractLayer(map);
+  
+  // Tract visibility
+  let tractsOn = true;                                    // start with tracts on
+  
+  const btn = document.getElementById("toggleTracts");
+  btn.addEventListener("click", () => {
+    if (!tractsOn) {
+      tractLayer.addTo(map);
+      btn.textContent = "Hide Tracts";
+      tractsOn = true;
+    } else {
+      map.removeLayer(tractLayer);
+      btn.textContent = "Show Tracts";
+      tractsOn = false;
+    }
+  })
+
+  
+  main().catch(err => console.error("Error in main:", err)); // Run the main function to load charts, with error handling
 });
