@@ -225,7 +225,18 @@ function povertyColor(pct) {
   return "#de2d26";                    // Red for very high poverty
 }
 
-async function buildPovertyLayer(geojsonPath = "tracts_acs_2023_elk_mar_sj.geojson") {
+function incomeColor(income) {
+  if (!Number.isFinite(income)) return "#cccccc"; // missing
+
+  // Buckets in dollars (adjust anytime)
+  if (income < 40000) return "#eff3ff";
+  if (income < 60000) return "#bdd7e7";
+  if (income < 80000) return "#6baed6";
+  if (income < 100000) return "#3182bd";
+  return "#08519c"; // darkest = highest income
+}
+
+async function buildPovertyLayer(geojsonPath = "tracts_acs_2024_elk_mar_sj.geojson") {
   const res = await fetch(geojsonPath);
   if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
   const geojson = await res.json();
@@ -286,6 +297,71 @@ function addPovertyLegend(map) {
   return legend; // important so we can remove it later
 }
 
+async function buildIncomeLayer(geojsonPath = "tracts_acs_2024_elk_mar_sj.geojson") {
+  const res = await fetch(geojsonPath);
+  if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
+  const geojson = await res.json();
+
+  console.log("Income tracts:", geojson.features?.length);
+
+  const layer = L.geoJSON(geojson, {
+    style: (feature) => {
+      const income = Number(feature.properties?.MedianIncomeNum);
+      return {
+        color: "#ffffff",
+        weight: 0.3,
+        fillOpacity: 0.55,
+        fillColor: incomeColor(income),
+      };
+    },
+    onEachFeature: (feature, leafletLayer) => {
+      const p = feature.properties || {};
+      const name = p.NAME ?? p.NAMELSAD ?? "Tract";
+
+      const income = Number(p.MedianIncomeNum);
+      const incomeLabel = Number.isFinite(income)
+        ? `$${Math.round(income).toLocaleString()}`
+        : "NA";
+
+      leafletLayer.bindPopup(`
+        <b>${name}</b><br>
+        Median Income: ${incomeLabel}
+      `);
+    },
+  });
+
+  return layer;
+}
+
+function addIncomeLegend(map) {
+  const legend = L.control({ position: "bottomright" });
+
+  legend.onAdd = function () {
+    const div = L.DomUtil.create("div", "legend");
+    const grades = [0, 40000, 60000, 80000, 100000];
+
+    div.innerHTML = `<b>Median Income</b><br>`;
+
+    for (let i = 0; i < grades.length; i++) {
+      const from = grades[i];
+      const to = grades[i + 1];
+      const color = incomeColor(from + 1);
+
+      div.innerHTML += `
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+          <span style="width:14px;height:14px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          ${from.toLocaleString()}${to ? `–${to.toLocaleString()}` : "+"}
+        </div>
+      `;
+    }
+    return div;
+  };
+
+  legend.addTo(map);
+  return legend;
+}
+
+
 async function addBusRoutesLayer(map) {
   const res = await fetch("transpo_routes.geojson"); // or "data/transpo_routes.geojson"
   if (!res.ok) throw new Error("Failed to load transpo_routes.geojson");
@@ -323,6 +399,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   let povertyLegend = null;
   let povertyOn = false;
 
+  let incomeLayer = null;
+  let incomeLegend = null;
+  let incomeOn = false;
+
+
   let routesLayer = null;
   let routesOn = false;
 
@@ -350,6 +431,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       const btnR = document.getElementById("toggleRoutes");
       if (btnR) btnR.textContent = "Show Bus Routes";
     }
+
+    //Income off
+    if (incomeLayer && incomeOn) {
+      map.removeLayer(incomeLayer);
+      incomeOn = false;
+
+      if (incomeLegend) {
+        map.removeControl(incomeLegend);
+        incomeLegend = null;
+      }
+
+      const btnI = document.getElementById("toggleIncome");
+      if (btnI) btnI.textContent = "Show Income";
+    }
+
   }
 
   // -------- Poverty button --------
@@ -416,6 +512,46 @@ document.addEventListener("DOMContentLoaded", async () => {
       btnRoutes.textContent = "Show Bus Routes";
     });
   }
+
+  // -------- Income button --------
+  const btnIncome = document.getElementById("toggleIncome");
+  if (!btnIncome) {
+    console.warn('Button with id="toggleIncome" not found in HTML.');
+  } else {
+    btnIncome.addEventListener("click", async () => {
+      // If income is currently OFF, turn others off then turn income ON
+      if (!incomeOn) {
+        turnOffAllOverlays();
+
+        if (!incomeLayer) incomeLayer = await buildIncomeLayer(); // uses your default geojsonPath
+
+        incomeLayer.addTo(map);
+
+        // Optional: fit to bounds like poverty does
+        map.fitBounds(incomeLayer.getBounds());
+
+        // Optional: legend
+        if (!incomeLegend) incomeLegend = addIncomeLegend(map);
+
+        btnIncome.textContent = "Hide Income";
+        incomeOn = true;
+        return;
+      }
+
+      // If income is ON, turn it OFF
+      map.removeLayer(incomeLayer);
+      incomeOn = false;
+
+      // Remove legend if you used it
+      if (incomeLegend) {
+        map.removeControl(incomeLegend);
+        incomeLegend = null;
+      }
+
+      btnIncome.textContent = "Show Income";
+    });
+  }
+
   // Tracts toggle (show all the time)
   const tractLayer = await addTractLayer(map);
   tractLayer.addTo(map);          // show it immediately, or you could add a button to toggle like poverty/routes
