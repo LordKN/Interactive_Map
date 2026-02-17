@@ -19,6 +19,32 @@ const columnMap = {
   individual_meal_lbs: "Indvid Meal LBS",
 };
 
+//Bus route colors
+const routeColors = {
+  "1 Madison / Mishawaka": "navy",
+  "10 Western Avenue": "turquoise",
+  "11 Southside Mishawaka": "maroon",
+  "12 Rum Village": "midnightblue",
+  "12/14 Rum Village / Sample": "thistle",
+  "13 Corby / Town & Country": "gold",
+  "14 Sample / Mayflower": "mediumpurple",
+  "15A University Park Mall / Mishawaka (via Main Stree": "saddlebrown",
+  "15B University Park Mall / Mishawaka (via Grape Road": "burlywood",
+  "16 Blackthorn Express": "hotpink",
+  "17 The Sweep": "olivedrab",
+  "3A Portage": "firebrick",
+  "3B Portage": "crimson",
+  "4 Lincolnway West / Excel Center / Airport": "darkorange",
+  "5 North Michigan / Laurel Woods": "navy",
+  "6 South Michigan / Erskine Village": "red",
+  "7 Notre Dame / University Park Mall": "forestgreen",
+  "7A Notre Dame Midnight Express": "seagreen",
+  "8 Miami / Scottsdale": "turquoise",
+  "8/6 Miami / Scottsdale / South Michigan / Erskine Vi": "red",
+  "9 Northside Mishawaka": "magenta"
+};
+
+
 // Convert value to number, treating empty/"NA" as 0
 function toNum(v) {
   const s = String(v ?? "").trim();                             // if v is null/undefined, make it an empty string
@@ -260,17 +286,73 @@ function addPovertyLegend(map) {
   return legend; // important so we can remove it later
 }
 
+async function addBusRoutesLayer(map) {
+  const res = await fetch("transpo_routes.geojson"); // or "data/transpo_routes.geojson"
+  if (!res.ok) throw new Error("Failed to load transpo_routes.geojson");
+  const geojson = await res.json();
+
+  console.log("Bus route features:", geojson.features?.length);
+
+  const routesLayer = L.geoJSON(geojson, {
+    style: (feature) => {
+      const name = feature.properties?.route_name ?? "";
+      const color = routeColors[name] ?? "#555555"; // fallback gray
+      return {
+        color,
+        weight: 3,
+        opacity: 0.9
+      };
+    },
+    onEachFeature: (feature, layer) => {
+      const name = feature.properties?.route_name ?? "Route";
+      layer.bindPopup(`<b>${name}</b>`);
+    }
+  });
+  return routesLayer;
+}
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   const map = initBaseMap();
 
   // Always on
   await addCountyBoundaries(map);
 
-  // Poverty toggle state
+  // Overlay states
   let povertyLayer = null;
   let povertyLegend = null;
   let povertyOn = false;
 
+  let routesLayer = null;
+  let routesOn = false;
+
+  // --- helper: turn everything off ---
+  function turnOffAllOverlays() {
+    // poverty off
+    if (povertyLayer && povertyOn) {
+      map.removeLayer(povertyLayer);
+      povertyOn = false;
+
+      if (povertyLegend) {
+        map.removeControl(povertyLegend);
+        povertyLegend = null;
+      }
+
+      const btnP = document.getElementById("togglePoverty");
+      if (btnP) btnP.textContent = "Show Poverty Layer";
+    }
+
+    // routes off
+    if (routesLayer && routesOn) {
+      map.removeLayer(routesLayer);
+      routesOn = false;
+
+      const btnR = document.getElementById("toggleRoutes");
+      if (btnR) btnR.textContent = "Show Bus Routes";
+    }
+  }
+
+  // -------- Poverty button --------
   const btn_poverty = document.getElementById("togglePoverty");
   if (!btn_poverty) {
     console.warn('Button with id="togglePoverty" not found in HTML.');
@@ -278,12 +360,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   btn_poverty.addEventListener("click", async () => {
-    // Build layer only once (first click)
-    if (!povertyLayer) {
-      povertyLayer = await buildPovertyLayer();
-    }
-
+    // If poverty is currently OFF, turn others off then turn poverty ON
     if (!povertyOn) {
+      turnOffAllOverlays();
+
+      if (!povertyLayer) povertyLayer = await buildPovertyLayer();
+
       povertyLayer.addTo(map);
       map.fitBounds(povertyLayer.getBounds());
 
@@ -291,23 +373,54 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       btn_poverty.textContent = "Hide Poverty Layer";
       povertyOn = true;
-    } else {
-      map.removeLayer(povertyLayer);
-
-      if (povertyLegend) {
-        map.removeControl(povertyLegend);
-        povertyLegend = null;
-      }
-
-      btn_poverty.textContent = "Show Poverty Layer";
-      povertyOn = false;
+      return;
     }
 
-    // Tracts toggle (show all the time)
-    const tractLayer = await addTractLayer(map);
-    tractLayer.addTo(map);          // show it
+    // If poverty is ON, turn it OFF
+    map.removeLayer(povertyLayer);
+    povertyOn = false;
+
+    if (povertyLegend) {
+      map.removeControl(povertyLegend);
+      povertyLegend = null;
+    }
+
+    btn_poverty.textContent = "Show Poverty Layer";
   });
 
+  // -------- Routes button --------
+  const btnRoutes = document.getElementById("toggleRoutes");
+  if (!btnRoutes) {
+    console.warn('Button with id="toggleRoutes" not found in HTML.');
+  } else {
+    btnRoutes.addEventListener("click", async () => {
+      // If routes is currently OFF, turn others off then turn routes ON
+      if (!routesOn) {
+        turnOffAllOverlays();
 
-  main().catch(err => console.error("Error in main:", err)); // Run the main function to load charts, with error handling
+        if (!routesLayer) routesLayer = await addBusRoutesLayer(map); // ✅ pass map if your function needs it
+        // If your addBusRoutesLayer() does NOT take map, use:
+        // if (!routesLayer) routesLayer = await addBusRoutesLayer();
+
+        routesLayer.addTo(map);
+
+        btnRoutes.textContent = "Hide Bus Routes";
+        routesOn = true;
+        return;
+      }
+
+      // If routes is ON, turn it OFF
+      map.removeLayer(routesLayer);
+      routesOn = false;
+
+      btnRoutes.textContent = "Show Bus Routes";
+    });
+  }
+  // Tracts toggle (show all the time)
+  const tractLayer = await addTractLayer(map);
+  tractLayer.addTo(map);          // show it immediately, or you could add a button to toggle like poverty/routes
+
+  main().catch(err => console.error("Error in main:", err));
 });
+
+
