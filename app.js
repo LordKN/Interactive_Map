@@ -304,7 +304,7 @@ function addPovertyLegend(map) {
 
       div.innerHTML += `
         <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
-          <span style="width:14px;height:14px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          <span style="width:30px;height:30px;background:${color};display:inline-block;border:1px solid #999;"></span>
           ${from}${to ? `–${to}` : "+"}
         </div>
       `;
@@ -368,7 +368,7 @@ function addIncomeLegend(map) {
 
       div.innerHTML += `
         <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
-          <span style="width:14px;height:14px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          <span style="width:30px;height:30px;background:${color};display:inline-block;border:1px solid #999;"></span>
           ${from.toLocaleString()}${to ? `–${to.toLocaleString()}` : "+"}
         </div>
       `;
@@ -455,7 +455,7 @@ function addU18Legend(map) {
       const color = u18Color(from + 0.01);
       div.innerHTML += `
         <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
-          <span style="width:14px;height:14px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          <span style="width:30px;height:30px;background:${color};display:inline-block;border:1px solid #999;"></span>
           ${from}${to ? `–${to}` : "+"}
         </div>`;
     }
@@ -476,7 +476,7 @@ function addOver65Legend(map) {
       const color = over65Color(from + 0.01);
       div.innerHTML += `
         <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
-          <span style="width:14px;height:14px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          <span style="width:30px;height:30px;background:${color};display:inline-block;border:1px solid #999;"></span>
           ${from}${to ? `–${to}` : "+"}
         </div>`;
     }
