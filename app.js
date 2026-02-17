@@ -165,7 +165,7 @@ async function addCountyBoundaries(map) {
   const layer = L.geoJSON(geojson, {                                   // Create a GeoJSON layer
     style: (feature) => ({                                           // Style function for each feature
       weight: 3,
-      color: 'blue',
+      color: 'white',
       fillOpacity: 0.15
     }),
     onEachFeature: (feature, layer) => {                           // Function to bind popup to each feature
