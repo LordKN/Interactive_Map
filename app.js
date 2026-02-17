@@ -486,7 +486,6 @@ function addOver65Legend(map) {
   return legend;
 }
 
-
 async function addBusRoutesLayer(map) {
   const res = await fetch("transpo_routes.geojson"); // or "data/transpo_routes.geojson"
   if (!res.ok) throw new Error("Failed to load transpo_routes.geojson");
@@ -512,6 +511,48 @@ async function addBusRoutesLayer(map) {
   return routesLayer;
 }
 
+async function buildClientClusterLayer(geojsonPath = "CCFN_Clients.geojson") {
+  const res = await fetch(geojsonPath);
+  if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
+  const geojson = await res.json();
+
+  console.log("Client points:", geojson.features?.length);
+
+  const cluster = L.markerClusterGroup({
+    // optional tuning
+    showCoverageOnHover: false,
+    spiderfyOnMaxZoom: true,
+    disableClusteringAtZoom: 16
+  });
+
+  const geoLayer = L.geoJSON(geojson, {
+    pointToLayer: (feature, latlng) => L.marker(latlng),
+    onEachFeature: (feature, marker) => {
+      const p = feature.properties || {};
+      const name = p.name ?? "Client";
+
+      const addr =
+        p.geocoded_display ??
+        [p.address, p.city, p.state, p.zip].filter(Boolean).join(", ");
+
+      const approx =
+        (p.approximate === true || String(p.approximate).toLowerCase() === "true")
+          ? "<br><i>Approximate location</i>"
+          : "";
+
+      marker.bindPopup(`
+        <b>${name}</b><br>
+        ${addr || "No address"}${approx}
+      `);
+    }
+  });
+
+  cluster.addLayer(geoLayer);
+  return cluster; // cluster acts like a layer
+}
+
+
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   const map = initBaseMap();
@@ -531,7 +572,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   let u18Layer = null, u18Legend = null, u18On = false;
   let over65Layer = null, over65Legend = null, over65On = false;
 
-
+  let clientsLayer = null;
+  let clientsOn = false;
 
   let routesLayer = null;
   let routesOn = false;
@@ -593,6 +635,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (b) b.textContent = "Show Over 65";
     }
 
+    //Partners/clients off
+    // clients off
+    if (clientsLayer && clientsOn) {
+      map.removeLayer(clientsLayer);
+      clientsOn = false;
+      const btnC = document.getElementById("toggleClients");
+      if (btnC) btnC.textContent = "Show Client Pins";
+    }
 
   }
 
@@ -742,6 +792,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // -------- Client Pins button --------
+  const btnClients = document.getElementById("toggleClients");
+  btnClients.addEventListener("click", async () => {
+    if (!clientsOn) {
+      turnOffAllOverlays(); // if you're doing "only one on at a time"
+
+      if (!clientsLayer) clientsLayer = await buildClientClusterLayer();
+
+      clientsLayer.addTo(map);
+      // optional: zoom to clusters first time
+      // map.fitBounds(clientsLayer.getBounds());
+
+      btnClients.textContent = "Hide Partners";
+      clientsOn = true;
+    } else {
+      map.removeLayer(clientsLayer);
+      btnClients.textContent = "Show Partners";
+      clientsOn = false;
+    }
+  });
 
   // Tracts toggle (show all the time)
   const tractLayer = await addTractLayer(map);

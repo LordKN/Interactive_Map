@@ -7,6 +7,14 @@
   <title>Weights by Category (3 Years)</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
+/>
 </head>
 
 <body>
@@ -38,6 +46,10 @@
       <div class = "map-controls">
         <button id = "toggleRoutes" type = "button">Show Bus Routes</button>
       </div>
+
+      <div class = "map-controls">
+        <button id="toggleClients" type="button">Show Partners</button>
+      </div>
     </section>
 
     <section class="card">
@@ -63,6 +75,7 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script src="app.js"></script>
 </body>
 
