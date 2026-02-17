@@ -213,28 +213,47 @@ async function addTractLayer(map) {
   return tractLayer; // return only, don't add here
 }
 
+// POVERTY (red ramp: darker = higher poverty)
 function povertyColor(pct) {
-  //Missing data
   if (!Number.isFinite(pct)) return "#cccccc";
-
-  // Define thresholds and corresponding colors
-  if (pct < 10) return "#2ca25f";       // Green for low poverty
-  if (pct < 20) return "#99d8c9";      // Light green
-  if (pct < 30) return "#ffffb2";      // Yellow for moderate poverty
-  if (pct < 40) return "#fecc5c";      // Orange for high poverty
-  return "#de2d26";                    // Red for very high poverty
+  if (pct < 10) return "#fee5d9";
+  if (pct < 20) return "#fcae91";
+  if (pct < 30) return "#fb6a4a";
+  if (pct < 40) return "#de2d26";
+  return "#a50f15";
 }
 
+// INCOME (purple ramp: darker = higher income)
 function incomeColor(income) {
-  if (!Number.isFinite(income)) return "#cccccc"; // missing
-
-  // Buckets in dollars (adjust anytime)
-  if (income < 40000) return "#eff3ff";
-  if (income < 60000) return "#bdd7e7";
-  if (income < 80000) return "#6baed6";
-  if (income < 100000) return "#3182bd";
-  return "#08519c"; // darkest = highest income
+  if (!Number.isFinite(income)) return "#cccccc";
+  if (income < 40000) return "#f2f0f7";
+  if (income < 60000) return "#cbc9e2";
+  if (income < 80000) return "#9e9ac8";
+  if (income < 100000) return "#756bb1";
+  return "#54278f";
 }
+
+// UNDER 18 (orange ramp: darker = higher under-18 %)
+function u18Color(pct) {
+  if (!Number.isFinite(pct)) return "#cccccc";
+  if (pct < 15) return "#fff5eb";
+  if (pct < 25) return "#fdd0a2";
+  if (pct < 35) return "#fdae6b";
+  if (pct < 45) return "#e6550d";
+  return "#a63603";
+}
+
+// OVER 65 (green ramp: darker = higher 65+ %)
+function over65Color(pct) {
+  if (!Number.isFinite(pct)) return "#cccccc";
+  if (pct < 10) return "#edf8e9";
+  if (pct < 20) return "#bae4b3";
+  if (pct < 30) return "#74c476";
+  if (pct < 40) return "#31a354";
+  return "#006d2c";
+}
+
+
 
 async function buildPovertyLayer(geojsonPath = "tracts_acs_2024_elk_mar_sj.geojson") {
   const res = await fetch(geojsonPath);
@@ -361,6 +380,112 @@ function addIncomeLegend(map) {
   return legend;
 }
 
+async function buildUnder18Layer(geojsonPath = "tracts_acs_2024_elk_mar_sj.geojson") {
+  const res = await fetch(geojsonPath);
+  if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
+  const geojson = await res.json();
+
+  const layer = L.geoJSON(geojson, {
+    style: (feature) => {
+      const pct = Number(feature.properties?.Under_18Per);
+      return {
+        color: "#ffffff",
+        weight: 0.3,
+        fillOpacity: 0.55,
+        fillColor: u18Color(pct),
+      };
+    },
+    onEachFeature: (feature, leafletLayer) => {
+      const p = feature.properties || {};
+      const name = p.NAME ?? p.NAMELSAD ?? "Tract";
+
+      const pct = Number(p.Under_18Per);
+      const label = Number.isFinite(pct) ? `${pct.toFixed(1)}%` : "NA";
+
+      leafletLayer.bindPopup(`
+        <b>${name}</b><br>
+        Under 18: ${label}
+      `);
+    },
+  });
+
+  return layer;
+}
+
+async function buildOver65Layer(geojsonPath = "tracts_acs_2024_elk_mar_sj.geojson") {
+  const res = await fetch(geojsonPath);
+  if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
+  const geojson = await res.json();
+
+  const layer = L.geoJSON(geojson, {
+    style: (feature) => {
+      const pct = Number(feature.properties?.Over_65Per);
+      return {
+        color: "#ffffff",
+        weight: 0.3,
+        fillOpacity: 0.55,
+        fillColor: over65Color(pct),
+      };
+    },
+    onEachFeature: (feature, leafletLayer) => {
+      const p = feature.properties || {};
+      const name = p.NAME ?? p.NAMELSAD ?? "Tract";
+
+      const pct = Number(p.Over_65Per);
+      const label = Number.isFinite(pct) ? `${pct.toFixed(1)}%` : "NA";
+
+      leafletLayer.bindPopup(`
+        <b>${name}</b><br>
+        Over 65: ${label}
+      `);
+    },
+  });
+
+  return layer;
+}
+
+function addU18Legend(map) {
+  const legend = L.control({ position: "bottomright" });
+  legend.onAdd = function () {
+    const div = L.DomUtil.create("div", "legend");
+    const grades = [0, 15, 25, 35, 45];
+    div.innerHTML = `<b>Under 18 (%)</b><br>`;
+    for (let i = 0; i < grades.length; i++) {
+      const from = grades[i], to = grades[i + 1];
+      const color = u18Color(from + 0.01);
+      div.innerHTML += `
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+          <span style="width:14px;height:14px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          ${from}${to ? `–${to}` : "+"}
+        </div>`;
+    }
+    return div;
+  };
+  legend.addTo(map);
+  return legend;
+}
+
+function addOver65Legend(map) {
+  const legend = L.control({ position: "bottomright" });
+  legend.onAdd = function () {
+    const div = L.DomUtil.create("div", "legend");
+    const grades = [0, 10, 20, 30, 40];
+    div.innerHTML = `<b>Over 65 (%)</b><br>`;
+    for (let i = 0; i < grades.length; i++) {
+      const from = grades[i], to = grades[i + 1];
+      const color = over65Color(from + 0.01);
+      div.innerHTML += `
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+          <span style="width:14px;height:14px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          ${from}${to ? `–${to}` : "+"}
+        </div>`;
+    }
+    return div;
+  };
+  legend.addTo(map);
+  return legend;
+}
+
 
 async function addBusRoutesLayer(map) {
   const res = await fetch("transpo_routes.geojson"); // or "data/transpo_routes.geojson"
@@ -402,6 +527,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   let incomeLayer = null;
   let incomeLegend = null;
   let incomeOn = false;
+
+  let u18Layer = null, u18Legend = null, u18On = false;
+  let over65Layer = null, over65Legend = null, over65On = false;
+
 
 
   let routesLayer = null;
@@ -445,6 +574,25 @@ document.addEventListener("DOMContentLoaded", async () => {
       const btnI = document.getElementById("toggleIncome");
       if (btnI) btnI.textContent = "Show Income";
     }
+
+    // under 18 off
+    if (u18Layer && u18On) {
+      map.removeLayer(u18Layer);
+      u18On = false;
+      if (u18Legend) { map.removeControl(u18Legend); u18Legend = null; }
+      const b = document.getElementById("toggleU18");
+      if (b) b.textContent = "Show Under 18";
+    }
+
+    // over 65 off
+    if (over65Layer && over65On) {
+      map.removeLayer(over65Layer);
+      over65On = false;
+      if (over65Legend) { map.removeControl(over65Legend); over65Legend = null; }
+      const b = document.getElementById("toggle65");
+      if (b) b.textContent = "Show Over 65";
+    }
+
 
   }
 
@@ -551,6 +699,49 @@ document.addEventListener("DOMContentLoaded", async () => {
       btnIncome.textContent = "Show Income";
     });
   }
+
+  // -------- Under 18 button --------
+  const btnU18 = document.getElementById("toggleU18");
+  if (btnU18) {
+    btnU18.addEventListener("click", async () => {
+      if (!u18On) {
+        turnOffAllOverlays();
+        if (!u18Layer) u18Layer = await buildUnder18Layer();
+        u18Layer.addTo(map);
+        map.fitBounds(u18Layer.getBounds());
+        if (!u18Legend) u18Legend = addU18Legend(map);
+        btnU18.textContent = "Hide Under 18";
+        u18On = true;
+        return;
+      }
+      map.removeLayer(u18Layer);
+      u18On = false;
+      if (u18Legend) { map.removeControl(u18Legend); u18Legend = null; }
+      btnU18.textContent = "Show Under 18";
+    });
+  }
+
+  // -------- Over 65 button --------
+  const btn65 = document.getElementById("toggle65");
+  if (btn65) {
+    btn65.addEventListener("click", async () => {
+      if (!over65On) {
+        turnOffAllOverlays();
+        if (!over65Layer) over65Layer = await buildOver65Layer();
+        over65Layer.addTo(map);
+        map.fitBounds(over65Layer.getBounds());
+        if (!over65Legend) over65Legend = addOver65Legend(map);
+        btn65.textContent = "Hide Over 65";
+        over65On = true;
+        return;
+      }
+      map.removeLayer(over65Layer);
+      over65On = false;
+      if (over65Legend) { map.removeControl(over65Legend); over65Legend = null; }
+      btn65.textContent = "Show Over 65";
+    });
+  }
+
 
   // Tracts toggle (show all the time)
   const tractLayer = await addTractLayer(map);
