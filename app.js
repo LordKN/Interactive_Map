@@ -147,14 +147,69 @@ async function main() {
 }
 
 function initBaseMap() {
-  // Center near Elkhart/Marion/SJ area
-  const map = L.map('map').setView([41.68, -86.25], 9);                  // Initialize the map centered at given coordinates with zoom level 9
-  //OpenStreetMap tile layer
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  // 1) Create map (zoom control stays top-left by default)
+  const map = L.map("map", { zoomControl: true }).setView([41.68, -86.25], 9);
+
+  // 2) Define light + dark basemaps
+  const lightTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
-  }).addTo(map);
-  return map;                                                            // Return the initialized map object  
+  });
+
+  const darkTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    subdomains: "abcd",
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; CARTO',
+    maxZoom: 19
+  });
+
+  // 3) Add light by default
+  lightTiles.addTo(map);
+
+  // 4) Toggle function
+  function setMapTheme(isDark) {
+    if (isDark) {
+      if (map.hasLayer(lightTiles)) map.removeLayer(lightTiles);
+      if (!map.hasLayer(darkTiles)) darkTiles.addTo(map);
+    } else {
+      if (map.hasLayer(darkTiles)) map.removeLayer(darkTiles);
+      if (!map.hasLayer(lightTiles)) lightTiles.addTo(map);
+    }
+  }
+
+  // 5) Add dark toggle control top-right
+  const DarkModeControl = L.Control.extend({
+    options: { position: "topright" },
+
+    onAdd: function () {
+      const container = L.DomUtil.create("div", "leaflet-bar");
+      const btn = L.DomUtil.create("a", "dark-toggle-btn", container);
+
+      btn.href = "#";
+      btn.title = "Toggle Dark Map";
+      btn.innerHTML = "🌙";
+
+      // stop clicks from panning/zooming the map
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+
+      let isDark = false;
+
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        isDark = !isDark;
+        setMapTheme(isDark);
+        btn.classList.toggle("active", isDark);
+
+        document.body.classList.toggle("dark-map-ui", isDark);
+      });
+
+      return container;
+    }
+  });
+
+  map.addControl(new DarkModeControl());
+
+  return map;
 }
 
 async function addCountyBoundaries(map) {
