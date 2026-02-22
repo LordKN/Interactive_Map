@@ -178,9 +178,9 @@ async function addCountyBoundaries(map) {
   map.fitBounds(layer.getBounds());
 }
 
-async function addTractLayer(map) {
-  const res = await fetch("tracts_elk_mar_sj.geojson");
-  if (!res.ok) throw new Error("Failed to load tracts_elk_mar_sj.geojson");
+async function addTractLayer(map, geojsonPath = "tracts_acs_2024_elk_mar_sj.geojson") {
+  const res = await fetch(geojsonPath);
+  if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
   const geojson = await res.json();
 
   console.log("Tract features:", geojson.features?.length);
@@ -189,25 +189,38 @@ async function addTractLayer(map) {
     style: () => ({
       weight: 1,
       color: "#000000",
-      fillOpacity: 0.05, // lighter fill so roads still visible
+      fillOpacity: 0.05,
     }),
     onEachFeature: (feature, layer) => {
       const p = feature.properties || {};
       const name = p.NAME ?? p.NAMELSAD ?? "Tract";
 
-      // These may not exist in your TIGER tract file (will show N/A)
-      const povNum = Number(p.PovertyPct);
-      const povLabel = Number.isFinite(povNum) ? `${povNum.toFixed(1)}%` : "N/A";
+      // Poverty %
+      const pov = Number(p.PovertyPct);
+      const povLabel = Number.isFinite(pov) ? `${pov.toFixed(1)}%` : "NA";
 
-      const incNum = Number(p.MedianIncomeNum);
-      const incLabel = Number.isFinite(incNum) ? `$${incNum.toLocaleString()}` : "N/A";
+      // Median Income
+      const inc = Number(p.MedianIncomeNum);
+      const incLabel = Number.isFinite(inc)
+        ? `$${Math.round(inc).toLocaleString()}`
+        : "NA";
+
+      // Under 18 %
+      const u18 = Number(p.Under_18Per);
+      const u18Label = Number.isFinite(u18) ? `${u18.toFixed(1)}%` : "NA";
+
+      // Over 65 %
+      const o65 = Number(p.Over_65Per);
+      const o65Label = Number.isFinite(o65) ? `${o65.toFixed(1)}%` : "NA";
 
       layer.bindPopup(`
         <b>${name}</b><br>
         Poverty: ${povLabel}<br>
-        Median Income: ${incLabel}
+        Median Income: ${incLabel}<br>
+        Under 18: ${u18Label}<br>
+        Over 65: ${o65Label}
       `);
-    }
+    },
   });
 
   return tractLayer; // return only, don't add here
@@ -588,7 +601,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       const btnP = document.getElementById("togglePoverty");
-      if (btnP) btnP.textContent = "Show Poverty Layer";
+      if (btnP) btnP.textContent = "Show Poverty";
     }
 
     // routes off
@@ -662,7 +675,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (!povertyLegend) povertyLegend = addPovertyLegend(map);
 
-      btn_poverty.textContent = "Hide Poverty Layer";
+      btn_poverty.textContent = "Hide Poverty";
       povertyOn = true;
       return;
     }
@@ -676,7 +689,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       povertyLegend = null;
     }
 
-    btn_poverty.textContent = "Show Poverty Layer";
+    btn_poverty.textContent = "Show Poverty";
   });
 
   // -------- Routes button --------
