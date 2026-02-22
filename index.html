@@ -7,14 +7,8 @@
   <title>Weights by Category (3 Years)</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
-/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
 </head>
 
 <body>
@@ -27,28 +21,31 @@
       <h2>Map</h2>
       <div id="map"></div>
 
-      <div class = "map-controls">
-        <button id = "togglePoverty" type = "button">Show Poverty</button>
-      </div>
+      <!-- grouped controls -->
+      <div class="map-toolbar" role="toolbar" aria-label="Map overlays">
+        <div class="toolbar-group">
+          <div class="toolbar-label">Economic</div>
+          <div class="toolbar-buttons">
+            <button id="togglePoverty" type="button" class="pill">Poverty</button>
+            <button id="toggleIncome" type="button" class="pill">Income</button>
+          </div>
+        </div>
 
-      <div class = "map-controls">
-        <button id = "toggleIncome" type = "button">Show Income</button>
-      </div>
+        <div class="toolbar-group">
+          <div class="toolbar-label">Age</div>
+          <div class="toolbar-buttons">
+            <button id="toggleU18" type="button" class="pill">Under 18</button>
+            <button id="toggle65" type="button" class="pill">Over 65</button>
+          </div>
+        </div>
 
-      <div class = "map-controls">
-        <button id = "toggleU18" type = "button">Show U18</button>
-      </div>
-
-      <div class = "map-controls">
-        <button id = "toggle65" type = "button">Show Over 65</button>
-      </div>
-
-      <div class = "map-controls">
-        <button id = "toggleRoutes" type = "button">Show Bus Routes</button>
-      </div>
-
-      <div class = "map-controls">
-        <button id="toggleClients" type="button">Show Partners</button>
+        <div class="toolbar-group">
+          <div class="toolbar-label">Layers</div>
+          <div class="toolbar-buttons">
+            <button id="toggleRoutes" type="button" class="pill">Bus Routes</button>
+            <button id="toggleClients" type="button" class="pill">Partners</button>
+          </div>
+        </div>
       </div>
     </section>
 

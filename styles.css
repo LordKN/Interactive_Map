@@ -1,36 +1,21 @@
-body {
-    font-family: system-ui, Arial;
-    margin: 0;
-    background: #f6f7fb;
+/* =========================
+   Base layout
+========================= */
+body{
+  font-family: system-ui, Arial;
+  margin: 0;
+  background: #f6f7fb;
 }
 
-header {
-    padding: 16px;
-    background: #fff;
-    border-bottom: 1px solid #eee;
+header{
+  padding: 16px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 18px;
-}
-
-.card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 16px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-}
-
-.hint {
-    color: #666;
-    font-size: 13px;
-    margin-top: 8px;
-}
-
-canvas {
-    width: 100%;
-    max-width: 520px;
+header h1{
+  margin: 0;
+  font-size: 18px;
 }
 
 main{
@@ -41,34 +26,188 @@ main{
   align-items: start;
 }
 
-/* Make the map section span full width */
+.card{
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
 .card--map{
   grid-column: 1 / -1;
 }
 
-/* Make the map big */
+.hint{
+  color: #666;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+canvas{
+  width: 100%;
+  max-width: 520px;
+}
+
+/* =========================
+   Map
+========================= */
 #map{
-  height: 520px;         /* make it bigger if you want */
+  height: 520px;
   width: 100%;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid #eee;
 }
 
-.map-controls{
+/* =========================
+   Toolbar (FIXED)
+   - groups fill space
+   - no weird blank area
+========================= */
+
+/* Toolbar container */
+.map-toolbar{
   margin-top: 12px;
-  display: flex;
+  width: 100%;
+
+  /* Use responsive columns so it fills space naturally */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+
+  padding: 12px;
+  border: 1px solid #eef0f4;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
+  box-shadow: 0 12px 26px rgba(15, 20, 30, 0.07);
+}
+
+/* Each group as a stacked mini card (label on top, buttons below) */
+.toolbar-group{
+  display: grid;
+  grid-template-rows: auto auto;
   gap: 10px;
+
+  padding: 12px;
+  border: 1px solid #eef0f4;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff, #f7f8ff);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
-.map-controls button{
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  background: #fff;
+/* Group label */
+.toolbar-label{
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+/* Buttons area: two equal buttons that fill the group width
+   switched from grid to flex so buttons expand to fill space */
+.toolbar-buttons{
+  display: flex;
+  gap: 10px;              /* space BETWEEN buttons */
+  width: 100%;
+  align-items: center;
+}
+
+/* make each button grow equally and avoid overflow on small screens */
+.toolbar-buttons .pill{
+  flex: 1 1 0;
+  min-width: 0;           /* prevents weird overflow on small screens */
+}
+
+/* =========================
+   Fancy buttons
+========================= */
+button.pill{
+  appearance: none;
+  width: 100%;
+  border: 1px solid rgba(148,163,184,0.35);
+  background: radial-gradient(120% 120% at 20% 0%, #ffffff 0%, #f3f6ff 55%, #eef2ff 100%);
+  color: #0f172a;
+
+  padding: 10px 12px;
+  border-radius: 12px; /* slightly less “pill”, more modern */
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 20px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease, border-color 140ms ease;
 }
 
-.map-controls button:hover{
-  background: #f3f4f6;
+/* subtle shine */
+button.pill::after{
+  content: "";
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 45%, transparent 70%);
+  transform: translateX(-40%);
+  transition: transform 240ms ease;
+  pointer-events: none;
+}
+
+button.pill:hover{
+  transform: translateY(-2px);
+  border-color: rgba(148,163,184,0.6);
+  box-shadow:
+    0 16px 28px rgba(15, 23, 42, 0.12),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  filter: saturate(1.06);
+}
+
+button.pill:hover::after{
+  transform: translateX(40%);
+}
+
+button.pill:active{
+  transform: translateY(0px);
+  box-shadow:
+    0 8px 16px rgba(15, 23, 42, 0.10),
+    inset 0 2px 10px rgba(15, 23, 42, 0.12);
+}
+
+/* Active/on state */
+button.pill.active{
+  border-color: rgba(29,78,216,0.65);
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow:
+    0 18px 34px rgba(37,99,235,0.26),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 900px){
+  .map-toolbar{
+    grid-template-columns: 1fr; /* stack groups */
+  }
+  /* keep two-column buttons when group is stacked (tablet) */
+  .toolbar-buttons{
+    /* maintain flex layout; still two buttons side-by-side where space allows */
+    gap: 10px;
+  }
+}
+
+@media (max-width: 520px){
+  /* on tiny screens let buttons stack vertically inside each group */
+  .toolbar-buttons{
+    flex-direction: column;
+  }
+
+  .toolbar-buttons .pill{
+    width: 100%;
+  }
 }

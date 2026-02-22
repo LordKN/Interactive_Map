@@ -551,9 +551,6 @@ async function buildClientClusterLayer(geojsonPath = "CCFN_Clients.geojson") {
   return cluster; // cluster acts like a layer
 }
 
-
-
-
 document.addEventListener("DOMContentLoaded", async () => {
   const map = initBaseMap();
 
