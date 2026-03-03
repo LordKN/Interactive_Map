@@ -527,6 +527,98 @@ async function buildClientClusterLayer(geojsonPath = "CCFN_Clients.geojson") {
   return cluster; // cluster acts like a layer
 }
 
+function pickFirstNumber(obj, keys) {
+  for (const k of keys) {
+    const v = Number(obj?.[k]);
+    if (Number.isFinite(v)) return { key: k, value: v };
+  }
+  return { key: null, value: NaN };
+}
+
+function walkColor(x) {
+  // Expect either 0..1 or 0..100; normalize to 0..100 for bins
+  if (!Number.isFinite(x)) return "#999999";
+  const pct = x <= 1 ? x * 100 : x;
+
+  if (pct >= 80) return "#1a9850";
+  if (pct >= 60) return "#66bd63";
+  if (pct >= 40) return "#a6d96a";
+  if (pct >= 20) return "#fdae61";
+  return "#d73027";
+}
+
+async function buildWalkingCoverageLayer(
+  geojsonPath = "walking-coverage-merged.geojson"
+) {
+  const res = await fetch(geojsonPath);
+  if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
+  const geojson = await res.json();
+
+  const layer = L.geoJSON(geojson, {
+    style: (feature) => {
+      const p = feature.properties || {};
+
+      // Try common field names for "coverage percent"
+      const { value } = pickFirstNumber(p, [
+        "coverage_pct",
+        "coverage_percent",
+        "coverage",
+        "walk_coverage",
+        "walk_pct",
+        "pct",
+        "percent",
+        "value",
+      ]);
+
+      // If it's a line layer, fillColor won't matter, but this style is safe.
+      return {
+        color: "#111111",
+        weight: 2,
+        opacity: 0.9,
+        fillOpacity: 0.45,
+        fillColor: walkColor(value),
+      };
+    },
+
+    onEachFeature: (feature, leafletLayer) => {
+      const p = feature.properties || {};
+
+      const name =
+        p.NAME ??
+        p.NAMELSAD ??
+        p.stop_name ??
+        p.route_name ??
+        p.id ??
+        "Walking Coverage";
+
+      const { key, value } = pickFirstNumber(p, [
+        "coverage_pct",
+        "coverage_percent",
+        "coverage",
+        "walk_coverage",
+        "walk_pct",
+        "pct",
+        "percent",
+        "value",
+      ]);
+
+      const pct = Number.isFinite(value)
+        ? (value <= 1 ? value * 100 : value)
+        : NaN;
+
+      const pctLabel = Number.isFinite(pct) ? `${pct.toFixed(1)}%` : "NA";
+      const keyLabel = key ? `(${key})` : "";
+
+      leafletLayer.bindPopup(`
+        <b>${name}</b><br>
+        Walking coverage ${keyLabel}: ${pctLabel}
+      `);
+    },
+  });
+
+  return layer;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const map = initBaseMap();
 
@@ -550,6 +642,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let routesLayer = null;
   let routesOn = false;
+
+  let walkLayer = null;
+  let walkLegend = null;
+  let walkOn = false;
 
   // --- helper: turn everything off ---
   function turnOffAllOverlays() {
@@ -615,6 +711,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       clientsOn = false;
       const btnC = document.getElementById("toggleClients");
       if (btnC) btnC.textContent = "Show Client Pins";
+    }
+
+    // walking off
+    if (walkLayer && walkOn) {
+      map.removeLayer(walkLayer);
+      walkOn = false;
+
+      if (walkLegend) {
+        map.removeControl(walkLegend);
+        walkLegend = null;
+      }
+
+      const btnW = document.getElementById("toggleWalk");
+      if (btnW) btnW.textContent = "Show Walking Coverage";
     }
 
   }
@@ -785,6 +895,40 @@ document.addEventListener("DOMContentLoaded", async () => {
       clientsOn = false;
     }
   });
+
+  // -------- Walking Coverage button --------
+  const btnWalk = document.getElementById("toggleWalk");
+  if (!btnWalk) {
+    console.warn('Button with id="toggleWalk" not found in HTML.');
+  } else {
+    btnWalk.addEventListener("click", async () => {
+      if (!walkOn) {
+        turnOffAllOverlays();
+
+        if (!walkLayer) walkLayer = await buildWalkingCoverageLayer();
+
+        walkLayer.addTo(map);
+        // optional zoom
+        try { map.fitBounds(walkLayer.getBounds()); } catch (e) { }
+
+        if (!walkLegend) walkLegend = addWalkLegend(map);
+
+        btnWalk.textContent = "Hide Walking Coverage";
+        walkOn = true;
+        return;
+      }
+
+      map.removeLayer(walkLayer);
+      walkOn = false;
+
+      if (walkLegend) {
+        map.removeControl(walkLegend);
+        walkLegend = null;
+      }
+
+      btnWalk.textContent = "Show Walking Coverage";
+    });
+  }
 
   // Tracts toggle (show all the time)
   const tractLayer = await addTractLayer(map);
