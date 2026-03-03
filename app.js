@@ -166,13 +166,23 @@ async function addTractLayer(map, geojsonPath = "tracts_acs_2024_elk_mar_sj.geoj
       const o65 = Number(p.Over_65Per);
       const o65Label = Number.isFinite(o65) ? `${o65.toFixed(1)}%` : "NA";
 
+      // --- Census Reporter Link ---
+      const geoid = p.GEOID; // adjust if your field name is different
+      const censusLink = geoid
+        ? `https://censusreporter.org/profiles/14000US${geoid}/`
+        : null;
+
       layer.bindPopup(`
-        <b>${name}</b><br>
-        Poverty: ${povLabel}<br>
-        Median Income: ${incLabel}<br>
-        Under 18: ${u18Label}<br>
-        Over 65: ${o65Label}
-      `);
+    <b>${name}</b><br>
+    Poverty: ${povLabel}<br>
+    Median Income: ${incLabel}<br>
+    Under 18: ${u18Label}<br>
+    Over 65: ${o65Label}<br><br>
+    ${censusLink
+          ? `<a href="${censusLink}" target="_blank">View on Census Reporter</a>`
+          : "Census Reporter: NA"
+        }
+  `);
     },
   });
 
