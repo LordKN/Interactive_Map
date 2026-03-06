@@ -604,17 +604,12 @@ function addWalkLegend(map) {
   const legend = L.control({ position: "bottomright" });
   legend.onAdd = function () {
     const div = L.DomUtil.create("div", "legend");
-    div.innerHTML = `<b>Walking Coverage</b><br>`;
-    const grades = [80, 60, 40, 20, 0];
-    const labels = ["80%+", "60–80%", "40–60%", "20–40%", "<20%"];
-    grades.forEach((g, i) => {
-      const color = walkColor(g + 0.01);
-      div.innerHTML += `
-        <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
-          <span style="width:30px;height:30px;background:${color};display:inline-block;border:1px solid #999;"></span>
-          ${labels[i]}
-        </div>`;
-    });
+    div.innerHTML = `
+      <b>Walking Coverage</b><br>
+      <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+        <span style="width:30px;height:18px;background:#3b82f6;opacity:0.5;display:inline-block;border:2px solid #1d4ed8;border-radius:3px;"></span>
+        Coverage Zone
+      </div>`;
     return div;
   };
   legend.addTo(map);
@@ -641,63 +636,17 @@ async function buildWalkingCoverageLayer(
   const geojson = await res.json();
 
   const layer = L.geoJSON(geojson, {
-    style: (feature) => {
-      const p = feature.properties || {};
-
-      // Try common field names for "coverage percent"
-      const { value } = pickFirstNumber(p, [
-        "coverage_pct",
-        "coverage_percent",
-        "coverage",
-        "walk_coverage",
-        "walk_pct",
-        "pct",
-        "percent",
-        "value",
-      ]);
-
-      // If it's a line layer, fillColor won't matter, but this style is safe.
-      return {
-        color: "#111111",
-        weight: 2,
-        opacity: 0.9,
-        fillOpacity: 0.45,
-        fillColor: walkColor(value),
-      };
-    },
-
+    style: () => ({
+      color: "#1d4ed8",
+      weight: 2,
+      opacity: 0.8,
+      fillColor: "#3b82f6",
+      fillOpacity: 0.25,
+    }),
     onEachFeature: (feature, leafletLayer) => {
-      const p = feature.properties || {};
-
-      const name =
-        p.NAME ??
-        p.NAMELSAD ??
-        p.stop_name ??
-        p.route_name ??
-        p.id ??
-        "Walking Coverage";
-
-      const { key, value } = pickFirstNumber(p, [
-        "coverage_pct",
-        "coverage_percent",
-        "coverage",
-        "walk_coverage",
-        "walk_pct",
-        "pct",
-        "percent",
-        "value",
-      ]);
-
-      const pct = Number.isFinite(value)
-        ? (value <= 1 ? value * 100 : value)
-        : NaN;
-
-      const pctLabel = Number.isFinite(pct) ? `${pct.toFixed(1)}%` : "NA";
-      const keyLabel = key ? `(${key})` : "";
-
       leafletLayer.bindPopup(`
-        <b>${name}</b><br>
-        Walking coverage ${keyLabel}: ${pctLabel}
+        <b>Walking Coverage Zone</b><br>
+        <span style="font-size:12px;color:#555;">Area within walking distance<br>of a partner location</span>
       `);
     },
   });
