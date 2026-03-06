@@ -487,7 +487,7 @@ async function addBusRoutesLayer(map) {
   return routesLayer;
 }
 
-async function buildClientClusterLayer(geojsonPath = "CCFN_Clients.geojson") {
+async function buildClientClusterLayer(geojsonPath = "CCFN_Clients_new.geojson") {
   const res = await fetch(geojsonPath);
   if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
   const geojson = await res.json();
@@ -495,7 +495,6 @@ async function buildClientClusterLayer(geojsonPath = "CCFN_Clients.geojson") {
   console.log("Client points:", geojson.features?.length);
 
   const cluster = L.markerClusterGroup({
-    // optional tuning
     showCoverageOnHover: false,
     spiderfyOnMaxZoom: true,
     disableClusteringAtZoom: 16
@@ -505,26 +504,92 @@ async function buildClientClusterLayer(geojsonPath = "CCFN_Clients.geojson") {
     pointToLayer: (feature, latlng) => L.marker(latlng),
     onEachFeature: (feature, marker) => {
       const p = feature.properties || {};
-      const name = p.name ?? "Client";
+      const name = p.name ?? "Partner";
 
       const addr =
         p.geocoded_display ??
         [p.address, p.city, p.state, p.zip].filter(Boolean).join(", ");
 
+      const orgType = p.org_type ? `<br><span style="color:#555;font-size:12px;">${p.org_type}</span>` : "";
+      const county = p.county ? `<br><span style="color:#888;font-size:11px;">County: ${p.county}</span>` : "";
+
       const approx =
         (p.approximate === true || String(p.approximate).toLowerCase() === "true")
-          ? "<br><i>Approximate location</i>"
+          ? "<br><i style='font-size:11px;'>Approximate location</i>"
           : "";
 
       marker.bindPopup(`
-        <b>${name}</b><br>
-        ${addr || "No address"}${approx}
+        <b>${name}</b>${orgType}${county}<br>
+        <span style="font-size:12px;">${addr || "No address"}</span>${approx}
       `);
     }
   });
 
   cluster.addLayer(geoLayer);
-  return cluster; // cluster acts like a layer
+  return cluster;
+}
+
+// CFR Headquarters marker (Cultivate Food Rescue main base)
+// Address: 1345 W Mishawaka Ave, South Bend, IN 46615
+const CFR_HQ = { lat: 41.6822, lon: -86.2480 };
+
+function addCFRHeadquarters(map) {
+  // Custom large star/home icon for HQ
+  const hqIcon = L.divIcon({
+    className: "",
+    html: `
+      <div style="
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      ">
+        <div style="
+          width: 46px;
+          height: 46px;
+          background: linear-gradient(135deg, #16a34a, #15803d);
+          border: 3px solid #ffffff;
+          border-radius: 50%;
+          box-shadow: 0 0 0 3px #16a34a, 0 4px 14px rgba(0,0,0,0.45);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 22px;
+          line-height: 1;
+        ">🌱</div>
+        <div style="
+          position: absolute;
+          top: 48px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #15803d;
+          color: white;
+          font-size: 10px;
+          font-weight: 800;
+          letter-spacing: 0.3px;
+          white-space: nowrap;
+          padding: 2px 7px;
+          border-radius: 6px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        ">CFR HQ</div>
+      </div>
+    `,
+    iconSize: [46, 70],
+    iconAnchor: [23, 23],
+    popupAnchor: [0, -28],
+  });
+
+  const hqMarker = L.marker([CFR_HQ.lat, CFR_HQ.lon], { icon: hqIcon, zIndexOffset: 1000 });
+  hqMarker.bindPopup(`
+    <div style="text-align:center;">
+      <div style="font-size:22px;margin-bottom:4px;">🌱</div>
+      <b style="font-size:14px;">Cultivate Food Rescue</b><br>
+      <span style="color:#16a34a;font-weight:700;font-size:12px;">Main Base of Operations</span><br>
+      <span style="font-size:12px;color:#555;">1345 W. Mishawaka Ave<br>South Bend, IN 46615</span>
+    </div>
+  `);
+  hqMarker.addTo(map);
+  return hqMarker;
 }
 
 function pickFirstNumber(obj, keys) {
@@ -624,6 +689,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Always on
   await addCountyBoundaries(map);
+
+  // CFR Headquarters — always visible
+  addCFRHeadquarters(map);
 
   // Overlay states
   let povertyLayer = null;
