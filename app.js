@@ -600,6 +600,27 @@ function pickFirstNumber(obj, keys) {
   return { key: null, value: NaN };
 }
 
+function addWalkLegend(map) {
+  const legend = L.control({ position: "bottomright" });
+  legend.onAdd = function () {
+    const div = L.DomUtil.create("div", "legend");
+    div.innerHTML = `<b>Walking Coverage</b><br>`;
+    const grades = [80, 60, 40, 20, 0];
+    const labels = ["80%+", "60–80%", "40–60%", "20–40%", "<20%"];
+    grades.forEach((g, i) => {
+      const color = walkColor(g + 0.01);
+      div.innerHTML += `
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+          <span style="width:30px;height:30px;background:${color};display:inline-block;border:1px solid #999;"></span>
+          ${labels[i]}
+        </div>`;
+    });
+    return div;
+  };
+  legend.addTo(map);
+  return legend;
+}
+
 function walkColor(x) {
   // Expect either 0..1 or 0..100; normalize to 0..100 for bins
   if (!Number.isFinite(x)) return "#999999";
@@ -687,10 +708,10 @@ async function buildWalkingCoverageLayer(
 document.addEventListener("DOMContentLoaded", async () => {
   const map = initBaseMap();
 
-  // Always on
-  await addCountyBoundaries(map);
+  // Always on (wrapped so a fetch error never blocks the rest of the map)
+  try { await addCountyBoundaries(map); } catch(e) { console.warn("County boundaries failed to load:", e); }
 
-  // CFR Headquarters — always visible
+  // CFR Headquarters — always visible, no fetch dependency
   addCFRHeadquarters(map);
 
   // Overlay states
@@ -971,18 +992,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else {
     btnWalk.addEventListener("click", async () => {
       if (!walkOn) {
-        turnOffAllOverlays();
-
         if (!walkLayer) walkLayer = await buildWalkingCoverageLayer();
 
         walkLayer.addTo(map);
-        // optional zoom
         try { map.fitBounds(walkLayer.getBounds()); } catch (e) { }
 
         if (!walkLegend) walkLegend = addWalkLegend(map);
 
-        btnWalk.textContent = "Hide Walking Coverage";
         walkOn = true;
+        btnWalk.textContent = "Hide Walking Coverage";
+        btnWalk.classList.add("active");
         return;
       }
 
@@ -995,14 +1014,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       btnWalk.textContent = "Show Walking Coverage";
+      btnWalk.classList.remove("active");
     });
   }
 
   // Tracts toggle (show all the time)
-  const tractLayer = await addTractLayer(map);
-  tractLayer.addTo(map);          // show it immediately, or you could add a button to toggle like poverty/routes
+  try {
+    const tractLayer = await addTractLayer(map);
+    tractLayer.addTo(map);
+  } catch(e) { console.warn("Tract layer failed to load:", e); }
 
   main().catch(err => console.error("Error in main:", err));
 });
-
-
