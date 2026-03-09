@@ -545,8 +545,8 @@ function addCFRHeadquarters(map) {
         justify-content: center;
       ">
         <div style="
-          width: 46px;
-          height: 46px;
+          width: 23px;
+          height: 23px;
           background: linear-gradient(135deg, #16a34a, #15803d);
           border: 3px solid #ffffff;
           border-radius: 50%;
