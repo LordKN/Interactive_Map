@@ -603,7 +603,7 @@ async function buildClientClusterLayer(geojsonPath = "CCFN_Clients.geojson") {
 
 // CFR Headquarters marker (Cultivate Food Rescue main base)
 // Address: 1345 W Mishawaka Ave, South Bend, IN 46615
-const CFR_HQ = { lat: 41.6822, lon: -86.2480 };
+const CFR_HQ = { lat: 41.659479, lon: -86.265593 };
 
 function addCFRHeadquarters(map) {
   // Custom large star/home icon for HQ
