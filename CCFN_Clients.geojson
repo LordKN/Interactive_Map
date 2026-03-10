@@ -30,27 +30,8 @@
         ]
       },
       "properties": {
-        "name": "Adult & Teen Challenge Northern Indiana",
-        "address": "1111 W. Bristol Street",
-        "city": "Elkhart",
-        "state": "IN",
-        "zip": "46514",
-        "geocoded_display": "1111, West Bristol Street, Elkhart, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.9891888,
-          41.7025344
-        ]
-      },
-      "properties": {
         "name": "Adult Teen Challange, Northern Indiana",
-        "address": "1111 W Bristol St.",
+        "address": "1111 W Bristol Street",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46514",
@@ -82,12 +63,12 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2560668,
-          41.6756572
+          -86.2560669,
+          41.6756603
         ]
       },
       "properties": {
-        "name": "Aids Ministry (HealthPlus Indiana)",
+        "name": "Aids Ministries",
         "address": "201 S William Street",
         "city": "South Bend",
         "state": "IN",
@@ -107,30 +88,11 @@
       },
       "properties": {
         "name": "Alzheimer's and Dementia Services",
-        "address": "111 Sunnybrook Ct.",
+        "address": "111 Sunnybrook Ct",
         "city": "South Bend",
         "state": "IN",
         "zip": "46637",
         "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
-        "approximate": true
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.1807031,
-          41.6611642
-        ]
-      },
-      "properties": {
-        "name": "Angels in the Attic",
-        "address": "2544 Miracle Lane, Suite B.",
-        "city": "MIshawaka",
-        "state": "IN",
-        "zip": "46545",
-        "geocoded_display": "Mishawaka, Saint Joseph County, Indiana, 46546, United States",
         "approximate": true
       }
     },
@@ -145,7 +107,7 @@
       },
       "properties": {
         "name": "Antioch Missionary Baptist Church",
-        "address": "1533 W. Ewing Avenue",
+        "address": "1533 W Ewing Avenue",
         "city": "South Bend",
         "state": "IN",
         "zip": "46613",
@@ -202,7 +164,7 @@
       },
       "properties": {
         "name": "Balanced Life Organization",
-        "address": "1521 N. Illinois Street",
+        "address": "1521 N Illinois Street",
         "city": "South Bend",
         "state": "IN",
         "zip": "46628",
@@ -221,11 +183,30 @@
       },
       "properties": {
         "name": "Beacon Care Coodination",
-        "address": "1600 E. Boulevard",
+        "address": "1600 E Boulevard",
         "city": "Elkhart",
         "state": "IN",
-        "zip": "",
+        "zip": "46514",
         "geocoded_display": "1600, East Jackson Boulevard, East Lake Estates, Elkhart, Elkhart County, Indiana, 46516, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.9934551,
+          41.6788543
+        ]
+      },
+      "properties": {
+        "name": "Beacon Elkhart General",
+        "address": "600 East Boulevard",
+        "city": "Elkhart",
+        "state": "IN",
+        "zip": "46514",
+        "geocoded_display": "Elkhart General Hospital, 600, East Boulevard, Elkhart, Elkhart County, Indiana, 46514, United States",
         "approximate": false
       }
     },
@@ -239,7 +220,7 @@
         ]
       },
       "properties": {
-        "name": "Beacon Health Systems Community Impact",
+        "name": "Beacon Health System Community Impact",
         "address": "307 Martin Luther King Jr Dr N",
         "city": "South Bend",
         "state": "IN",
@@ -272,12 +253,50 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -86.2506195,
+          41.6839974
+        ]
+      },
+      "properties": {
+        "name": "Beacon Memorial South Bend",
+        "address": "615 N Michigan St",
+        "city": "South Bend",
+        "state": "IN",
+        "zip": "46601",
+        "geocoded_display": "615, North Michigan Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.2873319,
+          42.6408997
+        ]
+      },
+      "properties": {
+        "name": "Believers Community Outreach Foundation",
+        "address": "156 University Dr",
+        "city": "Pontiac",
+        "state": "Mi",
+        "zip": "",
+        "geocoded_display": "156, University Drive, Pontiac, Oakland County, Michigan, 48342, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -86.2852292,
           41.6993423
         ]
       },
       "properties": {
-        "name": "Beyond the Kitchen",
+        "name": "Beyond The Kitchen",
         "address": "2507 Marquette Blvd",
         "city": "South Bend",
         "state": "IN",
@@ -315,7 +334,7 @@
         ]
       },
       "properties": {
-        "name": "Boys & Girls Club - Goshen",
+        "name": "Boys& Girls Club Goshen",
         "address": "306 Crescent Street",
         "city": "Goshen",
         "state": "IN",
@@ -334,7 +353,7 @@
         ]
       },
       "properties": {
-        "name": "Boys & Girls Club - Middlebury",
+        "name": "Boys & GIrls Club Middlebury",
         "address": "56805 Northridge Dr",
         "city": "Middlebury",
         "state": "IN",
@@ -353,12 +372,31 @@
         ]
       },
       "properties": {
-        "name": "Boys & Girls Club - Nappanee",
-        "address": "900 E. Centennial Street",
+        "name": "Boys & Girls Club Nappanee",
+        "address": "900 E Centennial Street",
         "city": "Nappanee",
         "state": "IN",
         "zip": "46550",
         "geocoded_display": "Boys & Girls Club of Nappanee, 900, East Centennial Street, Nappanee, Elkhart County, Indiana, 46550, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.9198316,
+          41.6326013
+        ]
+      },
+      "properties": {
+        "name": "Boys & Girls Club Elkhart County",
+        "address": "23702 Arlene Ave",
+        "city": "elkhart",
+        "state": "in",
+        "zip": "46517",
+        "geocoded_display": "23702, Arlene Avenue, Dunlap, Elkhart County, Indiana, 46517, United States",
         "approximate": false
       }
     },
@@ -392,10 +430,10 @@
       },
       "properties": {
         "name": "Breath of Life Ministries",
-        "address": "216 N. Second Street",
+        "address": "216 N Second Street",
         "city": "Elkhart",
         "state": "IN",
-        "zip": "",
+        "zip": "46514",
         "geocoded_display": "Elkhart County, Indiana, United States",
         "approximate": true
       }
@@ -410,7 +448,7 @@
         ]
       },
       "properties": {
-        "name": "Brick of Hope Ministries",
+        "name": "Brick of Hope - St Joe County",
         "address": "802 East Mishawaka Ave",
         "city": "MIshawaka",
         "state": "IN",
@@ -449,7 +487,7 @@
       },
       "properties": {
         "name": "Broadway Christian Parish",
-        "address": "1412 S. Carrol Street",
+        "address": "1412 S Carrol Street",
         "city": "South Bend",
         "state": "IN",
         "zip": "46613",
@@ -468,7 +506,7 @@
       },
       "properties": {
         "name": "Calvary United Methodist Church",
-        "address": "2222 W. Indiana Avenue",
+        "address": "2222 W Indiana Avenue",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46516",
@@ -500,25 +538,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
-        ]
-      },
-      "properties": {
-        "name": "Carry the Word Church",
-        "address": "1124 Thomas Street, South Bend, IN 46601",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46601",
-        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
-        "approximate": true
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -86.235052,
           41.655532
         ]
@@ -530,25 +549,6 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1817, Miami Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.8395349,
-          41.5861702
-        ]
-      },
-      "properties": {
-        "name": "Center for Healing and Hope",
-        "address": "400 W. Lincoln Avenue",
-        "city": "Goshen",
-        "state": "IN",
-        "zip": "46526",
-        "geocoded_display": "Center for Healing & Hope, 400, West Lincoln Avenue, East Lincoln Crossroads, Goshen, Elkhart County, Indiana, 46527, United States",
         "approximate": false
       }
     },
@@ -595,6 +595,25 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -86.2963106,
+          41.6756576
+        ]
+      },
+      "properties": {
+        "name": "Charles Black Community Center",
+        "address": "3419 W Washington St",
+        "city": "South Bend",
+        "state": "IN",
+        "zip": "46619",
+        "geocoded_display": "3419, West Washington Street, LaSalle Park, South Bend, Saint Joseph County, Indiana, 46619, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -86.2385554,
           41.666636
         ]
@@ -620,7 +639,7 @@
       },
       "properties": {
         "name": "Child & Parent Services (CAPS)",
-        "address": "1000 W Hively Ave.",
+        "address": "1000 W Hively Ave",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46517",
@@ -733,31 +752,12 @@
         ]
       },
       "properties": {
-        "name": "Church of Nazareen",
+        "name": "Church of Nazarene",
         "address": "401 Hilbish Boulevard",
         "city": "Bristol",
         "state": "IN",
         "zip": "46635",
         "geocoded_display": "401, Hilbish Boulevard, Bristol, Elkhart County, Indiana, 46507, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.9652235,
-          41.6603604
-        ]
-      },
-      "properties": {
-        "name": "Church on the Rock",
-        "address": "2626 Prairie Street",
-        "city": "Elkhart",
-        "state": "IN",
-        "zip": "",
-        "geocoded_display": "2626, Prairie Street, Elkhart, Elkhart County, Indiana, 46517, United States",
         "approximate": false
       }
     },
@@ -790,7 +790,7 @@
         ]
       },
       "properties": {
-        "name": "Clubhouse of St Joseph County",
+        "name": "Clubhouse of St. Joseph County",
         "address": "1153 Northside Blvd",
         "city": "South Bend",
         "state": "IN",
@@ -804,18 +804,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.505694,
-          41.702772
+          -86.5098231,
+          41.7056871
         ]
       },
       "properties": {
         "name": "Community Food Pantry of New Carlisle",
-        "address": "300 E. Compton St",
+        "address": "Physical: 300 E Compton St",
         "city": "New Carlisle",
         "state": "IN",
         "zip": "46552",
-        "geocoded_display": "300, East Compton Street, New Carlisle, Saint Joseph County, Indiana, 46552, United States",
-        "approximate": false
+        "geocoded_display": "New Carlisle, Saint Joseph County, Indiana, 46552, United States",
+        "approximate": true
       }
     },
     {
@@ -848,7 +848,7 @@
       },
       "properties": {
         "name": "Community Services",
-        "address": "311 E. Culver Road",
+        "address": "311 E Culver Road",
         "city": "Knox",
         "state": "IN",
         "zip": "46534",
@@ -885,7 +885,7 @@
         ]
       },
       "properties": {
-        "name": "Crossroads Recovery",
+        "name": "Crossroad Recovery - Goshen",
         "address": "57415 Alpha Dr",
         "city": "Goshen",
         "state": "IN",
@@ -905,7 +905,7 @@
       },
       "properties": {
         "name": "Crossroads Recovery SB",
-        "address": "900 W. Western Avenue",
+        "address": "900 W Western Avenue",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -918,13 +918,13 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.422735,
-          41.2132218
+          -86.4227569,
+          41.2131219
         ]
       },
       "properties": {
         "name": "Culver Food Pantry",
-        "address": "307 N. Plymouth",
+        "address": "307 N Plymouth",
         "city": "Culver",
         "state": "IN",
         "zip": "46511",
@@ -980,7 +980,7 @@
         ]
       },
       "properties": {
-        "name": "Davis Foundation Inc.",
+        "name": "Davis Foundation, Inc.",
         "address": "706 S 29th St",
         "city": "South Bend",
         "state": "IN",
@@ -1000,7 +1000,7 @@
       },
       "properties": {
         "name": "Dismas House",
-        "address": "521 S. St. Joseph Street",
+        "address": "521 S St Joseph Street",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -1013,18 +1013,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2984091,
-          41.66936
+          -86.2500066,
+          41.6833813
         ]
       },
       "properties": {
-        "name": "Divine Faith Ministries",
-        "address": "303 S. Kenmore",
+        "name": "Divine Faith Ministry (God's Grace Food Pantry at Layman Chapel)",
+        "address": "303 S Kenmore SB 46619",
         "city": "South Bend",
         "state": "IN",
         "zip": "46619",
-        "geocoded_display": "South Kenmore Street, LaSalle Park, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "approximate": true
       }
     },
     {
@@ -1032,18 +1032,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2521568,
-          41.6795468
+          -86.2500066,
+          41.6833813
         ]
       },
       "properties": {
         "name": "Downtown Soup Kitchen",
-        "address": "333 N.Main St",
+        "address": "333 NMain St",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
-        "geocoded_display": "333, North Main Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "approximate": true
       }
     },
     {
@@ -1076,7 +1076,7 @@
       },
       "properties": {
         "name": "Dustin's Place",
-        "address": "11802 Lincolnway E.",
+        "address": "11802 Lincolnway E",
         "city": "Plymouth",
         "state": "IN",
         "zip": "46563",
@@ -1114,7 +1114,7 @@
       },
       "properties": {
         "name": "Elkhart community church/River Oaks",
-        "address": "418 W Franklin St.",
+        "address": "418 W Franklin St",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46516",
@@ -1171,11 +1171,30 @@
       },
       "properties": {
         "name": "Family & Children's Center",
-        "address": "300 S. Saint Louis Blvd.",
+        "address": "300 S Saint Louis Blvd",
         "city": "South Bend",
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "300, South Saint Louis Boulevard, Edgewater, South Bend, Saint Joseph County, Indiana, 46617, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.96946,
+          41.702665
+        ]
+      },
+      "properties": {
+        "name": "Family Resource Center",
+        "address": "612 E Bristol Street",
+        "city": "elkhart",
+        "state": "in",
+        "zip": "46514",
+        "geocoded_display": "612, East Bristol Street, Elkhart, Elkhart County, Indiana, 46514, United States",
         "approximate": false
       }
     },
@@ -1203,17 +1222,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.0417555,
-          41.1716695
+          -86.267729,
+          41.6927549
         ]
       },
       "properties": {
-        "name": "First Baptist Church of Mentone",
-        "address": "206 S Oak Street",
-        "city": "Mentone",
+        "name": "Feed a Friend",
+        "address": "1310 Portage Ave",
+        "city": "South Bend",
         "state": "IN",
-        "zip": "46539",
-        "geocoded_display": "206, South Oak Street, Mentone, Kosciusko County, Indiana, 46539, United States",
+        "zip": "46616",
+        "geocoded_display": "1310, Portage Avenue, South Bend, Saint Joseph County, Indiana, 46616, United States",
         "approximate": false
       }
     },
@@ -1233,25 +1252,6 @@
         "state": "IN",
         "zip": "46528",
         "geocoded_display": "Merit Learning Center, 801, West Wilkinson Street, Historic Dickerson Landing, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.0926964,
-          41.7963667
-        ]
-      },
-      "properties": {
-        "name": "FIRST PENTECOSTAL CHURCH",
-        "address": "27262 us 12",
-        "city": "Edwardsburg",
-        "state": "MI",
-        "zip": "49112",
-        "geocoded_display": "27262, West Main Street, Ontwa Township, Cass County, Michigan, 49112, United States",
         "approximate": false
       }
     },
@@ -1298,51 +1298,13 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1807031,
-          41.6611642
-        ]
-      },
-      "properties": {
-        "name": "FLL Blazing Phoenix Community",
-        "address": "205 Remington Court North Apartment C",
-        "city": "Mishawaka",
-        "state": "IN",
-        "zip": "46545",
-        "geocoded_display": "Mishawaka, Saint Joseph County, Indiana, 46546, United States",
-        "approximate": true
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2500066,
-          41.6833813
-        ]
-      },
-      "properties": {
-        "name": "For the Good",
-        "address": "52491 Kenilworth Rd",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46637",
-        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
-        "approximate": true
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -85.9771273,
           41.6741634
         ]
       },
       "properties": {
         "name": "Foundations for Early Childhood Excellence",
-        "address": "706 W. Indiana Ave",
+        "address": "706 W Indiana Ave",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46516",
@@ -1380,7 +1342,7 @@
       },
       "properties": {
         "name": "Geminus",
-        "address": "500 N. Nappanee St. Suite 4A",
+        "address": "500 N Nappanee St Suite 4A",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46514",
@@ -1404,25 +1366,6 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "Toledo Road, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.8237306,
-          41.5715164
-        ]
-      },
-      "properties": {
-        "name": "Goshen Montessori Preschool",
-        "address": "727 New York Street",
-        "city": "Goshen",
-        "state": "IN",
-        "zip": "46526",
-        "geocoded_display": "Assembly Mennonite Church, 727, New York Street, Parkside, Goshen, Elkhart County, Indiana, 46526, United States",
         "approximate": false
       }
     },
@@ -1469,25 +1412,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.828119,
-          41.505249
-        ]
-      },
-      "properties": {
-        "name": "Grace Bible Baptist Food Pantry",
-        "address": "68080 Division St",
-        "city": "New Paris",
-        "state": "IN",
-        "zip": "46553",
-        "geocoded_display": "68080, Division Street, New Paris, Elkhart County, Indiana, 46553, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -86.7118109,
           41.6056733
         ]
@@ -1507,32 +1431,13 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2359861,
-          41.6643679
-        ]
-      },
-      "properties": {
-        "name": "Greater Mount Calvary MB Church",
-        "address": "1047 Lincoln Way W",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46616",
-        "geocoded_display": "Crooked Ewe, 1047, Lincoln Way West, Edgewater, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -86.2837801,
           41.6871578
         ]
       },
       "properties": {
         "name": "Greater New Jerusalem Missionary Baptist Church",
-        "address": "915 N Olive St.",
+        "address": "915 N Olive St",
         "city": "South Bend",
         "state": "IN",
         "zip": "46628",
@@ -1550,7 +1455,7 @@
         ]
       },
       "properties": {
-        "name": "Greater St John MBC",
+        "name": "Greater St. John MBC",
         "address": "101 N Adams St",
         "city": "South Bend",
         "state": "IN",
@@ -1570,7 +1475,7 @@
       },
       "properties": {
         "name": "Guidance Ministries",
-        "address": "216 N. 2nd Street",
+        "address": "216 N 2nd Street",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46516",
@@ -1602,17 +1507,36 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1831813,
-          41.6576058
+          -85.8590603,
+          41.6012796
         ]
       },
       "properties": {
-        "name": "Hannah's House - Mishawaka",
-        "address": "410 S Spring St",
-        "city": "Mishawaka",
+        "name": "Habitat For Humanity Elkhart",
+        "address": "2910 Goshen Road",
+        "city": "elkhart",
         "state": "IN",
-        "zip": "46544",
-        "geocoded_display": "410, South Spring Street, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
+        "zip": "46514",
+        "geocoded_display": "Elkhart County, Indiana, United States",
+        "approximate": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.245348,
+          41.669376
+        ]
+      },
+      "properties": {
+        "name": "Habitat for Humanity St Joseph County",
+        "address": "402 E South Street",
+        "city": "South Bend",
+        "state": "IN",
+        "zip": "46312",
+        "geocoded_display": "402, East South Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
         "approximate": false
       }
     },
@@ -1621,17 +1545,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2521568,
-          41.6795468
+          -86.1831813,
+          41.6576058
         ]
       },
       "properties": {
-        "name": "HEAL",
-        "address": "333 N.Main St",
-        "city": "South Bend",
+        "name": "Hannahs House - Mishawaka",
+        "address": "410 S Spring St",
+        "city": "Mishawaka",
         "state": "IN",
-        "zip": "46601",
-        "geocoded_display": "333, North Main Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
+        "zip": "46544",
+        "geocoded_display": "410, South Spring Street, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
         "approximate": false
       }
     },
@@ -1659,12 +1583,50 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -87.4880364,
+          41.6290221
+        ]
+      },
+      "properties": {
+        "name": "HealthLinc - East Chicago",
+        "address": "1313 W Chicago Ave",
+        "city": "East Chicago",
+        "state": "IN",
+        "zip": "",
+        "geocoded_display": "1313, West Chicago Avenue, Super Duper, East Chicago, North Township, Lake County, Indiana, 46312, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.8950297,
+          41.7075394
+        ]
+      },
+      "properties": {
+        "name": "HealthLinc - Michigan City",
+        "address": "200 Alfred Ave",
+        "city": "Michigan City",
+        "state": "IN",
+        "zip": "46360",
+        "geocoded_display": "Michigan City, LaPorte County, Indiana, United States",
+        "approximate": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -85.9463366,
           41.6903432
         ]
       },
       "properties": {
-        "name": "Heart City Health",
+        "name": "Heart City Health - WH",
         "address": "236 Simpson Avenue",
         "city": "Elkhart",
         "state": "IN",
@@ -1702,13 +1664,32 @@
         ]
       },
       "properties": {
-        "name": "Helping Hands of Cass County",
-        "address": "130 S. Broadway Street",
+        "name": "Helping Hands - Cass County",
+        "address": "130 S Broadway Street",
         "city": "Cassopolis",
         "state": "MI",
         "zip": "49031",
         "geocoded_display": "130, South Broadway Street, LaGrange Township, Cass County, Michigan, 49031, United States",
         "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.2500066,
+          41.6833813
+        ]
+      },
+      "properties": {
+        "name": "HerMichiana",
+        "address": "2004 Ironwood Circle Suite 130",
+        "city": "South Bend",
+        "state": "IN",
+        "zip": "46601",
+        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "approximate": true
       }
     },
     {
@@ -1727,44 +1708,6 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "4130, Hickory Road, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2500066,
-          41.6833813
-        ]
-      },
-      "properties": {
-        "name": "HerMichiana",
-        "address": "2004 Ironwood Circle Suite 130",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "",
-        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
-        "approximate": true
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.911665,
-          41.7041315
-        ]
-      },
-      "properties": {
-        "name": "Hillcrest Comm. Childcare Ministry",
-        "address": "4206 E. Bristol Street",
-        "city": "Elkhart",
-        "state": "IN",
-        "zip": "",
-        "geocoded_display": "4206, East Bristol Street, East Lake Estates, Elkhart, Elkhart County, Indiana, 46514, United States",
         "approximate": false
       }
     },
@@ -1836,7 +1779,7 @@
       },
       "properties": {
         "name": "Hope Ministries",
-        "address": "432 S. Lafayette Blvd",
+        "address": "432 S Lafayette Blvd",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -1860,6 +1803,25 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1533, Prairie Avenue, Rum Village, South Bend, Saint Joseph County, Indiana, 46613, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.2888227,
+          41.6897044
+        ]
+      },
+      "properties": {
+        "name": "Imani Unidad",
+        "address": "2806 Lincolnway West",
+        "city": "South Bend",
+        "state": "IN",
+        "zip": "46601",
+        "geocoded_display": "2806, Lincolnway West, South Bend, Saint Joseph County, Indiana, 46628, United States",
         "approximate": false
       }
     },
@@ -1912,7 +1874,7 @@
       },
       "properties": {
         "name": "Indiana Health Center (IHC) Michigan",
-        "address": "765 S. Michigan Street",
+        "address": "765 S Michigan Street",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -1931,10 +1893,10 @@
       },
       "properties": {
         "name": "Inspire Properties LLC",
-        "address": "7252 N. 900 East",
+        "address": "7252 N 900 East",
         "city": "New Carlisle",
         "state": "IN",
-        "zip": "",
+        "zip": "46552",
         "geocoded_display": "North 900 East;County Line Road, New Carlisle, Saint Joseph County, Indiana, 46552, United States",
         "approximate": false
       }
@@ -1949,8 +1911,8 @@
         ]
       },
       "properties": {
-        "name": "Ironwood Pentecostal Church Food Pantry",
-        "address": "4609 S. Ironwood Dr",
+        "name": "Ironwood United Pentecostal Food Pantry",
+        "address": "4609 S Ironwood Dr",
         "city": "South Bend",
         "state": "IN",
         "zip": "46614",
@@ -1968,7 +1930,7 @@
         ]
       },
       "properties": {
-        "name": "IUSB - Titans Feeding Titans",
+        "name": "IUSB: Titans Feeding Titans",
         "address": "1700 E Mishawaka Ave",
         "city": "South Bend",
         "state": "IN",
@@ -2025,7 +1987,7 @@
         ]
       },
       "properties": {
-        "name": "Kingdom Business International Ministries",
+        "name": "Kingdom Business International (New Creation Praise and Worship Center South Bend)",
         "address": "24255 Huron Street",
         "city": "South Bend",
         "state": "IN",
@@ -2045,30 +2007,11 @@
       },
       "properties": {
         "name": "Kingdom Community Center",
-        "address": "2301 S. Nappanee St",
+        "address": "2301 S Nappanee St",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "2301, South Nappanee Street, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.9035317,
-          41.6721241
-        ]
-      },
-      "properties": {
-        "name": "Kingdom Impact",
-        "address": "2201 Toledo Rd",
-        "city": "Elkhart",
-        "state": "IN",
-        "zip": "46516",
-        "geocoded_display": "Toledo Road, Elkhart County, Indiana, 46516, United States",
         "approximate": false
       }
     },
@@ -2082,7 +2025,7 @@
         ]
       },
       "properties": {
-        "name": "Kingdom Life Christian Catherdal",
+        "name": "kingdom Life Christian Cathedral",
         "address": "707 Sherman Avenue",
         "city": "South Bend",
         "state": "IN",
@@ -2101,7 +2044,7 @@
         ]
       },
       "properties": {
-        "name": "LaGrange County Council on Aginging",
+        "name": "LaGrange County Council on Aging",
         "address": "410 Central Ave",
         "city": "LaGrange",
         "state": "IN",
@@ -2121,7 +2064,7 @@
       },
       "properties": {
         "name": "Lakeville Fire Department",
-        "address": "117 S Main St.",
+        "address": "117 S Main St",
         "city": "Lakeville",
         "state": "IN",
         "zip": "46536",
@@ -2140,7 +2083,7 @@
       },
       "properties": {
         "name": "Lakeville United Methodist Church",
-        "address": "610 N. Michigan St",
+        "address": "610 N Michigan St",
         "city": "Lakeville",
         "state": "IN",
         "zip": "46536",
@@ -2159,7 +2102,7 @@
       },
       "properties": {
         "name": "Lasalle Park Homes",
-        "address": "3505 W. Washington st",
+        "address": "3505 W Washington st",
         "city": "South Bend",
         "state": "IN",
         "zip": "46619",
@@ -2172,56 +2115,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2974873,
-          41.6756449
-        ]
-      },
-      "properties": {
-        "name": "Lasalle Park Homes",
-        "address": "3505 W. Washington",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46619",
-        "geocoded_display": "3505, West Washington Street, LaSalle Park, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.3033397,
-          41.4783725
-        ]
-      },
-      "properties": {
-        "name": "Laville High School",
-        "address": "69969 IN-931",
-        "city": "Lakeville",
-        "state": "IN",
-        "zip": "46536",
-        "geocoded_display": "LaVille Junior-Senior High School, 69969, Dixie Highway, Lakeville, Saint Joseph County, Indiana, 46536, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2322713,
-          41.6850014
+          -86.2500066,
+          41.6833813
         ]
       },
       "properties": {
         "name": "Legacy Steps Pantry (First Step 2 Day Care)",
-        "address": "1218 chalfant.st",
+        "address": "1218 chalfantst",
         "city": "South Bend",
         "state": "IN",
         "zip": "46617",
-        "geocoded_display": "1218, Chalfant Street, South Bend, Saint Joseph County, Indiana, 46617, United States",
-        "approximate": false
+        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "approximate": true
       }
     },
     {
@@ -2254,7 +2159,7 @@
       },
       "properties": {
         "name": "Life Line Youth & Family Services",
-        "address": "620 S. Ironwood Drive",
+        "address": "620 S Ironwood Drive",
         "city": "Mishawaka",
         "state": "IN",
         "zip": "46544",
@@ -2305,44 +2210,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2166107,
-          41.7029016
-        ]
-      },
-      "properties": {
-        "name": "Little Flower church",
-        "address": "54191 Ironwood Rd",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46635",
-        "geocoded_display": "Ironwood Road, South Bend, Saint Joseph County, Indiana, 46556, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2493251,
-          41.6469204
-        ]
-      },
-      "properties": {
-        "name": "Little Scribblers",
-        "address": "2628 Michigan Street",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46613",
-        "geocoded_display": "2628, South Michigan Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -85.970283,
           41.660291
         ]
@@ -2362,8 +2229,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3156192,
-          41.6935396
+          -86.315215,
+          41.693542
         ]
       },
       "properties": {
@@ -2392,6 +2259,44 @@
         "state": "IN",
         "zip": "46528",
         "geocoded_display": "213, Middlebury Street, Chamberlain, Goshen, Elkhart County, Indiana, 46528, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.8359286,
+          41.5962984
+        ]
+      },
+      "properties": {
+        "name": "Maple City Health Center Vista",
+        "address": "808 N 3rd Street",
+        "city": "Goshen",
+        "state": "IN",
+        "zip": "46528",
+        "geocoded_display": "808, North 3rd Street, Northside, Goshen, Elkhart County, Indiana, 46528, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.8805143,
+          41.6086685
+        ]
+      },
+      "properties": {
+        "name": "Maple City Health Center Westend",
+        "address": "2606 Peddlers Village",
+        "city": "Goshen",
+        "state": "IN",
+        "zip": "46526",
+        "geocoded_display": "2606, Peddlers Village Road, Pickwick Village, Goshen, Elkhart County, Indiana, 46526, United States",
         "approximate": false
       }
     },
@@ -2438,8 +2343,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8125265,
-          42.0270341
+          -85.8069997,
+          42.0269112
         ]
       },
       "properties": {
@@ -2448,7 +2353,7 @@
         "city": "Marcellus",
         "state": "MI",
         "zip": "49067",
-        "geocoded_display": "214, East Main Street, Marcellus Township, Cass County, Michigan, 49067, United States",
+        "geocoded_display": "East Main Street, Marcellus Township, Cass County, Michigan, 49067, United States",
         "approximate": false
       }
     },
@@ -2558,7 +2463,7 @@
       },
       "properties": {
         "name": "Michiana Christian Community",
-        "address": "1217 S. Logan",
+        "address": "1217 S Logan",
         "city": "South Bend",
         "state": "IN",
         "zip": "46615",
@@ -2571,18 +2476,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.7060263,
-          41.6750714
+          -86.0902163,
+          41.7914787
         ]
       },
       "properties": {
-        "name": "Middlebury Boys & Girls Club",
-        "address": "56805 Northridge Dr",
-        "city": "Middlebury",
-        "state": "IN",
-        "zip": "46540",
-        "geocoded_display": "Middlebury, Elkhart County, Indiana, United States",
-        "approximate": true
+        "name": "Michiana Family Center",
+        "address": "Edwardsburg MI",
+        "city": "Edwardsburg",
+        "state": "MI",
+        "zip": "",
+        "geocoded_display": "Edwardsburg High School, 69358, Section Street, Edwardsburg, Cass County, Michigan, 49112, United States",
+        "approximate": false
       }
     },
     {
@@ -2601,6 +2506,25 @@
         "state": "IN",
         "zip": "46540",
         "geocoded_display": "County Road 16, Middlebury, Elkhart County, Indiana, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.8504923,
+          41.4080229
+        ]
+      },
+      "properties": {
+        "name": "Milford Food Bank",
+        "address": "201 S Higbee St",
+        "city": "Milford",
+        "state": "IN",
+        "zip": "46542",
+        "geocoded_display": "HD Automotive, 201, South Higbee Street, Milford, Kosciusko County, Indiana, 46542, United States",
         "approximate": false
       }
     },
@@ -2672,10 +2596,10 @@
       },
       "properties": {
         "name": "Mishawaka Troop Town",
-        "address": "1225 E. Jefferson Boulevard",
+        "address": "1225 E Jefferson Boulevard",
         "city": "Mishawaka",
         "state": "IN",
-        "zip": "",
+        "zip": "46544",
         "geocoded_display": "1225, East Jefferson Boulevard, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
         "approximate": false
       }
@@ -2704,17 +2628,36 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.256975,
+          41.672082
         ]
       },
       "properties": {
         "name": "Monroe Circle Community Center (MC3)",
-        "address": "526 W. Western Ave",
+        "address": "526 W Western Ave",
         "city": "South Bend",
         "state": "IN",
-        "zip": "466-1",
-        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "zip": "46614",
+        "geocoded_display": "526, West Western Avenue, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3097278,
+          41.3436555
+        ]
+      },
+      "properties": {
+        "name": "MoonTree Studios- Ancilla College",
+        "address": "9638 N Union Rd",
+        "city": "Plymouth",
+        "state": "in",
+        "zip": "46563",
+        "geocoded_display": "Plymouth, Marshall County, Indiana, 46563, United States",
         "approximate": true
       }
     },
@@ -2742,25 +2685,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3127075,
-          41.6692899
-        ]
-      },
-      "properties": {
-        "name": "Navarre Middle School",
-        "address": "4702 Ford St",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46619",
-        "geocoded_display": "4702, Ford Street, Westside, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -86.2382835,
           41.6860436
         ]
@@ -2780,18 +2704,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2159695,
-          41.6555384
+          -86.2500066,
+          41.6833813
         ]
       },
       "properties": {
-        "name": "New Beginnings Church of Deliverance",
-        "address": "1817 S Ironwood Dr",
+        "name": "New Day Intake Center",
+        "address": "PO Box 11162",
         "city": "South Bend",
         "state": "IN",
-        "zip": "46613",
-        "geocoded_display": "1817, South Ironwood Drive, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "zip": "46634",
+        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "approximate": true
       }
     },
     {
@@ -2808,7 +2732,7 @@
         "address": "28103 County Road 2o",
         "city": "Elkhart",
         "state": "IN",
-        "zip": "",
+        "zip": "46514",
         "geocoded_display": "Elkhart County, Indiana, United States",
         "approximate": true
       }
@@ -2827,25 +2751,6 @@
         "address": "251 Cass Street",
         "city": "Niles",
         "state": "MI",
-        "zip": "",
-        "geocoded_display": "251, Cass Street, Niles, Berrien County, Michigan, 49120, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.256745,
-          41.832781
-        ]
-      },
-      "properties": {
-        "name": "Niles Housing Commision",
-        "address": "251 Cass St",
-        "city": "Niles",
-        "state": "MI",
         "zip": "49120",
         "geocoded_display": "251, Cass Street, Niles, Berrien County, Michigan, 49120, United States",
         "approximate": false
@@ -2856,18 +2761,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.256745,
-          41.832781
+          -86.2500066,
+          41.6833813
         ]
       },
       "properties": {
-        "name": "Niles Housing Commission",
-        "address": "251 Cass Street",
-        "city": "Niles",
-        "state": "MI",
-        "zip": "49120",
-        "geocoded_display": "251, Cass Street, Niles, Berrien County, Michigan, 49120, United States",
-        "approximate": false
+        "name": "Northern Indiana Atheists",
+        "address": "PO Box 1153",
+        "city": "South Bend",
+        "state": "IN",
+        "zip": "46624",
+        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "approximate": true
       }
     },
     {
@@ -2894,18 +2799,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.148626,
-          41.443027
+          -86.5098231,
+          41.7056871
         ]
       },
       "properties": {
-        "name": "Oak Haven",
-        "address": "500 S Montgomery St",
-        "city": "Bremen",
+        "name": "Nourishing Seniors Inc",
+        "address": "31891 Chicago Trail Village",
+        "city": "New Carlisle",
         "state": "IN",
-        "zip": "46506",
-        "geocoded_display": "500, South Montgomery Street, Bremen, Marshall County, Indiana, 46506, United States",
-        "approximate": false
+        "zip": "46552",
+        "geocoded_display": "New Carlisle, Saint Joseph County, Indiana, 46552, United States",
+        "approximate": true
       }
     },
     {
@@ -2938,7 +2843,7 @@
       },
       "properties": {
         "name": "Oak Street Health",
-        "address": "4401 W. Western Ave",
+        "address": "4401 W Western Ave",
         "city": "South Bend",
         "state": "IN",
         "zip": "46619",
@@ -2957,7 +2862,7 @@
       },
       "properties": {
         "name": "Oaklawn - Oliver Apartments",
-        "address": "924 W. Indiana Ave",
+        "address": "924 W Indiana Ave",
         "city": "South Bend",
         "state": "IN",
         "zip": "46613",
@@ -2976,7 +2881,7 @@
       },
       "properties": {
         "name": "Oaklawn - Recovery Cafe",
-        "address": "333 N. Main street",
+        "address": "333 N Main street",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -3071,7 +2976,7 @@
       },
       "properties": {
         "name": "Oceola UMC Food Pantry",
-        "address": "431 N. Beech Rd",
+        "address": "431 N Beech Rd",
         "city": "Osceola",
         "state": "IN",
         "zip": "46561",
@@ -3114,6 +3019,25 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "173, Division Street, Elkhart, Elkhart County, Indiana, 46516, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.2516788,
+          41.6670364
+        ]
+      },
+      "properties": {
+        "name": "Our Lady of the Road",
+        "address": "744 South Main St",
+        "city": "South Bend",
+        "state": "IN",
+        "zip": "46601",
+        "geocoded_display": "744, South Main Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
         "approximate": false
       }
     },
@@ -3204,50 +3128,12 @@
       },
       "properties": {
         "name": "Place to Be Me",
-        "address": "712 N. Niles Avenue",
+        "address": "712 N Niles Avenue",
         "city": "South Bend",
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "712, North Niles Avenue, Harters Heights, South Bend, Saint Joseph County, Indiana, 46617, United States",
         "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.278268,
-          41.34321
-        ]
-      },
-      "properties": {
-        "name": "Plymouth Baptist",
-        "address": "11345 9A Road",
-        "city": "Plymouth",
-        "state": "IN",
-        "zip": "46563",
-        "geocoded_display": "11345, 9A Road, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.1088809,
-          41.9824681
-        ]
-      },
-      "properties": {
-        "name": "Pokagon Band",
-        "address": "52366 M51",
-        "city": "Dowagiac",
-        "state": "MI",
-        "zip": "49047",
-        "geocoded_display": "Dowagiac, Cass County, Michigan, United States",
-        "approximate": true
       }
     },
     {
@@ -3293,25 +3179,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.9876816,
-          41.66701
-        ]
-      },
-      "properties": {
-        "name": "Project Scope",
-        "address": "1333 West Lusher Ave",
-        "city": "Elkhart",
-        "state": "IN",
-        "zip": "46517",
-        "geocoded_display": "1333, West Lusher Avenue, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -85.9174014,
           41.6864061
         ]
@@ -3323,25 +3190,6 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "607, Middleton Run Road, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2499354,
-          41.6626961
-        ]
-      },
-      "properties": {
-        "name": "Real Services",
-        "address": "1151 S. Michigan St",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46601",
-        "geocoded_display": "1151, South Michigan Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
         "approximate": false
       }
     },
@@ -3375,7 +3223,7 @@
       },
       "properties": {
         "name": "RETA Pregnancy Clinic & Family Resources",
-        "address": "116 W. Jackson Blvd",
+        "address": "116 W Jackson Blvd",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46516",
@@ -3394,10 +3242,10 @@
       },
       "properties": {
         "name": "RHEMA Word",
-        "address": "802 E. Mishawaka Avenue",
+        "address": "802 E Mishawaka Avenue",
         "city": "Mishawaka",
         "state": "IN",
-        "zip": "",
+        "zip": "46544",
         "geocoded_display": "802, East Mishawaka Avenue, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
         "approximate": false
       }
@@ -3407,17 +3255,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.198823,
-          41.6728497
+          -86.2469007,
+          41.6464516
         ]
       },
       "properties": {
-        "name": "River Bend Cancer Services",
-        "address": "3516 E Jefferson Blvd",
+        "name": "Rising Families Foundation",
+        "address": "221 E Eckman Street",
         "city": "South Bend",
         "state": "IN",
-        "zip": "46615",
-        "geocoded_display": "3516, East Jefferson Boulevard, Bercliff Estates, South Bend, Saint Joseph County, Indiana, 46615, United States",
+        "zip": "46614",
+        "geocoded_display": "221, East Eckman Street, South Bend, Saint Joseph County, Indiana, 46613, United States",
         "approximate": false
       }
     },
@@ -3432,7 +3280,7 @@
       },
       "properties": {
         "name": "River Park United Methodist Church",
-        "address": "920 S. 23rd St",
+        "address": "920 S 23rd St",
         "city": "South Bend",
         "state": "IN",
         "zip": "46615",
@@ -3451,30 +3299,11 @@
       },
       "properties": {
         "name": "Robertson's Apartments",
-        "address": "211 S. Michigan St.",
-        "city": "south Bend",
+        "address": "211 S Michigan St",
+        "city": "South Bend",
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "Robertson's Senior Apartments, 211, South Michigan Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2353404,
-          41.688462
-        ]
-      },
-      "properties": {
-        "name": "Robinson Community Learning Center",
-        "address": "1004 Eddy St,",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46617",
-        "geocoded_display": "1004, North Eddy Street, Eddy Street Commons, South Bend, Saint Joseph County, Indiana, 46617, United States",
         "approximate": false
       }
     },
@@ -3508,30 +3337,11 @@
       },
       "properties": {
         "name": "Rushton Apartments",
-        "address": "501 W. Washington St",
+        "address": "501 W Washington St",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "501, West Washington Street, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.8158567,
-          41.5457208
-        ]
-      },
-      "properties": {
-        "name": "Ryan's Place",
-        "address": "1566 Regent Street",
-        "city": "Goshen",
-        "state": "IN",
-        "zip": "46526",
-        "geocoded_display": "Regent Street, Goshen, Elkhart County, Indiana, 46526, United States",
         "approximate": false
       }
     },
@@ -3603,7 +3413,7 @@
       },
       "properties": {
         "name": "Salvation Army",
-        "address": "424 N. 15th Street",
+        "address": "424 N 15th Street",
         "city": "Niles",
         "state": "MI",
         "zip": "49120",
@@ -3622,7 +3432,7 @@
       },
       "properties": {
         "name": "Salvation Army - Elkhart",
-        "address": "300 N. Main St",
+        "address": "300 N Main St",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46516",
@@ -3673,8 +3483,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.300111,
-          41.6719184
+          -86.2954244,
+          41.6719584
         ]
       },
       "properties": {
@@ -3749,32 +3559,13 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.9267408,
-          41.6377844
-        ]
-      },
-      "properties": {
-        "name": "Shepherd's Cove (Calvary Assembly of God)",
-        "address": "1010 E. Mishawaka Road",
-        "city": "Elkhart",
-        "state": "IN",
-        "zip": "46517",
-        "geocoded_display": "East Mishawaka Road, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -86.2483278,
           41.2436055
         ]
       },
       "properties": {
         "name": "Shepherd's Food Pantry Argos United Methodist Church",
-        "address": "570 N. Michigan St",
+        "address": "570 N Michigan St",
         "city": "Argos",
         "state": "IN",
         "zip": "46501",
@@ -3831,7 +3622,7 @@
       },
       "properties": {
         "name": "South Bend Police Athletic League",
-        "address": "701 W. Sample Street",
+        "address": "701 W Sample Street",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -3863,32 +3654,13 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2843644,
-          41.6694017
-        ]
-      },
-      "properties": {
-        "name": "St Adalbert & St. Casimir Conference",
-        "address": "2505 W Grace St",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46619",
-        "geocoded_display": "2505, West Grace Street, Westside, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -86.2531016,
           41.6754001
         ]
       },
       "properties": {
         "name": "St Joe County Health Dept",
-        "address": "227 W. Jefferson Boulevard",
+        "address": "227 W Jefferson Boulevard",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -3907,7 +3679,7 @@
       },
       "properties": {
         "name": "St Joe County Health Dept - Maternal Infant Health",
-        "address": "227 W. Jefferson Boulevard",
+        "address": "227 W Jefferson Boulevard",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -3926,7 +3698,7 @@
       },
       "properties": {
         "name": "St Joe County Health Dept - Mishawaka",
-        "address": "227 W. Jefferson Boulevard",
+        "address": "227 W Jefferson Boulevard",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -3945,7 +3717,7 @@
       },
       "properties": {
         "name": "St Joe County Health Dept - North East & West",
-        "address": "227 W. Jefferson Boulevard",
+        "address": "227 W Jefferson Boulevard",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -3964,26 +3736,7 @@
       },
       "properties": {
         "name": "St Joe County Health Dept - Rum Village",
-        "address": "227 W. Jefferson Boulevard",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46601",
-        "geocoded_display": "St Joseph County-City Building, 227, West Jefferson Boulevard, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2531016,
-          41.6754001
-        ]
-      },
-      "properties": {
-        "name": "St Joe County Health Dept - Rum Village",
-        "address": "227 W. Jefferson Boulevard",
+        "address": "227 W Jefferson Boulevard",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -4002,7 +3755,7 @@
       },
       "properties": {
         "name": "St Joe County Health Dept - Walkerton / N. Liberty",
-        "address": "227 W. Jefferson Boulevard",
+        "address": "227 W Jefferson Boulevard",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -4021,7 +3774,7 @@
       },
       "properties": {
         "name": "St Joe County Health Dept - West Side",
-        "address": "227 W. Jefferson Boulevard",
+        "address": "227 W Jefferson Boulevard",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -4059,7 +3812,7 @@
       },
       "properties": {
         "name": "St Margarets House",
-        "address": "117 N. Lafayette Blvd",
+        "address": "117 N Lafayette Blvd",
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
@@ -4173,7 +3926,7 @@
       },
       "properties": {
         "name": "St Vincent de Paul - St Joe Parrish, South Bend",
-        "address": "701 E. Colfax  Ave",
+        "address": "701 E Colfax  Ave",
         "city": "South Bend",
         "state": "IN",
         "zip": "46617",
@@ -4300,63 +4053,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.96946,
-          41.702665
-        ]
-      },
-      "properties": {
-        "name": "Strengthening Indiana Families",
-        "address": "612 E. Bristol Street",
-        "city": "Elkhart",
-        "state": "IN",
-        "zip": "46514",
-        "geocoded_display": "612, East Bristol Street, Elkhart, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.9823011,
-          41.6801191
-        ]
-      },
-      "properties": {
-        "name": "Susanna's Kitchen",
-        "address": "831 W. Marion St.",
-        "city": "Elkhart",
-        "state": "IN",
-        "zip": "46516",
-        "geocoded_display": "831, West Marion Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2659563,
-          41.6719469
-        ]
-      },
-      "properties": {
-        "name": "Take Heart",
-        "address": "1042 W Western Ave",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46601",
-        "geocoded_display": "1042, West Western Avenue, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -86.1062763,
           41.735251
         ]
@@ -4420,7 +4116,7 @@
       },
       "properties": {
         "name": "The Crossing Educational Center",
-        "address": "515 S Main St.",
+        "address": "515 S Main St",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46516",
@@ -4471,13 +4167,13 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2370779,
-          41.6518763
+          -86.2474717,
+          41.6516335
         ]
       },
       "properties": {
         "name": "The Journey Hose Corporation",
-        "address": "215 E. Fox Street",
+        "address": "215 E Fox Street",
         "city": "South Bend",
         "state": "IN",
         "zip": "46613",
@@ -4496,10 +4192,10 @@
       },
       "properties": {
         "name": "The Post Youth Center",
-        "address": "301 E. Lincoln Ave",
+        "address": "301 E Lincoln Ave",
         "city": "Goshen",
         "state": "IN",
-        "zip": "46528",
+        "zip": "46526",
         "geocoded_display": "301, East Lincoln Avenue, East Lincoln Crossroads, Goshen, Elkhart County, Indiana, 46528, United States",
         "approximate": false
       }
@@ -4566,13 +4262,32 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -86.2515943,
+          41.6777259
+        ]
+      },
+      "properties": {
+        "name": "Thee Outlet",
+        "address": "22500 US 20",
+        "city": "south bend",
+        "state": "in",
+        "zip": "46601",
+        "geocoded_display": "West Colfax Avenue, South Bend, Saint Joseph County, Indiana, 46601, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -86.5098231,
           41.7056871
         ]
       },
       "properties": {
         "name": "Threads of Hope Unhoused Mission",
-        "address": "7385 N. Walker Road",
+        "address": "7385 N Walker Road",
         "city": "New Carlisle",
         "state": "IN",
         "zip": "46552",
@@ -4629,11 +4344,30 @@
       },
       "properties": {
         "name": "Transformation Ministries",
-        "address": "1101 King St.",
+        "address": "1101 King St",
         "city": "South Bend",
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "1101, King Street, Keller Park, South Bend, Saint Joseph County, Indiana, 46616, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.248365,
+          41.6716967
+        ]
+      },
+      "properties": {
+        "name": "Tree of LIfe",
+        "address": "424 S Michigan St",
+        "city": "South Bend",
+        "state": "IN",
+        "zip": "46601",
+        "geocoded_display": "South Bend Main Post Office, 424, South Michigan Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
         "approximate": false
       }
     },
@@ -4667,30 +4401,11 @@
       },
       "properties": {
         "name": "Unity Gardens",
-        "address": "3701 Prast Blvd,",
+        "address": "3701 Prast Blvd",
         "city": "South Bend",
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "3701, Prast Boulevard, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -86.2521568,
-          41.6795468
-        ]
-      },
-      "properties": {
-        "name": "Upper Room Recovery Cafe",
-        "address": "333 N Main St",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46601",
-        "geocoded_display": "333, North Main Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
         "approximate": false
       }
     },
@@ -4737,8 +4452,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3152981,
-          41.6965656
+          -86.3152918,
+          41.6963757
         ]
       },
       "properties": {
@@ -4767,6 +4482,25 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "609, John Glenn Court, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.4847134,
+          41.4685709
+        ]
+      },
+      "properties": {
+        "name": "Walkerton American Legion",
+        "address": "302 Legion Drive",
+        "city": "Walkerton",
+        "state": "IN",
+        "zip": "46574",
+        "geocoded_display": "302, Legion Drive, Walkerton, Saint Joseph County, Indiana, 46574, United States",
         "approximate": false
       }
     },
@@ -4813,25 +4547,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
-        ]
-      },
-      "properties": {
-        "name": "Women Entrepreneurs Matter",
-        "address": "3624 E Mishawaka Ave",
-        "city": "South Bend",
-        "state": "IN",
-        "zip": "46615",
-        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
-        "approximate": true
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -85.7594018,
           41.4245125
         ]
@@ -4857,31 +4572,12 @@
       },
       "properties": {
         "name": "World Harvest Church",
-        "address": "1610 S. Nappanee St",
+        "address": "1610 S Nappanee St",
         "city": "Elkhart",
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "1610, South Nappanee Street, Elkhart, Elkhart County, Indiana, 46516, United States",
         "approximate": false
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -85.8344491,
-          41.5850394
-        ]
-      },
-      "properties": {
-        "name": "Yellowcreek Daycare Center",
-        "address": "64901 County Road 11,",
-        "city": "Goshen",
-        "state": "IN",
-        "zip": "46526",
-        "geocoded_display": "Goshen, Elkhart County, Indiana, United States",
-        "approximate": true
       }
     },
     {
@@ -4924,11 +4620,11 @@
     }
   ],
   "metadata": {
-    "generated": "2026-02-17T18:16:17.207Z",
-    "total": 268,
-    "geocoded": 259,
-    "failed": 9,
-    "skipped": 0,
+    "generated": "2026-03-09T16:17:06.124Z",
+    "total": 245,
+    "geocoded": 243,
+    "failed": 1,
+    "skipped": 1,
     "source": "OpenStreetMap Nominatim"
   }
 }
