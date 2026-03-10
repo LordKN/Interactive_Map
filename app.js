@@ -559,7 +559,7 @@ async function addBusRoutesLayer(map) {
   return routesLayer;
 }
 
-async function buildClientClusterLayer(geojsonPath = "CCFN_Clients_new.geojson") {
+async function buildClientClusterLayer(geojsonPath = "CCFN_Clients.geojson") {
   const res = await fetch(geojsonPath);
   if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
   const geojson = await res.json();
