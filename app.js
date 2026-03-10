@@ -229,6 +229,16 @@ function over65Color(pct) {
   return "#006d2c";
 }
 
+// FOOD INSECURITY INDEX (1–10, red-orange ramp: darker = more food insecure)
+function foodInsecurityColor(idx) {
+  if (!Number.isFinite(idx)) return "#cccccc";
+  if (idx <= 2)  return "#fff5f0";
+  if (idx <= 4)  return "#fcbba1";
+  if (idx <= 6)  return "#fb6a4a";
+  if (idx <= 8)  return "#cb181d";
+  return "#67000d";
+}
+
 
 
 async function buildPovertyLayer(geojsonPath = "tracts_acs_2024_elk_mar_sj.geojson") {
@@ -462,6 +472,68 @@ function addOver65Legend(map) {
   return legend;
 }
 
+async function buildFoodInsecurityLayer(geojsonPath = "tracts_acs_2024_elk_mar_sj.geojson") {
+  const res = await fetch(geojsonPath);
+  if (!res.ok) throw new Error(`Failed to load ${geojsonPath}`);
+  const geojson = await res.json();
+
+  const layer = L.geoJSON(geojson, {
+    style: (feature) => {
+      const idx = Number(feature.properties?.FoodInsecurityIndex);
+      return {
+        color: "#ffffff",
+        weight: 0.3,
+        fillOpacity: 0.65,
+        fillColor: foodInsecurityColor(idx),
+      };
+    },
+    onEachFeature: (feature, leafletLayer) => {
+      const p = feature.properties || {};
+      const name = p.NAME ?? p.NAMELSAD ?? "Tract";
+      const idx = p.FoodInsecurityIndex;
+      const idxLabel = idx != null ? `${idx} / 10` : "No data";
+      const geoid = p.GEOID;
+      const censusLink = geoid
+        ? `<a href="https://censusreporter.org/profiles/14000US${geoid}/" target="_blank">View on Census Reporter</a>`
+        : "";
+      leafletLayer.bindPopup(`
+        <b>${name}</b><br>
+        Food Insecurity Index: <b>${idxLabel}</b><br>
+        <span style="font-size:11px;color:#555;">(1 = least insecure, 10 = most insecure)</span><br><br>
+        ${censusLink}
+      `);
+    },
+  });
+
+  return layer;
+}
+
+function addFoodInsecurityLegend(map) {
+  const legend = L.control({ position: "bottomright" });
+  legend.onAdd = function () {
+    const div = L.DomUtil.create("div", "legend");
+    div.innerHTML = `<b>Food Insecurity Index</b><br>`;
+    const bands = [
+      { label: "1–2",  color: foodInsecurityColor(1) },
+      { label: "3–4",  color: foodInsecurityColor(3) },
+      { label: "5–6",  color: foodInsecurityColor(5) },
+      { label: "7–8",  color: foodInsecurityColor(7) },
+      { label: "9–10", color: foodInsecurityColor(9) },
+    ];
+    bands.forEach(b => {
+      div.innerHTML += `
+        <div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+          <span style="width:30px;height:30px;background:${b.color};display:inline-block;border:1px solid #999;"></span>
+          ${b.label}
+        </div>`;
+    });
+    div.innerHTML += `<div style="font-size:10px;color:#888;margin-top:4px;">1 = least · 10 = most insecure</div>`;
+    return div;
+  };
+  legend.addTo(map);
+  return legend;
+}
+
 async function addBusRoutesLayer(map) {
   const res = await fetch("transpo_routes.geojson"); // or "data/transpo_routes.geojson"
   if (!res.ok) throw new Error("Failed to load transpo_routes.geojson");
@@ -534,6 +606,7 @@ async function buildClientClusterLayer(geojsonPath = "CCFN_Clients_new.geojson")
 const CFR_HQ = { lat: 41.6822, lon: -86.2480 };
 
 function addCFRHeadquarters(map) {
+  // Custom large star/home icon for HQ
   const hqIcon = L.divIcon({
     className: "",
     html: `
@@ -544,54 +617,49 @@ function addCFRHeadquarters(map) {
         justify-content: center;
       ">
         <div style="
-          width: 16px;
-          height: 16px;
+          width: 15px;
+          height: 15px;
           background: linear-gradient(135deg, #16a34a, #15803d);
           border: 2px solid #ffffff;
           border-radius: 50%;
-          box-shadow: 0 0 0 2px #16a34a, 0 2px 8px rgba(0,0,0,0.35);
+          box-shadow: 0 0 0 2px #16a34a, 0 2px 6px rgba(0,0,0,0.45);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 12px;
+          font-size: 8px;
           line-height: 1;
         ">🌱</div>
         <div style="
           position: absolute;
-          top: 26px;
+          top: 17px;
           left: 50%;
           transform: translateX(-50%);
           background: #15803d;
           color: white;
-          font-size: 8px;
-          font-weight: 700;
-          letter-spacing: 0.2px;
+          font-size: 7px;
+          font-weight: 800;
+          letter-spacing: 0.3px;
           white-space: nowrap;
-          padding: 1px 5px;
-          border-radius: 5px;
-          box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+          padding: 1px 4px;
+          border-radius: 4px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         ">CFR HQ</div>
       </div>
     `,
-    iconSize: [32, 40],
-    iconAnchor: [16, 16],
-    popupAnchor: [0, -18],
+    iconSize: [15, 26],
+    iconAnchor: [8, 8],
+    popupAnchor: [0, -12],
   });
 
-  const hqMarker = L.marker([CFR_HQ.lat, CFR_HQ.lon], {
-    icon: hqIcon,
-    zIndexOffset: 1000
-  });
-
+  const hqMarker = L.marker([CFR_HQ.lat, CFR_HQ.lon], { icon: hqIcon, zIndexOffset: 1000 });
   hqMarker.bindPopup(`
     <div style="text-align:center;">
-      <div style="font-size:18px;margin-bottom:4px;">🌱</div>
+      <div style="font-size:22px;margin-bottom:4px;">🌱</div>
       <b style="font-size:14px;">Cultivate Food Rescue</b><br>
       <span style="color:#16a34a;font-weight:700;font-size:12px;">Main Base of Operations</span><br>
       <span style="font-size:12px;color:#555;">1345 W. Mishawaka Ave<br>South Bend, IN 46615</span>
     </div>
   `);
-
   hqMarker.addTo(map);
   return hqMarker;
 }
@@ -678,6 +746,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let u18Layer = null, u18Legend = null, u18On = false;
   let over65Layer = null, over65Legend = null, over65On = false;
+  let foodLayer = null, foodLegend = null, foodOn = false;
 
   let clientsLayer = null;
   let clientsOn = false;
@@ -767,6 +836,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const btnW = document.getElementById("toggleWalk");
       if (btnW) btnW.textContent = "Show Walking Coverage";
+    }
+
+    // food insecurity off
+    if (foodLayer && foodOn) {
+      map.removeLayer(foodLayer);
+      foodOn = false;
+      if (foodLegend) { map.removeControl(foodLegend); foodLegend = null; }
+      const btnF = document.getElementById("toggleFood");
+      if (btnF) { btnF.textContent = "Show Food Insecurity"; btnF.classList.remove("active"); }
     }
 
   }
@@ -917,6 +995,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // -------- Food Insecurity button --------
+  const btnFood = document.getElementById("toggleFood");
+  if (btnFood) {
+    btnFood.addEventListener("click", async () => {
+      if (!foodOn) {
+        turnOffAllOverlays();
+        if (!foodLayer) foodLayer = await buildFoodInsecurityLayer();
+        foodLayer.addTo(map);
+        map.fitBounds(foodLayer.getBounds());
+        if (!foodLegend) foodLegend = addFoodInsecurityLegend(map);
+        foodOn = true;
+        btnFood.textContent = "Hide Food Insecurity";
+        btnFood.classList.add("active");
+        return;
+      }
+      map.removeLayer(foodLayer);
+      foodOn = false;
+      if (foodLegend) { map.removeControl(foodLegend); foodLegend = null; }
+      btnFood.textContent = "Show Food Insecurity";
+      btnFood.classList.remove("active");
+    });
+  }
+
   // -------- Client Pins button --------
   const btnClients = document.getElementById("toggleClients");
   btnClients.addEventListener("click", async () => {
@@ -979,3 +1080,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   main().catch(err => console.error("Error in main:", err));
 });
+
+
