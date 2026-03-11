@@ -17,7 +17,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "833, South 30th Street, River Park, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -36,7 +36,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "1111, West Bristol Street, Elkhart, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -74,7 +74,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "South William Street, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -112,7 +112,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1533, West Ewing Avenue, Rum Village, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -131,7 +131,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "17400, Inwood Road, Mishawaka, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -169,7 +169,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "1521, North Illinois Street, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -188,7 +188,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "1600, East Jackson Boulevard, East Lake Estates, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -207,7 +207,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "Elkhart General Hospital, 600, East Boulevard, Elkhart, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -245,7 +245,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "714, North Michigan Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -264,7 +264,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "615, North Michigan Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -283,7 +283,7 @@
         "state": "Mi",
         "zip": "",
         "geocoded_display": "156, University Drive, Pontiac, Oakland County, Michigan, 48342, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -302,7 +302,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "2507, Marquette Boulevard, Keller Park, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -321,7 +321,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "2904, Miller Drive, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -340,7 +340,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "306, Crescent Street, Chamberlain, Goshen, Elkhart County, Indiana, 46528, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -378,7 +378,7 @@
         "state": "IN",
         "zip": "46550",
         "geocoded_display": "Boys & Girls Club of Nappanee, 900, East Centennial Street, Nappanee, Elkhart County, Indiana, 46550, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -397,7 +397,7 @@
         "state": "in",
         "zip": "46517",
         "geocoded_display": "23702, Arlene Avenue, Dunlap, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -454,7 +454,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "802, East Mishawaka Avenue, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -473,7 +473,7 @@
         "state": "IN",
         "zip": "46507",
         "geocoded_display": "505, West Vistula Street, Bristol, Elkhart County, Indiana, 46507, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -511,7 +511,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "2222, West Indiana Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -549,7 +549,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1817, Miami Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -568,7 +568,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "813, South Michigan Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -587,7 +587,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "295, East Mishawaka Avenue, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -606,7 +606,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "3419, West Washington Street, LaSalle Park, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -625,7 +625,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "Lincoln Way West, Edgewater, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -644,7 +644,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "1000, West Hively Avenue, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -663,7 +663,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "2307, Elwood Avenue, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -701,7 +701,7 @@
         "state": "IN",
         "zip": "46574",
         "geocoded_display": "625, Roosevelt Road, Walkerton, Saint Joseph County, Indiana, 46574, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -720,7 +720,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "907, Oakland Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -739,7 +739,7 @@
         "state": "MI",
         "zip": "46507",
         "geocoded_display": "520, Pearl Street, LaGrange Township, Cass County, Michigan, 49031, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -758,7 +758,7 @@
         "state": "IN",
         "zip": "46635",
         "geocoded_display": "401, Hilbish Boulevard, Bristol, Elkhart County, Indiana, 46507, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -777,7 +777,7 @@
         "state": "IN",
         "zip": "46635",
         "geocoded_display": "Clay Church - Firehouse Campus, 17646, Cleveland Road, South Bend, Saint Joseph County, Indiana, 46635, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -796,7 +796,7 @@
         "state": "IN",
         "zip": "46615",
         "geocoded_display": "1153, Northside Boulevard, Edgewater, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -853,7 +853,7 @@
         "state": "IN",
         "zip": "46534",
         "geocoded_display": "Community Services of Starke County, 311, East Culver Road, Knox, Starke County, Indiana, 46534, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -872,7 +872,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "3620, Deahl Court, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -910,7 +910,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "Western Avenue, Edgewater, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -929,7 +929,7 @@
         "state": "IN",
         "zip": "46511",
         "geocoded_display": "South Plymouth Street, Culver, Marshall County, Indiana, 46511, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -967,7 +967,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "Lincoln Highway, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -986,7 +986,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "706, South 29th Street, River Park, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1005,7 +1005,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "521, South Saint Joseph Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1062,7 +1062,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "1522, Linden Avenue, Kennedy Park, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1100,7 +1100,7 @@
         "state": "MI",
         "zip": "49112",
         "geocoded_display": "24832, US-12, Adamsville, Ontwa Township, Cass County, Michigan, 49112, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1119,7 +1119,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "River Oaks Community Church - Elkhart Campus, 418, West Franklin Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1138,7 +1138,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "2626, Prairie Street, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1176,7 +1176,7 @@
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "300, South Saint Louis Boulevard, Edgewater, South Bend, Saint Joseph County, Indiana, 46617, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1195,7 +1195,7 @@
         "state": "in",
         "zip": "46514",
         "geocoded_display": "612, East Bristol Street, Elkhart, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1214,7 +1214,7 @@
         "state": "MI",
         "zip": "49107",
         "geocoded_display": "122, Bluff Street, Buchanan, Berrien County, Michigan, 49107, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1233,7 +1233,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "1310, Portage Avenue, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1252,7 +1252,7 @@
         "state": "IN",
         "zip": "46528",
         "geocoded_display": "Merit Learning Center, 801, West Wilkinson Street, Historic Dickerson Landing, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1271,7 +1271,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "333, North Main Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1309,7 +1309,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "706, West Indiana Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1328,7 +1328,7 @@
         "state": "IN",
         "zip": "46737",
         "geocoded_display": "Coldwater Street, Fremont, Steuben County, Indiana, 46737, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1366,7 +1366,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "Toledo Road, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1404,7 +1404,7 @@
         "state": "IN",
         "zip": "46553",
         "geocoded_display": "68080, Division Street, New Paris, Elkhart County, Indiana, 46553, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1423,7 +1423,7 @@
         "state": "IN",
         "zip": "46350",
         "geocoded_display": "411, McCollum Street, La Porte, LaPorte County, Indiana, 46350, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1442,7 +1442,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "915, North Olive Street, Kennedy Park, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1461,7 +1461,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "Greater St John Missionary Baptist Church, 101, North Adams Street, Kennedy Park, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1480,7 +1480,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "216, North 2nd Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1499,7 +1499,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "30240, County Road 22, Jamestown, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1518,7 +1518,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "Elkhart County, Indiana, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1537,7 +1537,7 @@
         "state": "IN",
         "zip": "46312",
         "geocoded_display": "402, East South Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1556,7 +1556,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "410, South Spring Street, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1575,7 +1575,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "420, West 4th Street, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1594,7 +1594,7 @@
         "state": "IN",
         "zip": "",
         "geocoded_display": "1313, West Chicago Avenue, Super Duper, East Chicago, North Township, Lake County, Indiana, 46312, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1632,7 +1632,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "236, Simpson Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1651,7 +1651,7 @@
         "state": "IN",
         "zip": "46504",
         "geocoded_display": "204, North Washington Street, Bourbon, Marshall County, Indiana, 46504, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1670,7 +1670,7 @@
         "state": "MI",
         "zip": "49031",
         "geocoded_display": "130, South Broadway Street, LaGrange Township, Cass County, Michigan, 49031, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1708,7 +1708,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "4130, Hickory Road, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1727,7 +1727,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "1318, Lincolnway West, Kennedy Park, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1784,7 +1784,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "432, South Lafayette Boulevard, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1803,7 +1803,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1533, Prairie Avenue, Rum Village, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1822,7 +1822,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "2806, Lincolnway West, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1841,7 +1841,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "1901, West Western Avenue, Westside, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1860,7 +1860,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "1010, North Bendix Drive, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1879,7 +1879,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "765, South Michigan Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1898,7 +1898,7 @@
         "state": "IN",
         "zip": "46552",
         "geocoded_display": "North 900 East;County Line Road, New Carlisle, Saint Joseph County, Indiana, 46552, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1917,7 +1917,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "South Ironwood Drive, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1936,7 +1936,7 @@
         "state": "IN",
         "zip": "46634",
         "geocoded_display": "Mishawaka Avenue, Edgewater, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1955,7 +1955,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "220, Dean Johnson Boulevard, Southeast, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1974,7 +1974,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -1993,7 +1993,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "Huron Street, LaSalle Park, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2012,7 +2012,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "2301, South Nappanee Street, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2031,7 +2031,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "707, Sherman Avenue, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2069,7 +2069,7 @@
         "state": "IN",
         "zip": "46536",
         "geocoded_display": "117, South Main Street, Lakeville, Saint Joseph County, Indiana, 46536, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2088,7 +2088,7 @@
         "state": "IN",
         "zip": "46536",
         "geocoded_display": "Michigan Trail, Lakeville, Saint Joseph County, Indiana, 46536, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2107,7 +2107,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "3505, West Washington Street, LaSalle Park, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2145,7 +2145,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "5911, York Road, Crest Manor Addition, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2164,7 +2164,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "620, South Ironwood Drive, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2183,7 +2183,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1402, South Michigan Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2221,7 +2221,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "2601, Benham Avenue, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2240,7 +2240,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "Edison Road, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2259,7 +2259,7 @@
         "state": "IN",
         "zip": "46528",
         "geocoded_display": "213, Middlebury Street, Chamberlain, Goshen, Elkhart County, Indiana, 46528, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2278,7 +2278,7 @@
         "state": "IN",
         "zip": "46528",
         "geocoded_display": "808, North 3rd Street, Northside, Goshen, Elkhart County, Indiana, 46528, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2297,7 +2297,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "2606, Peddlers Village Road, Pickwick Village, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2316,7 +2316,7 @@
         "state": "IN",
         "zip": "46506",
         "geocoded_display": "2926, Elkhart Road, Pickwick Village, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2335,7 +2335,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1819, Prairie Avenue, Rum Village, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2354,7 +2354,7 @@
         "state": "MI",
         "zip": "49067",
         "geocoded_display": "East Main Street, Marcellus Township, Cass County, Michigan, 49067, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2392,7 +2392,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "4130, Miami Street, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2411,7 +2411,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "402, West Garro Street, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2430,7 +2430,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "High Street, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2449,7 +2449,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1905, Miami Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2468,7 +2468,7 @@
         "state": "IN",
         "zip": "46615",
         "geocoded_display": "1217, South Logan Street, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2487,7 +2487,7 @@
         "state": "MI",
         "zip": "",
         "geocoded_display": "Edwardsburg High School, 69358, Section Street, Edwardsburg, Cass County, Michigan, 49112, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2506,7 +2506,7 @@
         "state": "IN",
         "zip": "46540",
         "geocoded_display": "County Road 16, Middlebury, Elkhart County, Indiana, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2525,7 +2525,7 @@
         "state": "IN",
         "zip": "46542",
         "geocoded_display": "HD Automotive, 201, South Higbee Street, Milford, Kosciusko County, Indiana, 46542, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2563,7 +2563,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "1323, Miami Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2582,7 +2582,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "Lincolnway West, Mishawaka, Saint Joseph County, Indiana, 46561, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2601,7 +2601,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "1225, East Jefferson Boulevard, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2620,7 +2620,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "1000, South Michigan Street, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2639,7 +2639,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "526, West Western Avenue, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2677,7 +2677,7 @@
         "state": "IN",
         "zip": "46550",
         "geocoded_display": "292, South Main Street, Nappanee, Elkhart County, Indiana, 46550, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2696,7 +2696,7 @@
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "Fire House No. 7, 803, North Notre Dame Avenue, Harters Heights, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2715,7 +2715,7 @@
         "state": "IN",
         "zip": "46634",
         "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2753,7 +2753,7 @@
         "state": "MI",
         "zip": "49120",
         "geocoded_display": "251, Cass Street, Niles, Berrien County, Michigan, 49120, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2810,7 +2810,7 @@
         "state": "IN",
         "zip": "46552",
         "geocoded_display": "New Carlisle, Saint Joseph County, Indiana, 46552, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2829,7 +2829,7 @@
         "state": "IN",
         "zip": "46506",
         "geocoded_display": "500, South Montgomery Street, Bremen, Marshall County, Indiana, 46506, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2848,7 +2848,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "4401, West Western Avenue, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2867,7 +2867,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "924, West Indiana Avenue, Rum Village, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2886,7 +2886,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "333, North Main Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2905,7 +2905,7 @@
         "state": "IN",
         "zip": "46615",
         "geocoded_display": "3001, Hope Avenue, Edison Park, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2924,7 +2924,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "2600, Oakland Avenue, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2943,7 +2943,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "330, Lakeview Drive, Maplecrest, Goshen, Elkhart County, Indiana, 46528, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2962,7 +2962,7 @@
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "Oaklawn Out Patient, 415, East Madison Street, South Bend, Saint Joseph County, Indiana, 46617, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -2981,7 +2981,7 @@
         "state": "IN",
         "zip": "46561",
         "geocoded_display": "431, North Beech Road, Osceola, Saint Joseph County, Indiana, 46561, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3019,7 +3019,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "173, Division Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3038,7 +3038,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "744, South Main Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3057,7 +3057,7 @@
         "state": "IN",
         "zip": "46807",
         "geocoded_display": "322, West Woodland Avenue, Fort Wayne, Allen County, Indiana, 46807, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3076,7 +3076,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "211, North Cedar Street, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3095,7 +3095,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "County Road 36, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3133,7 +3133,7 @@
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "712, North Niles Avenue, Harters Heights, South Bend, Saint Joseph County, Indiana, 46617, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3152,7 +3152,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "340, Columbia Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3171,7 +3171,7 @@
         "state": "IN",
         "zip": "46615",
         "geocoded_display": "1232, East Bronson Street, Edgewater, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3190,7 +3190,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "607, Middleton Run Road, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3228,7 +3228,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "116, West Jackson Boulevard, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3247,7 +3247,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "802, East Mishawaka Avenue, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3266,7 +3266,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "221, East Eckman Street, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3285,7 +3285,7 @@
         "state": "IN",
         "zip": "46615",
         "geocoded_display": "920, South 23rd Street, River Park, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3304,7 +3304,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "Robertson's Senior Apartments, 211, South Michigan Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3323,7 +3323,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "610, North Michigan Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3342,7 +3342,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "501, West Washington Street, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3361,7 +3361,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "430, North 2nd Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3380,7 +3380,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "326, Chapin Street, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3399,7 +3399,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "East Day Road, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3418,7 +3418,7 @@
         "state": "MI",
         "zip": "49120",
         "geocoded_display": "424, North 15th Street, Niles, Berrien County, Michigan, 49120, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3437,7 +3437,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "The Salvation Army, 300, North Main Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3456,7 +3456,7 @@
         "state": "IN",
         "zip": "46528",
         "geocoded_display": "1013, North Main Street, Northside, Goshen, Elkhart County, Indiana, 46528, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3475,7 +3475,7 @@
         "state": "MI",
         "zip": "49120",
         "geocoded_display": "1707, Miller Drive, Niles Charter Township, Berrien County, Michigan, 49120, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3494,7 +3494,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "West Western Avenue, LaSalle Park, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3513,7 +3513,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "405, West Beardsley Avenue, Elkhart, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3528,10 +3528,10 @@
       "properties": {
         "name": "Serenity House",
         "address": "30240 County Road 22",
-        "city": "Plymouth",
+        "city": "Elkhart",
         "state": "IN",
         "zip": "46517",
-        "geocoded_display": "Plymouth, Marshall County, Indiana, 46563, United States",
+        "geocoded_display": "Elkhart, Elkhart County, Indiana, 46517, United States",
         "approximate": true
       }
     },
@@ -3551,7 +3551,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "All Season Inc, 4669, Michigan Road, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3570,7 +3570,7 @@
         "state": "IN",
         "zip": "46501",
         "geocoded_display": "570, North Michigan Street, Argos, Marshall County, Indiana, 46501, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3589,7 +3589,7 @@
         "state": "IN",
         "zip": "45644",
         "geocoded_display": "220, West 4th Street, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3608,7 +3608,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "Alonzo Watson Drive, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3616,8 +3616,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.259835,
-          41.665116
+          -86.254894,
+          41.665980
         ]
       },
       "properties": {
@@ -3627,7 +3627,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "701, West Sample Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3646,7 +3646,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "Toledo Road, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3665,7 +3665,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St Joseph County-City Building, 227, West Jefferson Boulevard, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3684,7 +3684,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St Joseph County-City Building, 227, West Jefferson Boulevard, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3703,7 +3703,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St Joseph County-City Building, 227, West Jefferson Boulevard, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3722,7 +3722,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St Joseph County-City Building, 227, West Jefferson Boulevard, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3741,7 +3741,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St Joseph County-City Building, 227, West Jefferson Boulevard, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3760,7 +3760,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St Joseph County-City Building, 227, West Jefferson Boulevard, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3779,7 +3779,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St Joseph County-City Building, 227, West Jefferson Boulevard, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3798,7 +3798,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St. Joe County Public Library, Main Branch, 304, South Main Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3817,7 +3817,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "Cathedral Of Saint James, 117, North Lafayette Boulevard, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3836,7 +3836,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "621, Lindsey Street, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3855,7 +3855,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "St Paul's Memorial Church, 1001, West Colfax Avenue, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3893,7 +3893,7 @@
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "520, Crescent Avenue, South Bend, Saint Joseph County, Indiana, 46617, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3912,7 +3912,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "1050, Wilber Street, Kennedy Park, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3931,7 +3931,7 @@
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "701, East Colfax Avenue, South Bend, Saint Joseph County, Indiana, 46617, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3969,7 +3969,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "1108, South Main Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -3988,7 +3988,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "Saint Matthew Cathedral, 1701, Miami Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4007,7 +4007,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "St Augustine Catholic Church, 1501, West Washington Street, Near West Side, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4026,7 +4026,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "Lincolnway West, Mishawaka, Saint Joseph County, Indiana, 46561, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4045,7 +4045,7 @@
         "state": "IN",
         "zip": "46637",
         "geocoded_display": "51490, Laurel Road, South Bend, Saint Joseph County, Indiana, 46637, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4083,7 +4083,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "Kenwood Avenue, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4102,7 +4102,7 @@
         "state": "IN",
         "zip": "46550",
         "geocoded_display": "107, East Marion Street, Nappanee, Elkhart County, Indiana, 46550, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4121,7 +4121,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "515, South Main Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4140,7 +4140,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "401, South Main Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4159,7 +4159,7 @@
         "state": "IN",
         "zip": "46507",
         "geocoded_display": "101, West Vistula Street, Bristol, Elkhart County, Indiana, 46507, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4178,7 +4178,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "Fox Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4197,7 +4197,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "301, East Lincoln Avenue, East Lincoln Crossroads, Goshen, Elkhart County, Indiana, 46528, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4216,7 +4216,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "215, East Indiana Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4235,7 +4235,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "5936, Barcus Way, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4254,7 +4254,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "223, South Main Street, Shanklin Millrace, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4273,7 +4273,7 @@
         "state": "in",
         "zip": "46601",
         "geocoded_display": "West Colfax Avenue, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4330,7 +4330,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "1320, Benham Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4349,7 +4349,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "1101, King Street, Keller Park, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4368,7 +4368,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "South Bend Main Post Office, 424, South Michigan Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4406,7 +4406,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "3701, Prast Boulevard, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4425,7 +4425,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "St. Joseph County VA Clinic, 1540, Trinity Place, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4444,7 +4444,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1014, Fox Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4463,7 +4463,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "Moss Road, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4482,7 +4482,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "609, John Glenn Court, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4501,7 +4501,7 @@
         "state": "IN",
         "zip": "46574",
         "geocoded_display": "302, Legion Drive, Walkerton, Saint Joseph County, Indiana, 46574, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4520,7 +4520,7 @@
         "state": "IN",
         "zip": "46574",
         "geocoded_display": "625, Roosevelt Road, Walkerton, Saint Joseph County, Indiana, 46574, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4539,7 +4539,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "22987, Edison Road, South Bend, Saint Joseph County, Indiana, 46628, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4558,7 +4558,7 @@
         "state": "IN",
         "zip": "46567",
         "geocoded_display": "Polywood Way, Polywood, Syracuse, Kosciusko County, Indiana, 46567, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4577,7 +4577,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "1610, South Nappanee Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4596,7 +4596,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "Lincoln Way West, Edgewater, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4615,7 +4615,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "1102, Fellows Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4653,7 +4653,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "215, West Garro Street, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4691,7 +4691,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "601, West Colfax Avenue, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4710,7 +4710,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "601, West Colfax Avenue, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4729,7 +4729,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "Old County Road 17, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4767,7 +4767,7 @@
         "state": "IN",
         "zip": "46506",
         "geocoded_display": "700, West South Street, Bremen, Marshall County, Indiana, 46506, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4786,7 +4786,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "5024, West Western Avenue, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4805,7 +4805,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "Southgate Crossing, 27751, County Road 26, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4843,7 +4843,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "1124, Thomas Street, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4862,7 +4862,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "Center for Healing & Hope, 400, West Lincoln Avenue, East Lincoln Crossroads, Goshen, Elkhart County, Indiana, 46527, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4881,7 +4881,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "North 5th Street, East Lincoln Crossroads, Goshen, Elkhart County, Indiana, 46527, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4900,7 +4900,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "2626, Prairie Street, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4919,7 +4919,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "731, Wagner Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4938,7 +4938,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "2201, Prairie Avenue, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4957,7 +4957,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "125, East Laporte Street, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4976,7 +4976,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "702, Chapin Street, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -4995,7 +4995,7 @@
         "state": "IN",
         "zip": "46530",
         "geocoded_display": "State Farm, 6910, North Main Street, Granger, Saint Joseph County, Indiana, 46530, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5033,7 +5033,7 @@
         "state": "IN",
         "zip": "46615",
         "geocoded_display": "Portage Avenue, North Shore Triangle, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5052,7 +5052,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "28082, County Road 4, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5071,7 +5071,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "2115, South 6th Street, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5090,7 +5090,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "Milton Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5109,7 +5109,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "923, Blaine Avenue, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5128,7 +5128,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "Blaine Avenue, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5147,7 +5147,7 @@
         "state": "IN",
         "zip": "46536",
         "geocoded_display": "20876, Pierce Road, Lakeville, Saint Joseph County, Indiana, 46536, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5166,7 +5166,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "Lincolnway West, Near West Side, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5185,7 +5185,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "801, Benham Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5204,7 +5204,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "605, Portage Avenue, North Shore Triangle, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5223,7 +5223,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "South Ironwood Drive, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5242,7 +5242,7 @@
         "state": "IN",
         "zip": "46550",
         "geocoded_display": "72036, County Road 7, Nappanee, Elkhart County, Indiana, 46550, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5261,7 +5261,7 @@
         "state": "IN",
         "zip": "46540",
         "geocoded_display": "203, East Lawrence Street, Middlebury, Elkhart County, Indiana, 46540, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5280,7 +5280,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "400, North Michigan Street, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5299,7 +5299,7 @@
         "state": "In",
         "zip": "46526",
         "geocoded_display": "South 5th Street, Shanklin Millrace, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5356,7 +5356,7 @@
         "state": "In",
         "zip": "46526",
         "geocoded_display": "1514, College Avenue, College Farm, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5375,7 +5375,7 @@
         "state": "IN",
         "zip": "46530",
         "geocoded_display": "51521, Elm Road, Granger, Saint Joseph County, Indiana, 46530, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5394,7 +5394,7 @@
         "state": "In",
         "zip": "46526",
         "geocoded_display": "1304, East Lincoln Avenue, East Goshen, Goshen, Elkhart County, Indiana, 46528, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5413,7 +5413,7 @@
         "state": "In",
         "zip": "46526",
         "geocoded_display": "1201, South 11th Street, Rieth Park, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5432,7 +5432,7 @@
         "state": "IN",
         "zip": "46506",
         "geocoded_display": "1237, West Plymouth Street, Bremen, Marshall County, Indiana, 46506, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5451,7 +5451,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "831, West Marion Street, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5470,7 +5470,7 @@
         "state": "IN",
         "zip": "46550",
         "geocoded_display": "1155, North Main Street, Nappanee, Elkhart County, Indiana, 46550, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5489,7 +5489,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "Grace United Methodist Church, 3012, South Twyckenham Drive, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5508,7 +5508,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "Crooked Ewe, 1047, Lincoln Way West, Edgewater, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5527,7 +5527,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "4614, West Western Avenue, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5565,7 +5565,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "620, West Edison Road, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5584,7 +5584,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "4206, East Bristol Street, East Lake Estates, Elkhart, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5622,7 +5622,7 @@
         "state": "IN",
         "zip": "46616",
         "geocoded_display": "1007, Portage Avenue, North Shore Triangle, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5641,7 +5641,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "North Michigan Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5660,7 +5660,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "Lincoln Highway, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5679,7 +5679,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "702, South Main Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5698,7 +5698,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "16555, Ireland Road, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5717,7 +5717,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "59218, County Road 3, Jamestown, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5736,7 +5736,7 @@
         "state": "In",
         "zip": "46528",
         "geocoded_display": "North Main Street, Northside, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5774,7 +5774,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "Toledo Road, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5793,7 +5793,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "901, East Jefferson Street, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5812,7 +5812,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5850,7 +5850,7 @@
         "state": "In",
         "zip": "46526",
         "geocoded_display": "1006, South 16th Street, College Farm, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5869,7 +5869,7 @@
         "state": "IN",
         "zip": "46635",
         "geocoded_display": "Ironwood Road, South Bend, Saint Joseph County, Indiana, 46556, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5888,7 +5888,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "2628, South Michigan Street, Southeast, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5907,7 +5907,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "121, East Tutt Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5926,7 +5926,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "1922, Milburn Boulevard, Mishawaka, Saint Joseph County, Indiana, 46544, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5945,7 +5945,7 @@
         "state": "IN",
         "zip": "46615",
         "geocoded_display": "2505, East Jefferson Boulevard, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5964,7 +5964,7 @@
         "state": "IN",
         "zip": "46540",
         "geocoded_display": "Loveway, 54151, County Road 12, Middlebury, Elkhart County, Indiana, 46540, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -5983,7 +5983,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "504, West Mishawaka Avenue, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6002,7 +6002,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "2337, Prairie Avenue, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6040,7 +6040,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "1305, West Harrison Street, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6059,7 +6059,7 @@
         "state": "IN",
         "zip": "46544",
         "geocoded_display": "906, East Grove Street, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6097,7 +6097,7 @@
         "state": "IN",
         "zip": "46635",
         "geocoded_display": "54301, Maple Lane, South Bend, Saint Joseph County, Indiana, 46635, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6116,7 +6116,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "1817, South Ironwood Drive, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6135,7 +6135,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "County Road 4 West, Elkhart, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6154,7 +6154,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "Van Buren Street, Kennedy Park, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6192,7 +6192,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "308, South Walnut Street, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6230,7 +6230,7 @@
         "state": "IN",
         "zip": "46628",
         "geocoded_display": "Birdsell Street, Kennedy Park, South Bend, Saint Joseph County, Indiana, 46616, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6249,7 +6249,7 @@
         "state": "IN",
         "zip": "46563",
         "geocoded_display": "11345, 9A Road, Plymouth, Marshall County, Indiana, 46563, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6325,7 +6325,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "1333, West Lusher Avenue, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6344,7 +6344,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "1151, South Michigan Street, Monroe Park, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6363,7 +6363,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "54820, County Road 1, Elkhart County, Indiana, 46514, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6382,7 +6382,7 @@
         "state": "IN",
         "zip": "46615",
         "geocoded_display": "3516, East Jefferson Boulevard, Bercliff Estates, South Bend, Saint Joseph County, Indiana, 46615, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6401,7 +6401,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "2715, East Jackson Boulevard, East Lake Estates, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6420,7 +6420,7 @@
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "1004, North Eddy Street, Eddy Street Commons, South Bend, Saint Joseph County, Indiana, 46617, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6439,7 +6439,7 @@
         "state": "IN",
         "zip": "46526",
         "geocoded_display": "Regent Street, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6458,7 +6458,7 @@
         "state": "IN",
         "zip": "46517",
         "geocoded_display": "East Mishawaka Road, Elkhart, Elkhart County, Indiana, 46517, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6477,7 +6477,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "803, West Wolf Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6496,7 +6496,7 @@
         "state": "IN",
         "zip": "46614",
         "geocoded_display": "Southgate Church, 3717, South Michigan Street, South Bend, Saint Joseph County, Indiana, 46614, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6515,7 +6515,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "County Road 16, Elkhart County, Indiana, 46507, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6553,7 +6553,7 @@
         "state": "IN",
         "zip": "46619",
         "geocoded_display": "2505, West Grace Street, Westside, South Bend, Saint Joseph County, Indiana, 46619, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6572,7 +6572,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "215, West Madison Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6591,7 +6591,7 @@
         "state": "IN",
         "zip": "46506",
         "geocoded_display": "803, West Bike Street, Bremen, Marshall County, Indiana, 46506, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6610,7 +6610,7 @@
         "state": "In",
         "zip": "46526",
         "geocoded_display": "109, West Monroe Street, Shanklin Millrace, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6629,7 +6629,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "226, West Lexington Avenue, Elkhart, Elkhart County, Indiana, 46516, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6648,7 +6648,7 @@
         "state": "IN",
         "zip": "46545",
         "geocoded_display": "St Mark Missionary Church, 55240, Bittersweet Road, Mishawaka, Saint Joseph County, Indiana, 46545, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6686,7 +6686,7 @@
         "state": "IN",
         "zip": "46613",
         "geocoded_display": "2221, South Ironwood Drive, South Bend, Saint Joseph County, Indiana, 46613, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6724,7 +6724,7 @@
         "state": "IN",
         "zip": "46516",
         "geocoded_display": "Elkhart, Elkhart County, Indiana, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6743,7 +6743,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "1042, West Western Avenue, Near West Side, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6762,7 +6762,7 @@
         "state": "IN",
         "zip": "46617",
         "geocoded_display": "533, North Niles Avenue, South Bend, Saint Joseph County, Indiana, 46617, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6781,7 +6781,7 @@
         "state": "In",
         "zip": "46526",
         "geocoded_display": "112, South 6th Street, Historic Southside, Goshen, Elkhart County, Indiana, 46528, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6838,7 +6838,7 @@
         "state": "IN",
         "zip": "46506",
         "geocoded_display": "515, South Whitlock Street, Bremen, Marshall County, Indiana, 46506, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6876,7 +6876,7 @@
         "state": "IN",
         "zip": "46601",
         "geocoded_display": "333, North Main Street, South Bend, Saint Joseph County, Indiana, 46601, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6895,7 +6895,7 @@
         "state": "In",
         "zip": "46526",
         "geocoded_display": "West Goshen Elementary School, 215, Dewey Avenue, West Goshen, Goshen, Elkhart County, Indiana, 46526, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
@@ -6933,7 +6933,7 @@
         "state": "IN",
         "zip": "46060",
         "geocoded_display": "14350 Mundy Drive, Nobelsville, Indiana, United States",
-        "approximate": false
+        "approximate": true
       }
     },
     {
