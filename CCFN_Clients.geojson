@@ -44,8 +44,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.209585,
+          41.710891
         ]
       },
       "properties": {
@@ -82,8 +82,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.249214,
+          41.721172
         ]
       },
       "properties": {
@@ -139,8 +139,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -85.991406,
+          41.686455
         ]
       },
       "properties": {
@@ -215,8 +215,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.250908,
+          41.679375
         ]
       },
       "properties": {
@@ -348,12 +348,12 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.7060263,
-          41.6750714
+          -85.727275,
+          41.671068
         ]
       },
       "properties": {
-        "name": "Boys & GIrls Club Middlebury",
+        "name": "Boys & Girls Club Middlebury",
         "address": "56805 Northridge Dr",
         "city": "Middlebury",
         "state": "IN",
@@ -405,8 +405,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3097278,
-          41.3436555
+          -86.309243,
+          41.341375
         ]
       },
       "properties": {
@@ -424,8 +424,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -85.975404,
+          41.688799
         ]
       },
       "properties": {
@@ -481,8 +481,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.245689,
+          41.659836
         ]
       },
       "properties": {
@@ -519,8 +519,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.364056,
+          41.605824
         ]
       },
       "properties": {
@@ -671,8 +671,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1807031,
-          41.6611642
+          -86.190416,
+          41.660423
         ]
       },
       "properties": {
@@ -804,8 +804,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.5098231,
-          41.7056871
+          -86.505252,
+          41.702578
         ]
       },
       "properties": {
@@ -823,8 +823,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.244170,
+          41.731880
         ]
       },
       "properties": {
@@ -880,8 +880,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8344491,
-          41.5850394
+          -85.886167,
+          41.660880
         ]
       },
       "properties": {
@@ -937,8 +937,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1480581,
-          41.4464361
+          -86.160271,
+          41.417651
         ]
       },
       "properties": {
@@ -1013,8 +1013,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.298820,
+          41.672913
         ]
       },
       "properties": {
@@ -1032,8 +1032,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.252593,
+          41.680199
         ]
       },
       "properties": {
@@ -1070,8 +1070,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3097278,
-          41.3436555
+          -86.295063,
+          41.340783
         ]
       },
       "properties": {
@@ -1146,8 +1146,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8241113,
-          41.5045465
+          -85.828802,
+          41.515271
         ]
       },
       "properties": {
@@ -1279,8 +1279,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.249611,
+          41.747410
         ]
       },
       "properties": {
@@ -1336,8 +1336,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -86.002916,
+          41.689581
         ]
       },
       "properties": {
@@ -1374,8 +1374,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -85.972573,
+          41.678295
         ]
       },
       "properties": {
@@ -1507,8 +1507,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -85.946593,
+          41.680033
         ]
       },
       "properties": {
@@ -1518,7 +1518,7 @@
         "state": "IN",
         "zip": "46514",
         "geocoded_display": "Elkhart County, Indiana, United States",
-        "approximate": true
+        "approximate": false
       }
     },
     {
@@ -1602,8 +1602,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.8950297,
-          41.7075394
+          -86.892426,
+          41.685934
         ]
       },
       "properties": {
@@ -1678,8 +1678,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.218731,
+          41.697158
         ]
       },
       "properties": {
@@ -1735,8 +1735,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.250642,
+          41.687245
         ]
       },
       "properties": {
@@ -1754,8 +1754,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.206020,
+          41.690361
         ]
       },
       "properties": {
@@ -2039,8 +2039,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.4216948,
-          41.6372578
+          -85.413923,
+          41.641218
         ]
       },
       "properties": {
@@ -2115,8 +2115,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.232262,
+          41.684956
         ]
       },
       "properties": {
@@ -2191,8 +2191,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.193885,
+          41.716019
         ]
       },
       "properties": {
@@ -2362,12 +2362,12 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3097278,
-          41.3436555
+          -86.446087,
+          41.337953
         ]
       },
       "properties": {
-        "name": "MARIAN UNIVERSITY’S ANCILLA COLLEGE",
+        "name": "Marian University's Ancilla College",
         "address": "20097 9B Road",
         "city": "Plymouth",
         "state": "IN",
@@ -2533,8 +2533,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.281406,
+          41.646625
         ]
       },
       "properties": {
@@ -2647,8 +2647,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3097278,
-          41.3436555
+          -86.440639,
+          41.337569
         ]
       },
       "properties": {
@@ -2704,8 +2704,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.250013,
+          41.671988
         ]
       },
       "properties": {
@@ -2715,7 +2715,7 @@
         "state": "IN",
         "zip": "46634",
         "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
-        "approximate": true
+        "approximate": false
       }
     },
     {
@@ -2723,8 +2723,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -86.037588,
+          41.698575
         ]
       },
       "properties": {
@@ -2761,8 +2761,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.250013,
+          41.671988
         ]
       },
       "properties": {
@@ -2780,8 +2780,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.242266,
+          41.698410
         ]
       },
       "properties": {
@@ -2799,8 +2799,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.5098231,
-          41.7056871
+          -86.484911,
+          41.729847
         ]
       },
       "properties": {
@@ -2810,7 +2810,7 @@
         "state": "IN",
         "zip": "46552",
         "geocoded_display": "New Carlisle, Saint Joseph County, Indiana, 46552, United States",
-        "approximate": true
+        "approximate": false
       }
     },
     {
@@ -2989,8 +2989,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -86.046999,
+          41.697467
         ]
       },
       "properties": {
@@ -3103,8 +3103,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1088809,
-          41.9824681
+          -86.119995,
+          41.976929
         ]
       },
       "properties": {
@@ -3198,8 +3198,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.236259,
+          41.639511
         ]
       },
       "properties": {
@@ -3521,8 +3521,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3097278,
-          41.3436555
+          -86.048706,
+          41.644287
         ]
       },
       "properties": {
@@ -3863,8 +3863,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.250642,
+          41.687245
         ]
       },
       "properties": {
@@ -3939,8 +3939,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1062763,
-          41.735251
+          -86.160049,
+          41.730892
         ]
       },
       "properties": {
@@ -4053,8 +4053,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1062763,
-          41.735251
+          -86.071121,
+          41.755119
         ]
       },
       "properties": {
@@ -4281,8 +4281,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.5098231,
-          41.7056871
+          -86.533327,
+          41.713770
         ]
       },
       "properties": {
@@ -4300,8 +4300,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -87.3811461,
-          38.687009
+          -86.668755,
+          41.214545
         ]
       },
       "properties": {
@@ -4376,8 +4376,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3097278,
-          41.3436555
+          -86.423303,
+          41.404724
         ]
       },
       "properties": {
@@ -4623,8 +4623,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -85.994316,
+          41.748719
         ]
       },
       "properties": {
@@ -4661,8 +4661,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1807031,
-          41.6611642
+          -86.192869,
+          41.682175
         ]
       },
       "properties": {
@@ -4737,8 +4737,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8344491,
-          41.5850394
+          -85.867393,
+          41.600982
         ]
       },
       "properties": {
@@ -4813,8 +4813,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.292728,
+          41.725038
         ]
       },
       "properties": {
@@ -5003,8 +5003,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2733398,
-          41.5244919
+          -86.265592,
+          41.488422
         ]
       },
       "properties": {
@@ -5307,8 +5307,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1807031,
-          41.6611642
+          -86.183289,
+          41.689761
         ]
       },
       "properties": {
@@ -5326,8 +5326,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.255844,
+          41.730770
         ]
       },
       "properties": {
@@ -5535,8 +5535,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.252593,
+          41.680199
         ]
       },
       "properties": {
@@ -5744,8 +5744,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.264946,
+          41.701050
         ]
       },
       "properties": {
@@ -5820,8 +5820,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2733398,
-          41.5244919
+          -86.283035,
+          41.516991
         ]
       },
       "properties": {
@@ -6010,8 +6010,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -86.039855,
+          41.695738
         ]
       },
       "properties": {
@@ -6067,8 +6067,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -85.024087,
+          41.674937
         ]
       },
       "properties": {
@@ -6162,8 +6162,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -85.963868,
+          41.737300
         ]
       },
       "properties": {
@@ -6200,8 +6200,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1163889,
-          41.2956002
+          -86.116040,
+          41.338770
         ]
       },
       "properties": {
@@ -6257,8 +6257,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3097278,
-          41.3436555
+          -86.290978,
+          41.313083
         ]
       },
       "properties": {
@@ -6276,8 +6276,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.1088809,
-          41.9824681
+          -86.108398,
+          42.036499
         ]
       },
       "properties": {
@@ -6295,8 +6295,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8344491,
-          41.5850394
+          -85.821875,
+          41.652083
         ]
       },
       "properties": {
@@ -6523,8 +6523,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.244919,
+          41.657234
         ]
       },
       "properties": {
@@ -6656,8 +6656,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.216500,
+          41.697792
         ]
       },
       "properties": {
@@ -6694,8 +6694,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.237282,
+          41.676155
         ]
       },
       "properties": {
@@ -6789,8 +6789,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -85.971670,
+          41.676935
         ]
       },
       "properties": {
@@ -6808,8 +6808,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8590603,
-          41.6012796
+          -86.024692,
+          41.688469
         ]
       },
       "properties": {
@@ -6846,8 +6846,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.3097278,
-          41.3436555
+          -86.335279,
+          41.266890
         ]
       },
       "properties": {
@@ -6903,8 +6903,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -86.2500066,
-          41.6833813
+          -86.196678,
+          41.665550
         ]
       },
       "properties": {
@@ -6922,8 +6922,27 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -85.8344491,
-          41.5850394
+          -86.002370,
+          39.996990
+        ]
+      },
+      "properties": {
+        "name": "Hands of Hope",
+        "address": "14350 Mundy Drive",
+        "city": "Nobelsville",
+        "state": "IN",
+        "zip": "46060",
+        "geocoded_display": "14350 Mundy Drive, Nobelsville, Indiana, United States",
+        "approximate": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.945983,
+          41.552450
         ]
       },
       "properties": {
