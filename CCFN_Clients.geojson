@@ -54,7 +54,7 @@
         "city": "South Bend",
         "state": "IN",
         "zip": "53871",
-        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "geocoded_display": "53871 Generations Drive, South Bend, Saint Joseph County, Indiana, United States",
         "approximate": true
       }
     },
@@ -92,7 +92,7 @@
         "city": "South Bend",
         "state": "IN",
         "zip": "46637",
-        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "geocoded_display": "111 Sunnybrook Ct, South Bend, Saint Joseph County, Indiana, United States",
         "approximate": true
       }
     },
@@ -149,7 +149,7 @@
         "city": "Elkhart",
         "state": "IN",
         "zip": "46514",
-        "geocoded_display": "Elkhart County, Indiana, United States",
+        "geocoded_display": "1133 Kilbourn Street C, Elkhart County, Indiana, United States",
         "approximate": true
       }
     },
@@ -225,7 +225,7 @@
         "city": "South Bend",
         "state": "IN",
         "zip": "46601",
-        "geocoded_display": "South Bend, Saint Joseph County, Indiana, United States",
+        "geocoded_display": "307 Martin Luther King Jr Dr N, South Bend, Saint Joseph County, Indiana, United States",
         "approximate": true
       }
     },
@@ -3531,7 +3531,7 @@
         "city": "Elkhart",
         "state": "IN",
         "zip": "46517",
-        "geocoded_display": "Elkhart, Elkhart County, Indiana, 46517, United States",
+        "geocoded_display": "30240 County Road 22, Elkhart, Elkhart County, Indiana, 46517, United States",
         "approximate": true
       }
     },
