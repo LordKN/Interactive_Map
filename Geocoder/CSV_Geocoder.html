@@ -442,7 +442,7 @@ async function startGeocoding() {
   results = []; cntOk = 0; cntFail = 0; cntSkip = 0;
   updateStats();
 
-  log('▶ Starting geocoding of ' + clients.length + ' records...', 'log-info');
+  log(' Starting geocoding of ' + clients.length + ' records...', 'log-info');
   
   // Much slower delay to avoid rate limiting - 5 seconds between requests
   const baseDelay = 5000; // 5 seconds
@@ -450,9 +450,9 @@ async function startGeocoding() {
   const pauseDelay = 10000; // 10 second pause
   const estimatedMinutes = Math.ceil((clients.length * baseDelay + pauseCount * pauseDelay) / 60000);
   
-  log(`ℹ Using ${baseDelay/1000}s delay between requests`, 'log-info');
-  log(`⏸ Adding ${pauseDelay/1000}s pause every 30 requests`, 'log-info');
-  log(`⏱ Estimated time: ~${estimatedMinutes} minute${estimatedMinutes > 1 ? 's' : ''}`, 'log-info');
+  log(` Using ${baseDelay/1000}s delay between requests`, 'log-info');
+  log(` Adding ${pauseDelay/1000}s pause every 30 requests`, 'log-info');
+  log(` Estimated time: ~${estimatedMinutes} minute${estimatedMinutes > 1 ? 's' : ''}`, 'log-info');
 
   const tbody = document.getElementById('tbody');
   tbody.innerHTML = '';
@@ -514,7 +514,7 @@ async function startGeocoding() {
 
   document.getElementById('bar').style.width = '100%';
   document.getElementById('progressText').textContent = `Done! ${cntOk} geocoded, ${cntFail} failed, ${cntSkip} skipped.`;
-  log(`\n✅ Complete! ${cntOk} geocoded, ${cntFail} failed, ${cntSkip} skipped.`, 'log-info');
+  log(`\n Complete! ${cntOk} geocoded, ${cntFail} failed, ${cntSkip} skipped.`, 'log-info');
   document.getElementById('downloadBtn').style.display = 'inline-flex';
   running = false;
 }
