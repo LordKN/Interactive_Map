@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSV Address Geocoder</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #1a3a5c; color: white; padding: 24px 32px; }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .header p { font-size: 13px; opacity: 0.75; margin-top: 4px; }
+  .container { max-width: 860px; margin: 32px auto; padding: 0 16px; }
+  .card { background: white; border-radius: 12px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; background: #1a3a5c; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .btn:hover { background: #254d7a; }
+  .btn:disabled { background: #aaa; cursor: not-allowed; }
+  .btn-green { background: #2e7d4f; }
+  .btn-green:hover { background: #3a9e64; }
+  .file-input-wrap { position: relative; display: inline-block; }
+  .file-input-wrap input[type=file] { position: absolute; opacity: 0; width: 100%; height: 100%; top: 0; left: 0; cursor: pointer; z-index: 2; }
+  .progress-wrap { margin-top: 20px; }
+  .progress-bar-bg { background: #e5e9ef; border-radius: 99px; height: 12px; overflow: hidden; }
+  .progress-bar { background: linear-gradient(90deg, #1a3a5c, #4a90d9); height: 100%; width: 0; border-radius: 99px; transition: width 0.3s; }
+  .progress-text { font-size: 13px; color: #666; margin-top: 8px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+  .stat { background: #f5f7fa; border-radius: 8px; padding: 14px; text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 700; }
+  .stat-label { font-size: 12px; color: #888; margin-top: 2px; }
+  .success .stat-num { color: #2e7d4f; }
+  .failed .stat-num { color: #c0392b; }
+  .skipped .stat-num { color: #e67e22; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f5f7fa; padding: 10px 12px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #e0e4ea; }
+  td { padding: 9px 12px; border-bottom: 1px solid #eef0f4; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; }
+  .badge-ok { background: #d4edda; color: #155724; }
+  .badge-fail { background: #f8d7da; color: #721c24; }
+  .badge-skip { background: #fff3cd; color: #856404; }
+  .log-box { background: #1e1e2e; color: #cdd6f4; border-radius: 8px; padding: 16px; font-family: monospace; font-size: 12px; height: 240px; overflow-y: auto; margin-top: 16px; }
+  .log-ok { color: #a6e3a1; }
+  .log-fail { color: #f38ba8; }
+  .log-skip { color: #fab387; }
+  .log-info { color: #89dceb; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .note { background: #e8f4fd; border-left: 4px solid #4a90d9; padding: 12px 16px; border-radius: 4px; font-size: 13px; line-height: 1.5; margin-bottom: 16px; }
+  .column-mapping { background: #f8f9fb; border-radius: 8px; padding: 16px; margin-top: 16px; }
+  .column-mapping h3 { font-size: 14px; margin-bottom: 12px; color: #555; }
+  .mapping-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+  .mapping-row label { font-size: 13px; font-weight: 600; color: #555; }
+  .mapping-row select { padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
+  #geocodingSection, #resultsCard { display: none; }
+  .preview-table { max-height: 200px; overflow-y: auto; margin-top: 12px; font-size: 12px; }
+  .file-info { background: #f0f4f8; padding: 12px; border-radius: 6px; margin-top: 12px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>CSV Address Geocoder</h1>
+  <p>Upload a CSV with addresses and convert to GeoJSON coordinates</p>
+</div>
+
+<div class="container">
+
+  <!-- Upload Section -->
+  <div class="card" id="uploadSection">
+    <p class="note">
+      Upload a CSV file with your addresses. The tool will auto-detect columns for <strong>name</strong>, <strong>address</strong>, 
+      <strong>city</strong>, <strong>state</strong>, and <strong>zip</strong>. You can adjust the mapping if needed.
+      <br><br>
+      <strong>Processing speed:</strong> To avoid rate limiting, the tool uses a <strong>5-second delay</strong> between requests 
+      plus a 10-second pause every 30 records. For 250+ records, expect 25-30 minutes total processing time.
+    </p>
+
+    <label for="fileInput" class="btn" style="cursor: pointer; margin: 0;">📁 Choose CSV File</label>
+    <input type="file" id="fileInput" accept=".csv" onchange="handleFileUpload(event)" style="display: none;">
+
+    <div id="fileInfoSection" style="display:none;">
+      <div class="file-info">
+        <strong>📄 <span id="fileName"></span></strong><br>
+        <span id="fileStats"></span>
+      </div>
+
+      <div class="column-mapping">
+        <h3>Column Mapping</h3>
+        <div class="mapping-row">
+          <label>Name Column:</label>
+          <select id="nameCol"></select>
+        </div>
+        <div class="mapping-row">
+          <label>Address Column:</label>
+          <select id="addressCol"></select>
+        </div>
+        <div class="mapping-row">
+          <label>City Column:</label>
+          <select id="cityCol"></select>
+        </div>
+        <div class="mapping-row">
+          <label>State Column:</label>
+          <select id="stateCol"></select>
+        </div>
+        <div class="mapping-row">
+          <label>Zip Column:</label>
+          <select id="zipCol"></select>
+        </div>
+      </div>
+
+      <div class="preview-table">
+        <h3 style="font-size:14px;margin-bottom:8px;color:#555;">Preview (first 5 rows)</h3>
+        <table>
+          <thead id="previewHead"></thead>
+          <tbody id="previewBody"></tbody>
+        </table>
+      </div>
+
+      <div class="actions" style="margin-top:20px;">
+        <button class="btn btn-green" onclick="proceedToGeocoding()">▶ Start Geocoding</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Geocoding Section -->
+  <div class="card" id="geocodingSection">
+    <p class="note">
+      Geocoding using the <strong>OpenStreetMap Nominatim API</strong> via a local proxy server to avoid CORS issues. 
+      <br><br>
+      <strong>⚡ IMPORTANT:</strong> Start the proxy server first by running:
+      <pre style="background: #2e3440; color: #88c0d0; padding: 10px; border-radius: 4px; margin: 8px 0;">npm install
+node geocode-proxy-server.js</pre>
+      The proxy runs at <code>http://localhost:3000</code> and handles CORS headers automatically.
+      <br><br>
+      Processing with <strong>5-second delays</strong> between requests and 10-second pauses every 30 records to prevent rate limiting. 
+      This is slow but reliable. Check the log below for progress details.
+    </p>
+
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar" id="bar"></div></div>
+      <div class="progress-text" id="progressText">Ready to start</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat success"><div class="stat-num" id="cntOk">0</div><div class="stat-label">Geocoded</div></div>
+      <div class="stat failed"><div class="stat-num" id="cntFail">0</div><div class="stat-label">Failed</div></div>
+      <div class="stat skipped"><div class="stat-num" id="cntSkip">0</div><div class="stat-label">No Address</div></div>
+    </div>
+
+    <div class="log-box" id="log"><span class="log-info">▶ Starting geocoding...</span></div>
+
+    <div class="actions" style="margin-top:20px;">
+      <button class="btn btn-green" id="downloadBtn" style="display:none;" onclick="downloadGeoJSON()">⬇ Download GeoJSON</button>
+      <button class="btn" onclick="resetTool()">↻ Upload New File</button>
+    </div>
+  </div>
+
+  <!-- Results Table -->
+  <div class="card" id="resultsCard">
+    <h2 style="font-size:16px;margin-bottom:14px;">Results Preview</h2>
+    <div style="overflow-x:auto;">
+      <table id="resultsTable">
+        <thead><tr><th>Name</th><th>Address</th><th>Coords</th><th>Status</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let csvData = [];
+let clients = [];
+let results = [];
+let cntOk = 0, cntFail = 0, cntSkip = 0;
+let running = false;
+
+function parseCSV(text) {
+  // Remove UTF-8 BOM if present
+  text = text.replace(/^\uFEFF/, '');
+  
+  const lines = text.split(/\r?\n/).filter(line => line.trim());
+  if (lines.length === 0) return { headers: [], rows: [] };
+  
+  // Parse headers using the same robust parser
+  const headers = parseCSVLine(lines[0]).map(h => h.trim());
+  const rows = [];
+  
+  for (let i = 1; i < lines.length; i++) {
+    const values = parseCSVLine(lines[i]);
+    // Create row object
+    const row = {};
+    headers.forEach((h, idx) => {
+      // Trim whitespace from all values
+      row[h] = values[idx] ? values[idx].trim() : '';
+    });
+    // Only add rows that have at least one non-empty value
+    if (Object.values(row).some(v => v && v !== '#N/A')) {
+      rows.push(row);
+    }
+  }
+  return { headers, rows };
+}
+
+function parseCSVLine(line) {
+  const values = [];
+  let current = '';
+  let inQuotes = false;
+  
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    const nextChar = line[i + 1];
+    
+    if (char === '"') {
+      // Handle escaped quotes ("")
+      if (inQuotes && nextChar === '"') {
+        current += '"';
+        i++; // Skip next quote
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      // End of field - clean up the value
+      let cleaned = current.trim();
+      // Remove surrounding quotes if present
+      if (cleaned.startsWith('"') && cleaned.endsWith('"')) {
+        cleaned = cleaned.slice(1, -1);
+      } else if (cleaned.startsWith("'") && cleaned.endsWith("'")) {
+        cleaned = cleaned.slice(1, -1);
+      }
+      values.push(cleaned);
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  // Push the last value with same cleanup
+  let cleaned = current.trim();
+  if (cleaned.startsWith('"') && cleaned.endsWith('"')) {
+    cleaned = cleaned.slice(1, -1);
+  } else if (cleaned.startsWith("'") && cleaned.endsWith("'")) {
+    cleaned = cleaned.slice(1, -1);
+  }
+  values.push(cleaned);
+  return values;
+}
+
+function findColumn(headers, patterns) {
+  // First try exact matches (case insensitive)
+  for (let pattern of patterns) {
+    const idx = headers.findIndex(h => h.toLowerCase() === pattern.toLowerCase());
+    if (idx !== -1) return idx;
+  }
+  // Then try partial matches
+  for (let pattern of patterns) {
+    const idx = headers.findIndex(h => h.toLowerCase().includes(pattern.toLowerCase()));
+    if (idx !== -1) return idx;
+  }
+  return 0;
+}
+
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    csvData = parseCSV(text);
+    
+    console.log('Parsed CSV:', csvData); // Debug logging
+    console.log('Headers:', csvData.headers);
+    console.log('Row count:', csvData.rows.length);
+    console.log('First row sample:', csvData.rows[0]);
+    
+    if (csvData.rows.length === 0) {
+      alert('No data rows found in CSV. Please check your file format.');
+      return;
+    }
+    
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('fileStats').textContent = `${csvData.rows.length} rows, ${csvData.headers.length} columns`;
+    
+    // Populate column selectors
+    const selects = ['nameCol', 'addressCol', 'cityCol', 'stateCol', 'zipCol'];
+    selects.forEach(id => {
+      const select = document.getElementById(id);
+      select.innerHTML = '<option value="">— None —</option>';
+      csvData.headers.forEach((h, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = h;
+        select.appendChild(opt);
+      });
+    });
+    
+    // Auto-detect columns - try exact matches first, then partial
+    const nameIdx = findColumn(csvData.headers, ['ACTIVE CCFN CLIENTS', 'name', 'client', 'organization', 'org', 'facility']);
+    const addressIdx = findColumn(csvData.headers, ['Address', 'street', 'addr', 'street address']);
+    const cityIdx = findColumn(csvData.headers, ['City', 'town', 'municipality']);
+    const stateIdx = findColumn(csvData.headers, ['State', 'province', 'st']);
+    const zipIdx = findColumn(csvData.headers, ['Zip', 'postal', 'postcode', 'postal code', 'zip code']);
+    
+    document.getElementById('nameCol').value = nameIdx;
+    document.getElementById('addressCol').value = addressIdx;
+    document.getElementById('cityCol').value = cityIdx;
+    document.getElementById('stateCol').value = stateIdx;
+    document.getElementById('zipCol').value = zipIdx;
+    
+    console.log('Auto-detected columns:');
+    console.log('  Name:', csvData.headers[nameIdx]);
+    console.log('  Address:', csvData.headers[addressIdx]);
+    console.log('  City:', csvData.headers[cityIdx]);
+    console.log('  State:', csvData.headers[stateIdx]);
+    console.log('  Zip:', csvData.headers[zipIdx]);
+    
+    // Show preview
+    const previewHead = document.getElementById('previewHead');
+    const previewBody = document.getElementById('previewBody');
+    previewHead.innerHTML = '<tr>' + csvData.headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+    previewBody.innerHTML = '';
+    csvData.rows.slice(0, 5).forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = csvData.headers.map(h => `<td>${row[h] || ''}</td>`).join('');
+      previewBody.appendChild(tr);
+    });
+    
+    document.getElementById('fileInfoSection').style.display = 'block';
+  };
+  reader.readAsText(file);
+}
+
+function proceedToGeocoding() {
+  const nameIdx = document.getElementById('nameCol').value;
+  const addressIdx = document.getElementById('addressCol').value;
+  const cityIdx = document.getElementById('cityCol').value;
+  const stateIdx = document.getElementById('stateCol').value;
+  const zipIdx = document.getElementById('zipCol').value;
+  
+  clients = csvData.rows.map(row => ({
+    name: nameIdx !== '' ? row[csvData.headers[nameIdx]] : '',
+    address: addressIdx !== '' ? row[csvData.headers[addressIdx]] : '',
+    city: cityIdx !== '' ? row[csvData.headers[cityIdx]] : '',
+    state: stateIdx !== '' ? row[csvData.headers[stateIdx]] : '',
+    zip: zipIdx !== '' ? row[csvData.headers[zipIdx]] : ''
+  })).filter(c => c.name || c.address || c.city);
+  
+  document.getElementById('uploadSection').style.display = 'none';
+  document.getElementById('geocodingSection').style.display = 'block';
+  
+  setTimeout(startGeocoding, 500);
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function log(msg, cls='') {
+  const box = document.getElementById('log');
+  const line = document.createElement('div');
+  if (cls) line.className = cls;
+  line.textContent = msg;
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+}
+
+function buildQuery(c) {
+  if (!c.address && !c.city) return null;
+  let parts = [];
+  if (c.address) parts.push(c.address.trim().replace(/\n.*/, '').replace(/,\s*$/, '').replace(/\s+/g, ' '));
+  if (c.city) parts.push(c.city);
+  if (c.state) parts.push(c.state);
+  if (c.zip) parts.push(c.zip);
+  return encodeURIComponent(parts.join(', '));
+}
+
+async function geocode(client, retryCount = 0) {
+  const query = buildQuery(client);
+  if (!query) return null;
+  
+  // Use proxy server to avoid CORS issues
+  const useProxy = true; // Set to false to use Nominatim directly
+  const url = useProxy 
+    ? `http://localhost:3000/geocode?q=${query}&countrycodes=us`
+    : `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1&countrycodes=us`;
+  
+  try {
+    const headers = useProxy ? {} : { 'Accept-Language': 'en', 'User-Agent': 'CSV-Geocoder/1.0' };
+    const res = await fetch(url, { headers });
+    
+    // Handle rate limiting
+    if (res.status === 429) {
+      if (retryCount < 3) {
+        const waitTime = (retryCount + 1) * 10000; // 10s, 20s, 30s - much longer waits
+        log(`⏳ Rate limited, waiting ${waitTime/1000}s...`, 'log-skip');
+        await sleep(waitTime);
+        return geocode(client, retryCount + 1);
+      }
+      return null;
+    }
+    
+    if (!res.ok) {
+      if (retryCount < 2) {
+        await sleep(5000); // 5 second retry delay
+        return geocode(client, retryCount + 1);
+      }
+      return null;
+    }
+    
+    const data = await res.json();
+    if (data && data.length > 0) {
+      return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon), display: data[0].display_name };
+    }
+    // Fallback: city + state only
+    if (client.city && client.state) {
+      const fallbackQuery = encodeURIComponent(client.city + ', ' + client.state);
+      const fallbackUrl = useProxy
+        ? `http://localhost:3000/geocode?q=${fallbackQuery}&countrycodes=us`
+        : `https://nominatim.openstreetmap.org/search?q=${fallbackQuery}&format=json&limit=1&countrycodes=us`;
+      const res2 = await fetch(fallbackUrl, { headers });
+      if (res2.ok) {
+        const data2 = await res2.json();
+        if (data2 && data2.length > 0) {
+          return { lat: parseFloat(data2[0].lat), lon: parseFloat(data2[0].lon), display: data2[0].display_name, approximate: true };
+        }
+      }
+    }
+  } catch(e) {
+    // If proxy is not running, suggest starting it
+    if (useProxy && e.message.includes('Failed to fetch')) {
+      log(`⚠ Proxy server not running! Start it with: node geocode-proxy-server.js`, 'log-fail');
+    }
+    if (retryCount < 2) {
+      log(`⚠ Error, retrying... (${retryCount + 1}/2)`, 'log-skip');
+      await sleep(5000); // 5 second retry delay
+      return geocode(client, retryCount + 1);
+    }
+  }
+  return null;
+}
+
+async function startGeocoding() {
+  if (running) return;
+  running = true;
+  results = []; cntOk = 0; cntFail = 0; cntSkip = 0;
+  updateStats();
+
+  log('▶ Starting geocoding of ' + clients.length + ' records...', 'log-info');
+  
+  // Much slower delay to avoid rate limiting - 5 seconds between requests
+  const baseDelay = 5000; // 5 seconds
+  const pauseCount = Math.floor(clients.length / 30); // Pause every 30 instead of 50
+  const pauseDelay = 10000; // 10 second pause
+  const estimatedMinutes = Math.ceil((clients.length * baseDelay + pauseCount * pauseDelay) / 60000);
+  
+  log(`ℹ Using ${baseDelay/1000}s delay between requests`, 'log-info');
+  log(`⏸ Adding ${pauseDelay/1000}s pause every 30 requests`, 'log-info');
+  log(`⏱ Estimated time: ~${estimatedMinutes} minute${estimatedMinutes > 1 ? 's' : ''}`, 'log-info');
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  document.getElementById('resultsCard').style.display = 'block';
+
+  for (let i = 0; i < clients.length; i++) {
+    const c = clients[i];
+    const pct = Math.round((i / clients.length) * 100);
+    document.getElementById('bar').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `Processing ${i + 1} of ${clients.length} — ${c.name || 'Record ' + (i+1)}`;
+
+    let coord = null;
+    let status = 'fail';
+    let badgeClass = 'badge-fail';
+    let coords = '—';
+
+    if (!c.address && !c.city) {
+      cntSkip++;
+      status = 'skip';
+      badgeClass = 'badge-skip';
+      log(`⚠ SKIP  ${c.name || 'Record ' + (i+1)} — no address`, 'log-skip');
+    } else {
+      coord = await geocode(c);
+      
+      // Add periodic longer pauses every 30 requests to avoid rate limiting
+      if ((i + 1) % 30 === 0 && i + 1 < clients.length) {
+        log(`⏸ Pausing 10s after ${i + 1} requests...`, 'log-info');
+        await sleep(10000);
+      }
+      
+      await sleep(baseDelay);
+      
+      if (coord) {
+        cntOk++;
+        status = 'ok';
+        badgeClass = 'badge-ok';
+        coords = `${coord.lat.toFixed(5)}, ${coord.lon.toFixed(5)}${coord.approximate ? ' (~city)' : ''}`;
+        log(`✓ OK    ${c.name || 'Record ' + (i+1)}`, 'log-ok');
+      } else {
+        cntFail++;
+        log(`✗ FAIL  ${c.name || 'Record ' + (i+1)}`, 'log-fail');
+      }
+    }
+
+    results.push({ client: c, coord, status });
+    updateStats();
+
+    // Add table row
+    const tr = document.createElement('tr');
+    const fullAddr = [c.address, c.city, c.state, c.zip].filter(Boolean).join(', ');
+    tr.innerHTML = `
+      <td>${c.name || '—'}</td>
+      <td style="max-width:180px;word-break:break-word;">${fullAddr || '—'}</td>
+      <td style="font-family:monospace;font-size:12px;">${coords}</td>
+      <td><span class="badge ${badgeClass}">${status === 'ok' ? 'OK' : status === 'skip' ? 'SKIP' : 'FAIL'}</span></td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  document.getElementById('bar').style.width = '100%';
+  document.getElementById('progressText').textContent = `Done! ${cntOk} geocoded, ${cntFail} failed, ${cntSkip} skipped.`;
+  log(`\n✅ Complete! ${cntOk} geocoded, ${cntFail} failed, ${cntSkip} skipped.`, 'log-info');
+  document.getElementById('downloadBtn').style.display = 'inline-flex';
+  running = false;
+}
+
+function updateStats() {
+  document.getElementById('cntOk').textContent = cntOk;
+  document.getElementById('cntFail').textContent = cntFail;
+  document.getElementById('cntSkip').textContent = cntSkip;
+}
+
+function downloadGeoJSON() {
+  const features = results
+    .filter(r => r.coord)
+    .map(r => ({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [r.coord.lon, r.coord.lat]
+      },
+      properties: {
+        name: r.client.name,
+        address: r.client.address,
+        city: r.client.city,
+        state: r.client.state,
+        zip: r.client.zip,
+        geocoded_display: r.coord.display || '',
+        approximate: r.coord.approximate || false
+      }
+    }));
+
+  const geojson = {
+    type: 'FeatureCollection',
+    features,
+    metadata: {
+      generated: new Date().toISOString(),
+      total: clients.length,
+      geocoded: cntOk,
+      failed: cntFail,
+      skipped: cntSkip,
+      source: 'OpenStreetMap Nominatim'
+    }
+  };
+
+  const blob = new Blob([JSON.stringify(geojson, null, 2)], { type: 'application/geo+json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'geocoded_addresses.geojson';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function resetTool() {
+  document.getElementById('uploadSection').style.display = 'block';
+  document.getElementById('geocodingSection').style.display = 'none';
+  document.getElementById('resultsCard').style.display = 'none';
+  document.getElementById('fileInfoSection').style.display = 'none';
+  document.getElementById('fileInput').value = '';
+  csvData = [];
+  clients = [];
+  results = [];
+}
+</script>
+</body>
+</html>

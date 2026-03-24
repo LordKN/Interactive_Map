@@ -1,0 +1,25 @@
+{
+  "name": "geocode-proxy-server",
+  "version": "1.0.0",
+  "description": "CORS proxy server for Nominatim geocoding API",
+  "main": "geocode-proxy-server.js",
+  "scripts": {
+    "start": "node geocode-proxy-server.js",
+    "dev": "nodemon geocode-proxy-server.js"
+  },
+  "keywords": [
+    "geocoding",
+    "nominatim",
+    "proxy",
+    "cors"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}

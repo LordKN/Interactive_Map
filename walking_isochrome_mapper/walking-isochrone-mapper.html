@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walking Isochrone Mapper</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f1a;
+    --surface: #111827;
+    --border: #1e2d45;
+    --accent: #00e5a0;
+    --accent2: #0af;
+    --warn: #ff6b35;
+    --text: #e2e8f0;
+    --muted: #4a5568;
+    --panel-w: 340px;
+    --zone-color: #00e5a0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+  h1 span { color: var(--accent); }
+
+  .badge {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: rgba(0,229,160,.1);
+    border: 1px solid rgba(0,229,160,.3);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .layout { display: flex; flex: 1; overflow: hidden; }
+
+  .panel {
+    width: var(--panel-w);
+    flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel::-webkit-scrollbar { width: 4px; }
+  .panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .section { padding: 16px 18px; border-bottom: 1px solid var(--border); }
+
+  .section-title {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+  }
+
+  label {
+    display: block; font-size: 12px; color: var(--muted);
+    margin-bottom: 5px; font-family: 'DM Mono', monospace;
+  }
+
+  input[type="text"], input[type="password"], textarea {
+    width: 100%; background: var(--bg); border: 1px solid var(--border);
+    color: var(--text); padding: 9px 12px; border-radius: 8px;
+    font-family: 'DM Mono', monospace; font-size: 12px; outline: none; transition: border-color .2s;
+  }
+  input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,229,160,.1); }
+  textarea { resize: vertical; min-height: 130px; line-height: 1.5; }
+  .input-group { margin-bottom: 12px; }
+
+  input[type="range"] { width: 100%; accent-color: var(--accent); margin-top: 4px; }
+  input[type="color"] {
+    width: 100%; height: 36px; border: 1px solid var(--border);
+    background: var(--bg); border-radius: 8px; cursor: pointer; padding: 3px 6px;
+  }
+
+  .range-display { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .range-val { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: var(--accent); }
+
+  button {
+    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px;
+    border: none; border-radius: 8px; cursor: pointer; padding: 10px 16px; transition: all .2s;
+  }
+  .btn-primary { background: var(--accent); color: #0b0f1a; width: 100%; letter-spacing: 0.5px; }
+  .btn-primary:hover { background: #00ffb3; transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+  .btn-stop { background: var(--warn); color: #fff; width: 100%; display: none; }
+  .btn-stop:hover { background: #ff8c5a; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); font-size: 11px; padding: 6px 10px; }
+  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+
+  /* Export buttons */
+  .export-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+  .btn-export {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 600;
+    border-radius: 8px; padding: 10px 8px; cursor: pointer; transition: all .2s;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .btn-export:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,160,.05); }
+  .btn-export:disabled { opacity: .35; cursor: not-allowed; }
+  .btn-export .export-icon { font-size: 18px; }
+  .btn-export .export-label { font-size: 10px; letter-spacing: .5px; text-transform: uppercase; }
+
+  .status {
+    padding: 10px 14px; border-radius: 8px; font-size: 12px;
+    font-family: 'DM Mono', monospace; line-height: 1.5; display: none; margin-top: 10px;
+  }
+  .status.info    { background: rgba(0,170,255,.1); border: 1px solid rgba(0,170,255,.3); color: var(--accent2); display: block; }
+  .status.success { background: rgba(0,229,160,.1); border: 1px solid rgba(0,229,160,.3); color: var(--accent); display: block; }
+  .status.error   { background: rgba(255,107,53,.1); border: 1px solid rgba(255,107,53,.3); color: var(--warn); display: block; }
+  .status.loading { display: block; background: rgba(255,255,255,.03); border: 1px solid var(--border); color: var(--muted); }
+  .status.stopped { display: block; background: rgba(255,107,53,.05); border: 1px solid rgba(255,107,53,.2); color: #aaa; }
+
+  .progress-wrap { display: none; margin-top: 12px; }
+  .progress-wrap.visible { display: block; }
+  .progress-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .progress-count { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); }
+  .progress-eta   { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
+  .progress-track { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; height: 8px; overflow: hidden; }
+  .progress-fill  { height: 100%; background: linear-gradient(90deg, var(--accent), #0af); border-radius: 6px; width: 0%; transition: width .4s ease; }
+
+  .cooldown-wrap { margin-top: 8px; display: none; }
+  .cooldown-wrap.visible { display: block; }
+  .cooldown-label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); margin-bottom: 4px; display: flex; justify-content: space-between; }
+  .cooldown-track { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; height: 3px; overflow: hidden; }
+  .cooldown-fill  { height: 100%; background: var(--muted); border-radius: 4px; width: 100%; transition: width linear; }
+
+  /* Stats */
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .stat-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
+  .stat-num   { font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 3px; }
+
+  /* Coverage stat — full width */
+  .stat-coverage {
+    background: var(--bg); border: 1px solid rgba(0,229,160,.25);
+    border-radius: 8px; padding: 12px 14px; margin-bottom: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .stat-coverage-label { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); }
+  .stat-coverage-val   { font-size: 16px; font-weight: 800; color: var(--accent); font-family: 'DM Mono', monospace; }
+
+  /* Results list */
+  .results-scroll { max-height: 280px; overflow-y: auto; padding-right: 2px; }
+  .results-scroll::-webkit-scrollbar { width: 3px; }
+  .results-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .results-list { display: flex; flex-direction: column; gap: 5px; }
+
+  .result-item {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 11px; cursor: pointer; transition: border-color .15s;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .result-item:hover { border-color: #4a5568; }
+  .result-item.pending { opacity: 0.45; }
+
+  .result-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: var(--zone-color); }
+  .result-info { flex: 1; min-width: 0; }
+  .result-name  { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .result-coord { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); margin-top: 2px; }
+
+  .result-badge {
+    font-size: 9px; font-weight: 600; letter-spacing: .5px;
+    padding: 2px 6px; border-radius: 10px; flex-shrink: 0; white-space: nowrap;
+  }
+  .result-badge.ok      { background: rgba(0,229,160,.15); color: var(--accent); }
+  .result-badge.fail    { background: rgba(255,107,53,.15); color: var(--warn); }
+  .result-badge.pending { background: rgba(255,255,255,.05); color: var(--muted); }
+  .result-badge.active  { background: rgba(0,170,255,.15); color: var(--accent2); }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner {
+    display: inline-block; width: 11px; height: 11px;
+    border: 2px solid var(--muted); border-top-color: var(--accent);
+    border-radius: 50%; animation: spin .8s linear infinite;
+    margin-right: 7px; vertical-align: middle;
+  }
+
+  #map { flex: 1; z-index: 0; }
+  .leaflet-container { background: #0b0f1a; }
+  .leaflet-tile { filter: invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.8); }
+
+  .btn-strip { display: flex; gap: 6px; flex-wrap: wrap; }
+  .key-hint { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 6px; line-height: 1.7; }
+
+  /* color swatch preview */
+  .color-preview-row {
+    display: flex; align-items: center; gap: 10px; margin-top: 10px;
+  }
+  .color-swatch {
+    width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+    flex-shrink: 0; transition: background .2s;
+  }
+  .color-inputs { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .color-inputs label { margin: 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🚶</div>
+  <h1>Walk<span>Reach</span></h1>
+  <div class="badge">unified coverage</div>
+</header>
+
+<div class="layout">
+  <div class="panel">
+
+    <!-- API -->
+    <div class="section">
+      <div class="section-title">API Configuration</div>
+      <div class="input-group">
+        <label>OpenRouteService API Key</label>
+        <input type="password" id="apiKey" placeholder="paste your free ORS key…"/>
+        <p class="key-hint">Free key at <strong style="color:#0af">openrouteservice.org</strong><br>Dashboard → Tokens → copy default key<br><br><span style="color:var(--warn)">⚠ Run proxy first:</span> <code style="background:#0b0f1a;padding:2px 5px;border-radius:4px;font-size:10px">node proxy.js</code></p>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="section">
+      <div class="section-title">Settings</div>
+
+      <div class="range-display">
+        <label style="margin:0">Walk distance per point</label>
+        <span class="range-val" id="distVal">1.0 mi</span>
+      </div>
+      <input type="range" id="distRange" min="0.1" max="3" step="0.1" value="1.0"/>
+
+      <div style="margin-top:14px">
+        <div class="range-display">
+          <label style="margin:0">Delay between batches</label>
+          <span class="range-val" id="delayVal">1.5 s</span>
+        </div>
+        <input type="range" id="delayRange" min="0.5" max="15" step="0.5" value="1.5"/>
+        <p class="key-hint">
+          ORS free tier: ~40 req/min · batch = 5 pts<br>
+          Raise if you see 429 errors. Lower on paid plan.
+        </p>
+      </div>
+
+      <!-- Zone color -->
+      <div style="margin-top:14px">
+        <label>Zone fill color</label>
+        <div class="color-preview-row">
+          <div class="color-swatch" id="colorSwatch" style="background:#00e5a0"></div>
+          <div class="color-inputs">
+            <input type="color" id="zoneColor" value="#00e5a0" title="Pick zone color"/>
+          </div>
+        </div>
+        <div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap">
+          <button class="btn-ghost" style="font-size:10px;padding:4px 8px" onclick="setColor('#00e5a0')">■ Teal</button>
+          <button class="btn-ghost" style="font-size:10px;padding:4px 8px" onclick="setColor('#0af')">■ Blue</button>
+          <button class="btn-ghost" style="font-size:10px;padding:4px 8px" onclick="setColor('#f472b6')">■ Pink</button>
+          <button class="btn-ghost" style="font-size:10px;padding:4px 8px" onclick="setColor('#fb923c')">■ Orange</button>
+          <button class="btn-ghost" style="font-size:10px;padding:4px 8px" onclick="setColor('#a78bfa')">■ Purple</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEOJSON INPUT -->
+    <div class="section">
+      <div class="section-title">GeoJSON Input</div>
+      <div class="input-group">
+        <label>Paste FeatureCollection of Points</label>
+        <textarea id="geojsonInput" placeholder='{"type":"FeatureCollection","features":[]}'></textarea>
+      </div>
+      <div class="btn-strip">
+        <button class="btn-ghost" onclick="loadSample()">Sample data</button>
+        <button class="btn-ghost" onclick="clearAll()">Clear</button>
+      </div>
+    </div>
+
+    <!-- RUN -->
+    <div class="section">
+      <button class="btn-primary" id="runBtn" onclick="run()">Generate Unified Coverage</button>
+      <button class="btn-stop"    id="stopBtn" onclick="stop()">Stop Processing</button>
+      <div id="status"></div>
+
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-header">
+          <span class="progress-count" id="progressCount">0 / 0</span>
+          <span class="progress-eta"   id="progressEta"></span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div class="cooldown-wrap" id="cooldownWrap">
+        <div class="cooldown-label">
+          <span>cooldown</span><span id="cooldownSec"></span>
+        </div>
+        <div class="cooldown-track">
+          <div class="cooldown-fill" id="cooldownFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPORT -->
+    <div class="section" id="exportSection" style="display:none">
+      <div class="section-title">Export</div>
+
+      <div class="stat-coverage">
+        <div>
+          <div class="stat-coverage-label">Total coverage area</div>
+          <div style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px" id="coverageNote"></div>
+        </div>
+        <div class="stat-coverage-val" id="coverageArea">—</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Points</div></div>
+        <div class="stat-box"><div class="stat-num" id="statOk">0</div><div class="stat-label">Mapped</div></div>
+        <div class="stat-box"><div class="stat-num" id="statFail" style="color:var(--warn)">0</div><div class="stat-label">Failed</div></div>
+      </div>
+
+      <div class="export-grid">
+        <button class="btn-export" id="exportUnifiedBtn" onclick="exportGeoJSON('unified')" disabled>
+          <span class="export-icon">⬡</span>
+          <span class="export-label">Merged zones</span>
+        </button>
+        <button class="btn-export" id="exportAllBtn" onclick="exportGeoJSON('all')" disabled>
+          <span class="export-icon">⬡⬡</span>
+          <span class="export-label">All zones</span>
+        </button>
+        <button class="btn-export" id="exportPointsBtn" onclick="exportGeoJSON('points')" disabled>
+          <span class="export-icon">●</span>
+          <span class="export-label">Points only</span>
+        </button>
+        <button class="btn-export" id="exportCombinedBtn" onclick="exportGeoJSON('combined')" disabled>
+          <span class="export-icon">✦</span>
+          <span class="export-label">All layers</span>
+        </button>
+      </div>
+      <p class="key-hint" style="margin-top:8px">
+        <b>Merged zones</b> — single dissolved polygon<br>
+        <b>All zones</b> — one polygon per point<br>
+        <b>Points only</b> — original input points<br>
+        <b>All layers</b> — everything combined
+      </p>
+    </div>
+
+    <!-- POINT LIST -->
+    <div class="section" id="pointListSection" style="display:none">
+      <div class="section-title">Points</div>
+      <div class="results-scroll">
+        <div class="results-list" id="resultsList"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="map"></div>
+</div>
+
+<script>
+// ─── MAP ─────────────────────────────────────────────────────
+const map = L.map('map', { zoomControl: true }).setView([40.748, -73.986], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors', maxZoom: 19
+}).addTo(map);
+
+// ─── STATE ───────────────────────────────────────────────────
+let items          = [];       // per-point records
+let unifiedLayer   = null;     // single merged Leaflet layer
+let pointsLayer    = null;     // all input point markers
+let unifiedGeoJSON = null;     // merged turf feature (for export)
+let allIsoGeoJSON  = [];       // individual iso features (for export)
+let abortFlag      = false;
+let running        = false;
+
+// ─── COLOR ───────────────────────────────────────────────────
+let zoneColor = '#00e5a0';
+
+document.getElementById('zoneColor').addEventListener('input', e => {
+  setColor(e.target.value);
+});
+
+function setColor(hex) {
+  zoneColor = hex;
+  document.getElementById('zoneColor').value = hex;
+  document.getElementById('colorSwatch').style.background = hex;
+  document.documentElement.style.setProperty('--zone-color', hex);
+  // Re-style live layers if they exist
+  if (unifiedLayer) {
+    unifiedLayer.setStyle({ color: hex, fillColor: hex });
+  }
+}
+
+// ─── SLIDERS ─────────────────────────────────────────────────
+document.getElementById('distRange').addEventListener('input', e => {
+  document.getElementById('distVal').textContent = parseFloat(e.target.value).toFixed(1) + ' mi';
+});
+document.getElementById('delayRange').addEventListener('input', e => {
+  document.getElementById('delayVal').textContent = parseFloat(e.target.value).toFixed(1) + ' s';
+});
+
+// ─── SAMPLE ──────────────────────────────────────────────────
+function loadSample() {
+  const sample = {"type":"FeatureCollection","features":[
+    {"type":"Feature","properties":{"name":"Empire State Building"},"geometry":{"type":"Point","coordinates":[-73.9857,40.7484]}},
+    {"type":"Feature","properties":{"name":"Bryant Park"},"geometry":{"type":"Point","coordinates":[-73.9832,40.7536]}},
+    {"type":"Feature","properties":{"name":"Rockefeller Center"},"geometry":{"type":"Point","coordinates":[-73.9787,40.7587]}},
+    {"type":"Feature","properties":{"name":"Times Square"},"geometry":{"type":"Point","coordinates":[-73.9855,40.7580]}},
+    {"type":"Feature","properties":{"name":"Grand Central"},"geometry":{"type":"Point","coordinates":[-73.9772,40.7527]}},
+    {"type":"Feature","properties":{"name":"Flatiron Building"},"geometry":{"type":"Point","coordinates":[-73.9897,40.7411]}},
+    {"type":"Feature","properties":{"name":"Penn Station"},"geometry":{"type":"Point","coordinates":[-73.9935,40.7505]}},
+    {"type":"Feature","properties":{"name":"Chelsea Market"},"geometry":{"type":"Point","coordinates":[-74.0047,40.7422]}},
+    {"type":"Feature","properties":{"name":"Union Square"},"geometry":{"type":"Point","coordinates":[-73.9903,40.7359]}},
+    {"type":"Feature","properties":{"name":"Madison Sq Garden"},"geometry":{"type":"Point","coordinates":[-73.9930,40.7505]}}
+  ]};
+  document.getElementById('geojsonInput').value = JSON.stringify(sample, null, 2);
+  map.setView([40.7500, -73.9857], 14);
+  setStatus('Sample data loaded — add your ORS key and hit Generate!', 'info');
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────
+function setStatus(msg, type = 'info') {
+  const el = document.getElementById('status');
+  el.className = 'status ' + type;
+  el.innerHTML = type === 'loading' ? `<span class="spinner"></span>${msg}` : msg;
+}
+
+function setProgress(done, total, etaMs) {
+  const wrap = document.getElementById('progressWrap');
+  wrap.classList.toggle('visible', total > 0);
+  document.getElementById('progressFill').style.width  = total > 0 ? `${(done/total)*100}%` : '0%';
+  document.getElementById('progressCount').textContent = `${done} / ${total} points`;
+  const etaEl = document.getElementById('progressEta');
+  if (etaMs > 0 && done < total) {
+    const s = Math.ceil(etaMs / 1000);
+    etaEl.textContent = s < 60 ? `~${s}s left` : `~${Math.ceil(s/60)}m left`;
+  } else etaEl.textContent = '';
+}
+
+async function showCooldown(ms) {
+  const wrap  = document.getElementById('cooldownWrap');
+  const fill  = document.getElementById('cooldownFill');
+  const label = document.getElementById('cooldownSec');
+  wrap.classList.add('visible');
+  const end = Date.now() + ms;
+  return new Promise(resolve => {
+    const tick = () => {
+      if (abortFlag) { wrap.classList.remove('visible'); resolve(); return; }
+      const rem = end - Date.now();
+      if (rem <= 0) { fill.style.width = '0%'; wrap.classList.remove('visible'); resolve(); return; }
+      fill.style.transition = `width ${Math.min(rem, 150)}ms linear`;
+      fill.style.width = `${(rem / ms) * 100}%`;
+      label.textContent = (rem / 1000).toFixed(1) + 's';
+      setTimeout(tick, 100);
+    };
+    tick();
+  });
+}
+
+function updateResultBadge(idx, status) {
+  const el   = document.querySelector(`#resultsList .result-item:nth-child(${idx+1}) .result-badge`);
+  const item = document.querySelector(`#resultsList .result-item:nth-child(${idx+1})`);
+  if (!el) return;
+  el.className = `result-badge ${status}`;
+  el.textContent = status === 'ok' ? '✓ mapped' : status === 'fail' ? '✗ error' : status === 'active' ? '⟳ fetching' : '— pending';
+  if (item) item.classList.toggle('pending', status === 'pending');
+}
+
+function updateStats() {
+  document.getElementById('statOk').textContent   = items.filter(r => r.success === true).length;
+  document.getElementById('statFail').textContent = items.filter(r => r.success === false).length;
+}
+
+// ─── AREA CALC ────────────────────────────────────────────────
+function formatArea(sqMeters) {
+  if (sqMeters > 1e6) return (sqMeters / 1e6).toFixed(2) + ' km²';
+  const sqMiles = sqMeters / 2589988;
+  if (sqMiles >= 0.1) return sqMiles.toFixed(2) + ' mi²';
+  const acres = sqMeters / 4046.86;
+  return acres.toFixed(1) + ' acres';
+}
+
+// ─── CLEAR ───────────────────────────────────────────────────
+function clearAll() {
+  if (running) return;
+  unifiedLayer?.remove();   unifiedLayer = null;
+  pointsLayer?.remove();    pointsLayer  = null;
+  unifiedGeoJSON = null;
+  allIsoGeoJSON  = [];
+  items = [];
+  document.getElementById('geojsonInput').value = '';
+  document.getElementById('status').className = 'status';
+  document.getElementById('status').innerHTML = '';
+  document.getElementById('exportSection').style.display    = 'none';
+  document.getElementById('pointListSection').style.display = 'none';
+  setProgress(0, 0);
+}
+
+function stop() { abortFlag = true; }
+
+// ─── ORS ─────────────────────────────────────────────────────
+async function fetchBatch(locations, distMeters, apiKey) {
+  // Requests go to the local proxy (proxy.js) which forwards to ORS and
+  // adds the CORS headers the browser needs. Run: node proxy.js
+  const resp = await fetch('http://localhost:3001/ors/v2/isochrones/foot-walking', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': apiKey },
+    body: JSON.stringify({ locations, range_type: 'distance', range: [distMeters] })
+  });
+  if (resp.status === 429) {
+    const retryAfter = parseInt(resp.headers.get('Retry-After') || '60', 10);
+    throw Object.assign(new Error(`Rate limited — retry after ${retryAfter}s`), { status: 429, retryAfter });
+  }
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    throw new Error(err.error?.message || `HTTP ${resp.status} — check your API key`);
+  }
+  return resp.json();
+}
+
+// ─── MERGE + REDRAW ──────────────────────────────────────────
+function rebuildUnifiedLayer() {
+  unifiedLayer?.remove();
+  unifiedLayer = null;
+
+  if (allIsoGeoJSON.length === 0) return;
+
+  // Union all collected isochrone polygons using Turf
+  let merged = allIsoGeoJSON[0];
+  for (let i = 1; i < allIsoGeoJSON.length; i++) {
+    try { merged = turf.union(merged, allIsoGeoJSON[i]); }
+    catch (e) { /* skip degenerate geometry */ }
+  }
+
+  unifiedGeoJSON = merged;
+
+  unifiedLayer = L.geoJSON(merged, {
+    style: {
+      color: zoneColor,
+      fillColor: zoneColor,
+      fillOpacity: 0.18,
+      weight: 2,
+      opacity: 0.8
+    }
+  }).addTo(map);
+
+  // Update coverage area
+  try {
+    const areaSqM = turf.area(merged);
+    document.getElementById('coverageArea').textContent = formatArea(areaSqM);
+    document.getElementById('coverageNote').textContent =
+      `from ${items.filter(r=>r.success).length} point${items.filter(r=>r.success).length!==1?'s':''}`;
+  } catch (e) {
+    document.getElementById('coverageArea').textContent = '—';
+  }
+}
+
+// ─── EXPORT ──────────────────────────────────────────────────
+function exportGeoJSON(mode) {
+  let data, filename;
+
+  if (mode === 'unified') {
+    if (!unifiedGeoJSON) return;
+    data = { type: 'FeatureCollection', features: [unifiedGeoJSON] };
+    filename = 'walking-coverage-merged.geojson';
+  } else if (mode === 'all') {
+    data = { type: 'FeatureCollection', features: allIsoGeoJSON };
+    filename = 'walking-coverage-all-zones.geojson';
+  } else if (mode === 'points') {
+    data = {
+      type: 'FeatureCollection',
+      features: items.filter(r => r.success).map(r => ({
+        type: 'Feature',
+        properties: r.f.properties || {},
+        geometry: { type: 'Point', coordinates: r.coord }
+      }))
+    };
+    filename = 'walking-coverage-points.geojson';
+  } else if (mode === 'combined') {
+    const features = [];
+    if (unifiedGeoJSON) features.push({ ...unifiedGeoJSON, properties: { type: 'merged_coverage', source: 'unified' } });
+    allIsoGeoJSON.forEach((f, i) => features.push({ ...f, properties: { ...f.properties, type: 'individual_zone', point_index: i } }));
+    items.filter(r => r.success).forEach(r => features.push({
+      type: 'Feature',
+      properties: { ...r.f.properties, type: 'origin_point' },
+      geometry: { type: 'Point', coordinates: r.coord }
+    }));
+    data = { type: 'FeatureCollection', features };
+    filename = 'walking-coverage-combined.geojson';
+  }
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/geo+json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─── MAIN ────────────────────────────────────────────────────
+async function run() {
+  const apiKey     = document.getElementById('apiKey').value.trim();
+  const geojsonRaw = document.getElementById('geojsonInput').value.trim();
+  const distMiles  = parseFloat(document.getElementById('distRange').value);
+  const delaySec   = parseFloat(document.getElementById('delayRange').value);
+  const distMeters = distMiles * 1609.34;
+
+  if (!apiKey)     return setStatus('Please enter your OpenRouteService API key.', 'error');
+  if (!geojsonRaw) return setStatus('Paste a GeoJSON FeatureCollection above.', 'error');
+
+  let geojson;
+  try { geojson = JSON.parse(geojsonRaw); }
+  catch (e) { return setStatus('Invalid JSON — check your GeoJSON syntax.', 'error'); }
+
+  const features = (geojson.features || []).filter(f => f.geometry?.type === 'Point');
+  if (features.length === 0) return setStatus('No Point features found in your GeoJSON.', 'error');
+
+  // Reset
+  unifiedLayer?.remove();   unifiedLayer = null;
+  pointsLayer?.remove();    pointsLayer  = null;
+  unifiedGeoJSON = null;
+  allIsoGeoJSON  = [];
+
+  items = features.map((f, i) => ({
+    f, coord: f.geometry.coordinates,
+    name: f.properties?.name || f.properties?.title || f.properties?.id || `Point ${i+1}`,
+    success: null, error: null
+  }));
+
+  // Draw all input points immediately
+  pointsLayer = L.layerGroup(
+    items.map(r =>
+      L.circleMarker([r.coord[1], r.coord[0]], {
+        radius: 5, color: zoneColor, fillColor: zoneColor, fillOpacity: 0.9, weight: 2
+      }).bindPopup(`<b>${r.name}</b><br><small style="color:#888">${r.coord[1].toFixed(5)}, ${r.coord[0].toFixed(5)}</small>`)
+    )
+  ).addTo(map);
+
+  // Render point list
+  const list = document.getElementById('resultsList');
+  list.innerHTML = '';
+  items.forEach((r, i) => {
+    const div = document.createElement('div');
+    div.className = 'result-item pending';
+    div.innerHTML = `
+      <div class="result-dot"></div>
+      <div class="result-info">
+        <div class="result-name">${r.name}</div>
+        <div class="result-coord">${r.coord[1].toFixed(5)}, ${r.coord[0].toFixed(5)}</div>
+      </div>
+      <span class="result-badge pending">— pending</span>
+    `;
+    div.onclick = () => map.setView([r.coord[1], r.coord[0]], 15);
+    list.appendChild(div);
+  });
+
+  document.getElementById('statTotal').textContent = items.length;
+  document.getElementById('statOk').textContent    = 0;
+  document.getElementById('statFail').textContent  = 0;
+  document.getElementById('coverageArea').textContent = '—';
+  document.getElementById('coverageNote').textContent = '';
+  document.getElementById('exportSection').style.display    = 'block';
+  document.getElementById('pointListSection').style.display = 'block';
+
+  // Disable export until done
+  ['exportUnifiedBtn','exportAllBtn','exportPointsBtn','exportCombinedBtn']
+    .forEach(id => document.getElementById(id).disabled = true);
+
+  abortFlag = false;
+  running   = true;
+  document.getElementById('runBtn').style.display  = 'none';
+  document.getElementById('stopBtn').style.display = 'block';
+  setProgress(0, items.length, 0);
+  setStatus(`Processing ${items.length} point${items.length > 1 ? 's' : ''} — merging overlaps as they arrive…`, 'loading');
+
+  const BATCH      = 5;
+  const delayMs    = delaySec * 1000;
+  let done         = 0;
+  const startTime  = Date.now();
+
+  for (let b = 0; b < items.length; b += BATCH) {
+    if (abortFlag) break;
+
+    const batch = items.slice(b, b + BATCH);
+    batch.forEach((r, j) => updateResultBadge(b + j, 'active'));
+
+    let retryCount = 0;
+    while (retryCount <= 3) {
+      if (abortFlag) break;
+      try {
+        const isoData = await fetchBatch(batch.map(r => r.coord), distMeters, apiKey);
+
+        isoData.features.forEach((isoFeature, j) => {
+          batch[j].success = true;
+          // Tag the iso feature with its source point metadata
+          isoFeature.properties = {
+            ...isoFeature.properties,
+            point_name:  batch[j].name,
+            point_index: b + j,
+            origin_lng:  batch[j].coord[0],
+            origin_lat:  batch[j].coord[1],
+            dist_miles:  distMiles
+          };
+          allIsoGeoJSON.push(isoFeature);
+          updateResultBadge(b + j, 'ok');
+        });
+
+        // Re-merge and redraw after each batch so the map updates live
+        rebuildUnifiedLayer();
+        updateStats();
+        break;
+
+      } catch (err) {
+        if (err.status === 429 && retryCount < 3) {
+          const waitMs = (err.retryAfter ? err.retryAfter * 1000 : delayMs) * (retryCount + 1);
+          setStatus(`Rate limited — waiting ${Math.ceil(waitMs/1000)}s, then retrying… (attempt ${retryCount+1}/3)`, 'loading');
+          await showCooldown(waitMs);
+          retryCount++;
+          continue;
+        }
+        batch.forEach((r, j) => {
+          r.success = false; r.error = err.message;
+          updateResultBadge(b + j, 'fail');
+          const el = document.querySelector(`#resultsList .result-item:nth-child(${b+j+1})`);
+          if (el) el.title = err.message;
+        });
+        updateStats();
+        break;
+      }
+    }
+
+    done += batch.length;
+    const elapsed   = Date.now() - startTime;
+    const msPerPt   = elapsed / done;
+    const remaining = items.length - done;
+    const etaMs     = remaining * msPerPt + (remaining > 0 ? delayMs * Math.ceil(remaining / BATCH) : 0);
+    setProgress(done, items.length, etaMs);
+
+    if (!abortFlag && b + BATCH < items.length) await showCooldown(delayMs);
+  }
+
+  // ── Finish ────────────────────────────────────────────────
+  running   = false;
+  abortFlag = false;
+  document.getElementById('runBtn').style.display  = 'block';
+  document.getElementById('stopBtn').style.display = 'none';
+  document.getElementById('progressWrap').classList.remove('visible');
+  document.getElementById('cooldownWrap').classList.remove('visible');
+
+  // Fit bounds
+  if (unifiedLayer) {
+    map.fitBounds(unifiedLayer.getBounds().pad(0.1));
+  } else if (pointsLayer) {
+    const pts = items.filter(r => r.coord).map(r => [r.coord[1], r.coord[0]]);
+    if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.2));
+  }
+
+  // Enable export buttons
+  const hasZones = allIsoGeoJSON.length > 0;
+  document.getElementById('exportUnifiedBtn').disabled  = !unifiedGeoJSON;
+  document.getElementById('exportAllBtn').disabled      = !hasZones;
+  document.getElementById('exportPointsBtn').disabled   = !hasZones;
+  document.getElementById('exportCombinedBtn').disabled = !hasZones;
+
+  const ok      = items.filter(r => r.success === true).length;
+  const fail    = items.filter(r => r.success === false).length;
+  const stopped = items.filter(r => r.success === null).length;
+
+  if (stopped > 0) {
+    setStatus(`Stopped — ${ok} zone${ok!==1?'s':''} merged. ${stopped} not processed.`, 'stopped');
+  } else if (fail === 0) {
+    setStatus(`All ${ok} zones merged into unified coverage — ${distMiles} mi walk each.`, 'success');
+  } else {
+    setStatus(`${ok} zones merged, ${fail} failed. Hover failed items for details.`, 'info');
+  }
+}
+</script>
+</body>
+</html>
