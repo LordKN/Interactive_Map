@@ -2,20 +2,24 @@
    Base layout
 ========================= */
 body{
-  font-family: system-ui, Arial;
+  font-family: system-ui, Arial, sans-serif;
   margin: 0;
-  background: #f6f7fb;
+  background: linear-gradient(180deg, #f4faf6 0%, #f5f2fb 100%);
+  color: #1f2937;
 }
 
 header{
   padding: 16px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  background: linear-gradient(90deg, #ecfdf5, #f3e8ff);
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 10px rgba(34, 139, 94, 0.05);
 }
 
 header h1{
   margin: 0;
   font-size: 18px;
+  color: #14532d;
+  letter-spacing: 0.5px;
 }
 
 main{
@@ -27,18 +31,23 @@ main{
 }
 
 .card{
-  background: #fff;
+  background: linear-gradient(180deg, #ffffff, #f6fbf7);
   border-radius: 14px;
   padding: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1px solid #e3efe6;
+  box-shadow: 0 6px 24px rgba(34, 139, 94, 0.08);
 }
 
 .card--map{
   grid-column: 1 / -1;
 }
 
+.card h2{
+  color: #173b2c;
+}
+
 .hint{
-  color: #666;
+  color: #667085;
   font-size: 13px;
   margin-top: 8px;
 }
@@ -56,67 +65,57 @@ canvas{
   width: 100%;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid #eee;
+  border: 1px solid #dbe8df;
+  box-shadow: inset 0 0 0 1px rgba(34, 139, 94, 0.05);
 }
 
 /* =========================
-   Toolbar (FIXED)
-   - groups fill space
-   - no weird blank area
+   Toolbar
 ========================= */
-
-/* Toolbar container */
 .map-toolbar{
   margin-top: 12px;
   width: 100%;
-
-  /* Use responsive columns so it fills space naturally */
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 
   padding: 12px;
-  border: 1px solid #eef0f4;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
-  background: linear-gradient(180deg, #ffffff, #fbfcff);
-  box-shadow: 0 12px 26px rgba(15, 20, 30, 0.07);
+  background: linear-gradient(180deg, #f6fbf7, #f3f0fa);
+  box-shadow: 0 12px 26px rgba(60, 80, 70, 0.08);
 }
 
-/* Each group as a stacked mini card (label on top, buttons below) */
 .toolbar-group{
   display: grid;
   grid-template-rows: auto auto;
   gap: 10px;
 
   padding: 12px;
-  border: 1px solid #eef0f4;
+  border: 1px solid #e4efe7;
   border-radius: 14px;
-  background: linear-gradient(180deg, #ffffff, #f7f8ff);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+  background: linear-gradient(180deg, #ffffff, #f4faf6);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95);
 }
 
-/* Group label */
 .toolbar-label{
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.35px;
   text-transform: uppercase;
-  color: #475569;
+  color: #6b4fa3;
 }
 
-/* Buttons area: two equal buttons that fill the group width
-   switched from grid to flex so buttons expand to fill space */
 .toolbar-buttons{
   display: flex;
-  gap: 10px;              /* space BETWEEN buttons */
+  gap: 10px;
   width: 100%;
   align-items: center;
 }
 
-/* make each button grow equally and avoid overflow on small screens */
 .toolbar-buttons .pill{
   flex: 1 1 0;
-  min-width: 0;           /* prevents weird overflow on small screens */
+  min-width: 0;
 }
 
 /* =========================
@@ -125,12 +124,17 @@ canvas{
 button.pill{
   appearance: none;
   width: 100%;
-  border: 1px solid rgba(148,163,184,0.35);
-  background: radial-gradient(120% 120% at 20% 0%, #ffffff 0%, #f3f6ff 55%, #eef2ff 100%);
-  color: #0f172a;
+  border: 1px solid rgba(126, 145, 135, 0.28);
+  background: radial-gradient(
+    120% 120% at 20% 0%,
+    #ffffff 0%,
+    #f4faf5 52%,
+    #f3f0fa 100%
+  );
+  color: #1f2937;
 
   padding: 10px 12px;
-  border-radius: 12px; /* slightly less “pill”, more modern */
+  border-radius: 12px;
   font-weight: 800;
   font-size: 14px;
   letter-spacing: 0.2px;
@@ -140,18 +144,28 @@ button.pill{
   overflow: hidden;
 
   box-shadow:
-    0 10px 20px rgba(15, 23, 42, 0.08),
+    0 10px 20px rgba(45, 74, 58, 0.08),
     inset 0 1px 0 rgba(255,255,255,0.9);
 
-  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease, border-color 140ms ease;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    filter 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease,
+    color 140ms ease;
 }
 
-/* subtle shine */
 button.pill::after{
   content: "";
   position: absolute;
   inset: -40% -60%;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 45%, transparent 70%);
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.55) 45%,
+    transparent 70%
+  );
   transform: translateX(-40%);
   transition: transform 240ms ease;
   pointer-events: none;
@@ -159,11 +173,17 @@ button.pill::after{
 
 button.pill:hover{
   transform: translateY(-2px);
-  border-color: rgba(148,163,184,0.6);
+  border-color: rgba(96, 135, 115, 0.45);
   box-shadow:
-    0 16px 28px rgba(15, 23, 42, 0.12),
+    0 16px 28px rgba(45, 74, 58, 0.12),
     inset 0 1px 0 rgba(255,255,255,0.9);
-  filter: saturate(1.06);
+  filter: saturate(1.05);
+  background: radial-gradient(
+    120% 120% at 20% 0%,
+    #ffffff 0%,
+    #eef8f0 52%,
+    #eee8f8 100%
+  );
 }
 
 button.pill:hover::after{
@@ -173,8 +193,17 @@ button.pill:hover::after{
 button.pill:active{
   transform: translateY(0px);
   box-shadow:
-    0 8px 16px rgba(15, 23, 42, 0.10),
-    inset 0 2px 10px rgba(15, 23, 42, 0.12);
+    0 8px 16px rgba(45, 74, 58, 0.10),
+    inset 0 2px 10px rgba(45, 74, 58, 0.10);
+}
+
+button.pill.active{
+  border-color: rgba(34, 139, 94, 0.75);
+  background: linear-gradient(180deg, #34c27a 0%, #249a60 100%);
+  color: #ffffff;
+  box-shadow:
+    0 18px 34px rgba(36, 154, 96, 0.24),
+    inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
 /* =========================
@@ -182,17 +211,15 @@ button.pill:active{
 ========================= */
 @media (max-width: 900px){
   .map-toolbar{
-    grid-template-columns: 1fr; /* stack groups */
+    grid-template-columns: 1fr;
   }
-  /* keep two-column buttons when group is stacked (tablet) */
+
   .toolbar-buttons{
-    /* maintain flex layout; still two buttons side-by-side where space allows */
     gap: 10px;
   }
 }
 
 @media (max-width: 520px){
-  /* on tiny screens let buttons stack vertically inside each group */
   .toolbar-buttons{
     flex-direction: column;
   }
@@ -202,27 +229,9 @@ button.pill:active{
   }
 }
 
-/* Only applies when dark map is enabled */
-body.dark-map-ui .leaflet-popup-content-wrapper,
-body.dark-map-ui .leaflet-popup-tip,
-body.dark-map-ui .leaflet-control {
-  background: #0b1220;
-  color: #e5e7eb;
-  border: 1px solid rgba(148,163,184,0.25);
-}
-
-body.dark-map-ui .leaflet-control a {
-  color: #e5e7eb;
-}
-
-body.dark-map-ui .legend {
-  background: #0b1220;
-  color: #e5e7eb;
-  border: 1px solid rgba(148,163,184,0.25);
-  border-radius: 12px;
-  padding: 10px;
-}
-
+/* =========================
+   Dark map toggle button
+========================= */
 .dark-toggle-btn{
   display: block;
   width: 34px;
@@ -231,20 +240,34 @@ body.dark-map-ui .legend {
   text-align: center;
   text-decoration: none;
   font-size: 18px;
-  background: #fff;
-  color: #111;
+  background: #ffffff;
+  color: #14532d;
 }
 
 .dark-toggle-btn:hover{
-  background: #f3f4f6;
+  background: #f0fdf4;
 }
 
 .dark-toggle-btn.active{
-  background: #111;
-  color: #fff;
+  background: #14532d;
+  color: #ffffff;
 }
 
-/* Dark mode styling for Leaflet UI */
+/* =========================
+   Dark mode styling for Leaflet UI
+========================= */
+body.dark-map-ui .leaflet-popup-content-wrapper,
+body.dark-map-ui .leaflet-popup-tip,
+body.dark-map-ui .leaflet-control{
+  background: #0b1220 !important;
+  color: #e5e7eb !important;
+  border: 1px solid rgba(148,163,184,0.25) !important;
+}
+
+body.dark-map-ui .leaflet-control a{
+  color: #e5e7eb;
+}
+
 body.dark-map-ui .legend{
   background: #0b1220 !important;
   color: #e5e7eb !important;
@@ -259,13 +282,6 @@ body.dark-map-ui .legend b{
 
 body.dark-map-ui .leaflet-control{
   color: #e5e7eb;
-}
-
-body.dark-map-ui .leaflet-popup-content-wrapper,
-body.dark-map-ui .leaflet-popup-tip{
-  background: #0b1220 !important;
-  color: #e5e7eb !important;
-  border: 1px solid rgba(148,163,184,0.25) !important;
 }
 
 body.dark-map-ui .leaflet-popup-content b{
