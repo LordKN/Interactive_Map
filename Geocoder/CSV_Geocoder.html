@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<!-- 
+  CSV Address Geocoder
+  ====================
+  A self-contained single-page tool that:
+    1. Accepts a CSV file containing postal addresses
+    2. Lets the user map CSV columns to address fields (name, address, city, state, zip)
+    3. Sends each address to the OpenStreetMap Nominatim geocoding API via a local
+       Node.js proxy server (to avoid browser CORS restrictions)
+    4. Displays live progress, per-record status, and running counters
+    5. Exports the successfully geocoded records as a GeoJSON FeatureCollection
+
+  DEPENDENCIES:
+    - A local proxy server (geocode-proxy-server.js) must be running on port 3000.
+      Start it with:  npm install && node geocode-proxy-server.js
+    - No other external libraries are required; everything runs in the browser.
+-->
+<html lang="en">
+<head>
+  <!-- Character encoding — required for proper handling of special characters in addresses -->
+  <meta charset="UTF-8">
+  <!-- Responsive viewport — makes the layout scale correctly on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV Address Geocoder</title>
+
+  <style>
+    /* ─── RESET ─────────────────────────────────────────────────────────────────
+       Apply border-box sizing to every element so padding/border don't add to
+       declared widths, and strip default browser margin/padding.                 */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── BASE BODY ──────────────────────────────────────────────────────────────
+       System font stack for a native look on any OS; light grey background.      */
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; }
+
+    /* ─── PAGE HEADER ────────────────────────────────────────────────────────────
+       Dark navy banner at the top with the app title and subtitle.               */
+    .header { background: #1a3a5c; color: white; padding: 24px 32px; }
+    .header h1 { font-size: 22px; font-weight: 700; }
+    .header p { font-size: 13px; opacity: 0.75; margin-top: 4px; }
+
+    /* ─── MAIN CONTENT WRAPPER ───────────────────────────────────────────────────
+       Centred, max-width container with side padding for narrow viewports.       */
+    .container { max-width: 860px; margin: 32px auto; padding: 0 16px; }
+
+    /* ─── CARD ───────────────────────────────────────────────────────────────────
+       White rounded panel used for each major UI section (upload, geocoding,
+       results). Subtle drop shadow for depth.                                    */
+    .card { background: white; border-radius: 12px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+
+    /* ─── BUTTONS ────────────────────────────────────────────────────────────────
+       Base button style — navy background, white text, rounded corners.
+       .btn-green overrides the background for "positive action" buttons.
+       Disabled state turns grey and blocks cursor interaction.                   */
+    .btn { display: inline-flex; align-items: center; gap: 8px; background: #1a3a5c; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn:hover { background: #254d7a; }
+    .btn:disabled { background: #aaa; cursor: not-allowed; }
+    .btn-green { background: #2e7d4f; }
+    .btn-green:hover { background: #3a9e64; }
+
+    /* ─── FILE INPUT WRAPPER ─────────────────────────────────────────────────────
+       The native <input type="file"> is invisible (opacity:0) and overlaid on top
+       of the styled <label> button, so clicking the label triggers the file
+       picker while keeping full control over visual styling.                     */
+    .file-input-wrap { position: relative; display: inline-block; }
+    .file-input-wrap input[type=file] { position: absolute; opacity: 0; width: 100%; height: 100%; top: 0; left: 0; cursor: pointer; z-index: 2; }
+
+    /* ─── PROGRESS BAR ───────────────────────────────────────────────────────────
+       Container (.progress-wrap) holds the grey track (.progress-bar-bg) and the
+       animated fill (.progress-bar).  Width of .progress-bar is set via JS to
+       reflect geocoding progress. CSS transition makes growth smooth.            */
+    .progress-wrap { margin-top: 20px; }
+    .progress-bar-bg { background: #e5e9ef; border-radius: 99px; height: 12px; overflow: hidden; }
+    .progress-bar { background: linear-gradient(90deg, #1a3a5c, #4a90d9); height: 100%; width: 0; border-radius: 99px; transition: width 0.3s; }
+    .progress-text { font-size: 13px; color: #666; margin-top: 8px; }
+
+    /* ─── STATISTICS GRID ────────────────────────────────────────────────────────
+       Three equal-width boxes side-by-side showing counts for geocoded, failed,
+       and skipped records.  Each counter number is colour-coded:
+         .success → green   .failed → red   .skipped → orange                    */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+    .stat { background: #f5f7fa; border-radius: 8px; padding: 14px; text-align: center; }
+    .stat-num { font-size: 28px; font-weight: 700; }
+    .stat-label { font-size: 12px; color: #888; margin-top: 2px; }
+    .success .stat-num { color: #2e7d4f; }
+    .failed .stat-num { color: #c0392b; }
+    .skipped .stat-num { color: #e67e22; }
+
+    /* ─── RESULTS TABLE ──────────────────────────────────────────────────────────
+       Standard striped table (border on each row). Header row has a grey
+       background and slightly heavier border to separate it from data rows.      */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: #f5f7fa; padding: 10px 12px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #e0e4ea; }
+    td { padding: 9px 12px; border-bottom: 1px solid #eef0f4; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    /* ─── STATUS BADGES ──────────────────────────────────────────────────────────
+       Pill-shaped inline labels shown in the Status column of the results table.
+         .badge-ok   → green  (geocoded successfully)
+         .badge-fail → red    (geocoding failed)
+         .badge-skip → amber  (row had no address data)                           */
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; }
+    .badge-ok { background: #d4edda; color: #155724; }
+    .badge-fail { background: #f8d7da; color: #721c24; }
+    .badge-skip { background: #fff3cd; color: #856404; }
+
+    /* ─── LOG BOX ────────────────────────────────────────────────────────────────
+       Dark terminal-style scrollable box for real-time geocoding activity.
+       Monospace font and Catppuccin-inspired palette for readability.
+       Individual line colours:
+         .log-ok   → green  (successful geocode)
+         .log-fail → red    (failed geocode)
+         .log-skip → orange (skipped row)
+         .log-info → cyan   (informational / status messages)                     */
+    .log-box { background: #1e1e2e; color: #cdd6f4; border-radius: 8px; padding: 16px; font-family: monospace; font-size: 12px; height: 240px; overflow-y: auto; margin-top: 16px; }
+    .log-ok { color: #a6e3a1; }
+    .log-fail { color: #f38ba8; }
+    .log-skip { color: #fab387; }
+    .log-info { color: #89dceb; }
+
+    /* ─── ACTION ROW ─────────────────────────────────────────────────────────────
+       Flex row used to group action buttons (download, reset, start geocoding).  */
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ─── INFORMATIONAL NOTE BOX ─────────────────────────────────────────────────
+       Blue left-border callout used for instructional text in each section.      */
+    .note { background: #e8f4fd; border-left: 4px solid #4a90d9; padding: 12px 16px; border-radius: 4px; font-size: 13px; line-height: 1.5; margin-bottom: 16px; }
+
+    /* ─── COLUMN MAPPING PANEL ───────────────────────────────────────────────────
+       Grey sub-panel inside the upload card that holds the five dropdowns
+       for mapping CSV column names to address fields.                            */
+    .column-mapping { background: #f8f9fb; border-radius: 8px; padding: 16px; margin-top: 16px; }
+    .column-mapping h3 { font-size: 14px; margin-bottom: 12px; color: #555; }
+
+    /* Two-column grid: label on the left, <select> on the right.                */
+    .mapping-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+    .mapping-row label { font-size: 13px; font-weight: 600; color: #555; }
+    .mapping-row select { padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
+
+    /* ─── SECTION VISIBILITY ─────────────────────────────────────────────────────
+       The geocoding card and results card are hidden initially; they are revealed
+       by JavaScript at the appropriate step in the workflow.                     */
+    #geocodingSection, #resultsCard { display: none; }
+
+    /* ─── CSV PREVIEW TABLE ──────────────────────────────────────────────────────
+       Scrollable area that shows the first 5 rows of the uploaded CSV so the
+       user can verify the data before starting.                                  */
+    .preview-table { max-height: 200px; overflow-y: auto; margin-top: 12px; font-size: 12px; }
+
+    /* Small grey pill showing the file name and row/column count after upload.   */
+    .file-info { background: #f0f4f8; padding: 12px; border-radius: 6px; margin-top: 12px; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PAGE HEADER
+     Always visible. Displays the app name and a one-line description.
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="header">
+  <h1>CSV Address Geocoder</h1>
+  <p>Upload a CSV with addresses and convert to GeoJSON coordinates</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     MAIN CONTENT CONTAINER
+     Centred wrapper that holds all three workflow cards.
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="container">
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       CARD 1 — UPLOAD & COLUMN MAPPING  (id="uploadSection")
+       Visible on page load. Steps:
+         a) User clicks "Choose CSV File" → hidden <input> triggers file picker
+         b) After upload, file info, column-mapping dropdowns, and a 5-row preview appear
+         c) User adjusts column mapping if needed, then clicks "Start Geocoding"
+       ─────────────────────────────────────────────────────────────────────── -->
+  <div class="card" id="uploadSection">
+
+    <!-- Instructional callout explaining CSV requirements and estimated runtime -->
+    <p class="note">
+      Upload a CSV file with your addresses. The tool will auto-detect columns for <strong>name</strong>, <strong>address</strong>, 
+      <strong>city</strong>, <strong>state</strong>, and <strong>zip</strong>. You can adjust the mapping if needed.
+      <br><br>
+      <strong>Processing speed:</strong> To avoid rate limiting, the tool uses a <strong>5-second delay</strong> between requests 
+      plus a 10-second pause every 30 records. For 250+ records, expect 25-30 minutes total processing time.
+    </p>
+
+    <!-- Styled label acts as the visible "button"; clicking it opens the file picker.
+         The actual <input type="file"> below is hidden via display:none.           -->
+    <label for="fileInput" class="btn" style="cursor: pointer; margin: 0;">📁 Choose CSV File</label>
+    <!-- Hidden file input — accepts only .csv files.
+         onchange fires handleFileUpload() as soon as a file is selected.           -->
+    <input type="file" id="fileInput" accept=".csv" onchange="handleFileUpload(event)" style="display: none;">
+
+    <!-- ── FILE INFO + MAPPING + PREVIEW (hidden until a CSV is loaded) ─────── -->
+    <div id="fileInfoSection" style="display:none;">
+
+      <!-- Shows the chosen file's name, row count, and column count -->
+      <div class="file-info">
+        <strong>📄 <span id="fileName"></span></strong><br>
+        <span id="fileStats"></span>
+      </div>
+
+      <!-- ── COLUMN MAPPING DROPDOWNS ────────────────────────────────────────
+           Five <select> elements, one per address field.  Each is populated
+           with every column header from the uploaded CSV.  The JS auto-selects
+           the most likely match; the user can override any mapping.             -->
+      <div class="column-mapping">
+        <h3>Column Mapping</h3>
+
+        <!-- Each .mapping-row is a 2-column grid: label | dropdown -->
+        <div class="mapping-row">
+          <label>Name Column:</label>
+          <select id="nameCol"></select>      <!-- Maps to the record's display name -->
+        </div>
+        <div class="mapping-row">
+          <label>Address Column:</label>
+          <select id="addressCol"></select>   <!-- Street address (e.g. "123 Main St") -->
+        </div>
+        <div class="mapping-row">
+          <label>City Column:</label>
+          <select id="cityCol"></select>      <!-- City name -->
+        </div>
+        <div class="mapping-row">
+          <label>State Column:</label>
+          <select id="stateCol"></select>     <!-- US state (full name or abbreviation) -->
+        </div>
+        <div class="mapping-row">
+          <label>Zip Column:</label>
+          <select id="zipCol"></select>       <!-- ZIP / postal code -->
+        </div>
+      </div>
+
+      <!-- ── CSV DATA PREVIEW ────────────────────────────────────────────────
+           Scrollable table showing the first 5 data rows of the CSV so the
+           user can verify that columns were parsed correctly.
+           Headers are injected into #previewHead; rows into #previewBody.      -->
+      <div class="preview-table">
+        <h3 style="font-size:14px;margin-bottom:8px;color:#555;">Preview (first 5 rows)</h3>
+        <table>
+          <thead id="previewHead"></thead>
+          <tbody id="previewBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Button that reads the current column-mapping selections and starts geocoding -->
+      <div class="actions" style="margin-top:20px;">
+        <button class="btn btn-green" onclick="proceedToGeocoding()">▶ Start Geocoding</button>
+      </div>
+    </div>
+  </div><!-- /uploadSection -->
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       CARD 2 — GEOCODING PROGRESS  (id="geocodingSection")
+       Hidden initially; revealed by proceedToGeocoding().
+       Shows a progress bar, live counters, a terminal-style activity log,
+       and (when finished) a Download GeoJSON button.
+       ─────────────────────────────────────────────────────────────────────── -->
+  <div class="card" id="geocodingSection">
+
+    <!-- Instructions for starting the required local proxy server -->
+    <p class="note">
+      Geocoding using the <strong>OpenStreetMap Nominatim API</strong> via a local proxy server to avoid CORS issues. 
+      <br><br>
+      <strong>⚡ IMPORTANT:</strong> Start the proxy server first by running:
+      <pre style="background: #2e3440; color: #88c0d0; padding: 10px; border-radius: 4px; margin: 8px 0;">npm install
+node geocode-proxy-server.js</pre>
+      The proxy runs at <code>http://localhost:3000</code> and handles CORS headers automatically.
+      <br><br>
+      Processing with <strong>5-second delays</strong> between requests and 10-second pauses every 30 records to prevent rate limiting. 
+      This is slow but reliable. Check the log below for progress details.
+    </p>
+
+    <!-- ── PROGRESS BAR ──────────────────────────────────────────────────────
+         #bar width is updated by JS (0–100%) as each record is processed.
+         #progressText shows "Processing X of Y — <name>" during the run
+         and a summary message when finished.                                   -->
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar" id="bar"></div></div>
+      <div class="progress-text" id="progressText">Ready to start</div>
+    </div>
+
+    <!-- ── STATISTICS COUNTERS ───────────────────────────────────────────────
+         Three live counters updated after every record:
+           #cntOk   → successfully geocoded (green)
+           #cntFail → geocoding failed (red)
+           #cntSkip → row skipped because it had no address data (orange)       -->
+    <div class="stats">
+      <div class="stat success"><div class="stat-num" id="cntOk">0</div><div class="stat-label">Geocoded</div></div>
+      <div class="stat failed"><div class="stat-num" id="cntFail">0</div><div class="stat-label">Failed</div></div>
+      <div class="stat skipped"><div class="stat-num" id="cntSkip">0</div><div class="stat-label">No Address</div></div>
+    </div>
+
+    <!-- ── ACTIVITY LOG ───────────────────────────────────────────────────────
+         Dark scrollable terminal pane.  Each geocoding event appends a new
+         coloured <div> (✓ OK, ✗ FAIL, ⚠ SKIP, ▶ info).
+         Auto-scrolls to the bottom after each entry.                           -->
+    <div class="log-box" id="log"><span class="log-info">▶ Starting geocoding...</span></div>
+
+    <!-- ── ACTION BUTTONS ───────────────────────────────────────────────────
+         #downloadBtn is hidden until geocoding completes; clicking it calls
+         downloadGeoJSON() to build and save the output file.
+         "Upload New File" calls resetTool() to return to the upload screen.    -->
+    <div class="actions" style="margin-top:20px;">
+      <button class="btn btn-green" id="downloadBtn" style="display:none;" onclick="downloadGeoJSON()">⬇ Download GeoJSON</button>
+      <button class="btn" onclick="resetTool()">↻ Upload New File</button>
+    </div>
+  </div><!-- /geocodingSection -->
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       CARD 3 — RESULTS TABLE  (id="resultsCard")
+       Hidden initially; revealed when geocoding starts.
+       Each processed record is appended as a <tr> to #tbody in real time,
+       showing: name | full address | lat,lon | status badge.
+       ─────────────────────────────────────────────────────────────────────── -->
+  <div class="card" id="resultsCard">
+    <h2 style="font-size:16px;margin-bottom:14px;">Results Preview</h2>
+    <div style="overflow-x:auto;">
+      <!-- Column headers are static; rows are injected dynamically by JS -->
+      <table id="resultsTable">
+        <thead><tr><th>Name</th><th>Address</th><th>Coords</th><th>Status</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div><!-- /resultsCard -->
+
+</div><!-- /container -->
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — ALL APPLICATION LOGIC
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<script>
+// ── MODULE-LEVEL STATE ────────────────────────────────────────────────────────
+// These variables persist for the lifetime of the page.
+
+let csvData = [];   // Object returned by parseCSV(): { headers: [], rows: [] }
+let clients = [];   // Normalised array of { name, address, city, state, zip } objects
+let results = [];   // Accumulated geocoding results: { client, coord, status }
+let cntOk = 0, cntFail = 0, cntSkip = 0;  // Running tallies for the stats counters
+let running = false; // Guard flag — prevents startGeocoding() from being called twice
+
+
+// ── parseCSV(text) ────────────────────────────────────────────────────────────
+// Parses the raw text content of a CSV file into a structured object.
+//
+// Parameters:
+//   text {string} — raw file content, potentially with a UTF-8 BOM
+//
+// Returns:
+//   { headers: string[], rows: object[] }
+//   headers — array of column names from the first line
+//   rows    — array of objects keyed by column name; rows with all-empty or
+//             all-#N/A values are filtered out
+//
+function parseCSV(text) {
+  // Strip the UTF-8 Byte Order Mark (\uFEFF) that Excel sometimes prepends.
+  // Without this, the first column header would have an invisible character prefix.
+  text = text.replace(/^\uFEFF/, '');
+  
+  // Split into lines, handling both Windows (\r\n) and Unix (\n) line endings.
+  // Empty/whitespace-only lines are discarded.
+  const lines = text.split(/\r?\n/).filter(line => line.trim());
+  if (lines.length === 0) return { headers: [], rows: [] };
+  
+  // Parse the header row using the same robust quoted-field parser used for data rows.
+  // .map(h => h.trim()) removes leading/trailing whitespace from column names.
+  const headers = parseCSVLine(lines[0]).map(h => h.trim());
+  const rows = [];
+  
+  // Process each data row (index 1 onward, skipping the header at index 0).
+  for (let i = 1; i < lines.length; i++) {
+    const values = parseCSVLine(lines[i]);
+
+    // Build a plain object where each key is a header name and the value is the
+    // corresponding cell, with whitespace trimmed.  Missing cells default to ''.
+    const row = {};
+    headers.forEach((h, idx) => {
+      row[h] = values[idx] ? values[idx].trim() : '';
+    });
+
+    // Skip rows where every cell is either empty or the Excel error string '#N/A'
+    // (e.g. blank trailing rows or formula-error rows in exported spreadsheets).
+    if (Object.values(row).some(v => v && v !== '#N/A')) {
+      rows.push(row);
+    }
+  }
+  return { headers, rows };
+}
+
+
+// ── parseCSVLine(line) ────────────────────────────────────────────────────────
+// Splits a single CSV line into an array of field values, correctly handling:
+//   • Quoted fields that may contain commas (e.g. "123 Main St, Apt 4")
+//   • Escaped double-quotes inside quoted fields ("")
+//   • Fields wrapped in single quotes (trimmed during clean-up)
+//   • Leading/trailing whitespace around field values
+//
+// Returns:
+//   string[] — ordered array of field values for this line
+//
+function parseCSVLine(line) {
+  const values = [];
+  let current = '';   // Characters accumulated for the current field
+  let inQuotes = false; // Whether we are currently inside a quoted field
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    const nextChar = line[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        // Escaped double-quote ("") inside a quoted field → add a literal "
+        current += '"';
+        i++; // Consume the second quote so it isn't processed again
+      } else {
+        // Toggle in/out of quoted-field mode
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      // Comma outside quotes → field boundary; clean and push accumulated value
+      let cleaned = current.trim();
+      // Remove outer double-quotes if the parser left them (edge case)
+      if (cleaned.startsWith('"') && cleaned.endsWith('"')) {
+        cleaned = cleaned.slice(1, -1);
+      } else if (cleaned.startsWith("'") && cleaned.endsWith("'")) {
+        // Also strip single-quote wrapping (non-standard but occasionally seen)
+        cleaned = cleaned.slice(1, -1);
+      }
+      values.push(cleaned);
+      current = ''; // Reset accumulator for next field
+    } else {
+      // Normal character — append to the current field accumulator
+      current += char;
+    }
+  }
+
+  // After the loop, push whatever is left in the accumulator as the final field.
+  let cleaned = current.trim();
+  if (cleaned.startsWith('"') && cleaned.endsWith('"')) {
+    cleaned = cleaned.slice(1, -1);
+  } else if (cleaned.startsWith("'") && cleaned.endsWith("'")) {
+    cleaned = cleaned.slice(1, -1);
+  }
+  values.push(cleaned);
+  return values;
+}
+
+
+// ── findColumn(headers, patterns) ────────────────────────────────────────────
+// Searches a list of header names for the best match to any of the given
+// keyword patterns.  Used for auto-detecting which CSV column corresponds to
+// each address field (name, address, city, state, zip).
+//
+// Strategy:
+//   1. Try exact (case-insensitive) match first — most reliable
+//   2. Fall back to substring match — catches variants like "Street Address"
+//   3. Return 0 (first column) if nothing matches — safe default
+//
+// Parameters:
+//   headers  {string[]} — column names from the parsed CSV
+//   patterns {string[]} — candidate column name keywords, ordered by preference
+//
+// Returns:
+//   number — index into the headers array of the best matching column
+//
+function findColumn(headers, patterns) {
+  // Pass 1: exact match (case-insensitive)
+  for (let pattern of patterns) {
+    const idx = headers.findIndex(h => h.toLowerCase() === pattern.toLowerCase());
+    if (idx !== -1) return idx;
+  }
+  // Pass 2: partial/substring match (case-insensitive)
+  for (let pattern of patterns) {
+    const idx = headers.findIndex(h => h.toLowerCase().includes(pattern.toLowerCase()));
+    if (idx !== -1) return idx;
+  }
+  return 0; // Default to the first column if no match found
+}
+
+
+// ── handleFileUpload(event) ──────────────────────────────────────────────────
+// Called by the file <input>'s onchange event when the user selects a CSV file.
+// Reads the file as text, parses it, auto-detects column mappings, populates the
+// column-mapping dropdowns, renders a 5-row preview, and reveals the info panel.
+//
+// Parameters:
+//   event {Event} — the DOM change event from the file input
+//
+function handleFileUpload(event) {
+  const file = event.target.files[0]; // Get the first (only) selected file
+  if (!file) return; // Exit if the dialog was cancelled
+
+  const reader = new FileReader(); // Browser API for reading local files
+
+  // Callback fires when the file has been fully read into memory.
+  reader.onload = function(e) {
+    const text = e.target.result; // Full file content as a string
+    csvData = parseCSV(text);     // Parse into { headers, rows }
+    
+    // Debug output to browser console (useful during development)
+    console.log('Parsed CSV:', csvData);
+    console.log('Headers:', csvData.headers);
+    console.log('Row count:', csvData.rows.length);
+    console.log('First row sample:', csvData.rows[0]);
+    
+    // Guard against empty or malformed CSV files
+    if (csvData.rows.length === 0) {
+      alert('No data rows found in CSV. Please check your file format.');
+      return;
+    }
+    
+    // Show the file name and a summary of its dimensions
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('fileStats').textContent = `${csvData.rows.length} rows, ${csvData.headers.length} columns`;
+    
+    // ── Populate the five column-mapping <select> dropdowns ──────────────────
+    // Each dropdown gets a "— None —" placeholder plus one <option> per CSV column.
+    const selects = ['nameCol', 'addressCol', 'cityCol', 'stateCol', 'zipCol'];
+    selects.forEach(id => {
+      const select = document.getElementById(id);
+      select.innerHTML = '<option value="">— None —</option>'; // Reset any previous options
+      csvData.headers.forEach((h, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;        // Value is the column index (used in proceedToGeocoding)
+        opt.textContent = h;    // Display text is the column header name
+        select.appendChild(opt);
+      });
+    });
+    
+    // ── Auto-detect best column match for each address field ─────────────────
+    // Patterns are ordered by specificity; exact column names known to appear
+    // in the target dataset ('ACTIVE CCFN CLIENTS', 'Address', etc.) are tried first.
+    const nameIdx    = findColumn(csvData.headers, ['ACTIVE CCFN CLIENTS', 'name', 'client', 'organization', 'org', 'facility']);
+    const addressIdx = findColumn(csvData.headers, ['Address', 'street', 'addr', 'street address']);
+    const cityIdx    = findColumn(csvData.headers, ['City', 'town', 'municipality']);
+    const stateIdx   = findColumn(csvData.headers, ['State', 'province', 'st']);
+    const zipIdx     = findColumn(csvData.headers, ['Zip', 'postal', 'postcode', 'postal code', 'zip code']);
+    
+    // Pre-select the auto-detected column in each dropdown
+    document.getElementById('nameCol').value    = nameIdx;
+    document.getElementById('addressCol').value = addressIdx;
+    document.getElementById('cityCol').value    = cityIdx;
+    document.getElementById('stateCol').value   = stateIdx;
+    document.getElementById('zipCol').value     = zipIdx;
+    
+    // Debug output showing which columns were matched
+    console.log('Auto-detected columns:');
+    console.log('  Name:',    csvData.headers[nameIdx]);
+    console.log('  Address:', csvData.headers[addressIdx]);
+    console.log('  City:',    csvData.headers[cityIdx]);
+    console.log('  State:',   csvData.headers[stateIdx]);
+    console.log('  Zip:',     csvData.headers[zipIdx]);
+    
+    // ── Render the 5-row CSV preview table ───────────────────────────────────
+    const previewHead = document.getElementById('previewHead');
+    const previewBody = document.getElementById('previewBody');
+
+    // Build the header row from all column names
+    previewHead.innerHTML = '<tr>' + csvData.headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+    previewBody.innerHTML = '';
+
+    // Render the first 5 data rows; empty cells display as blank strings
+    csvData.rows.slice(0, 5).forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = csvData.headers.map(h => `<td>${row[h] || ''}</td>`).join('');
+      previewBody.appendChild(tr);
+    });
+    
+    // Reveal the file-info / mapping / preview sub-panel
+    document.getElementById('fileInfoSection').style.display = 'block';
+  };
+
+  // Trigger the asynchronous file read (result delivered to reader.onload above)
+  reader.readAsText(file);
+}
+
+
+// ── proceedToGeocoding() ─────────────────────────────────────────────────────
+// Called when the user clicks "Start Geocoding".
+// Reads the current column-mapping dropdown values, converts all CSV rows into
+// normalised client objects, hides the upload card, reveals the geocoding card,
+// and kicks off the geocoding loop after a brief delay.
+//
+function proceedToGeocoding() {
+  // Read selected column indices from each mapping dropdown
+  const nameIdx    = document.getElementById('nameCol').value;
+  const addressIdx = document.getElementById('addressCol').value;
+  const cityIdx    = document.getElementById('cityCol').value;
+  const stateIdx   = document.getElementById('stateCol').value;
+  const zipIdx     = document.getElementById('zipCol').value;
+  
+  // Build the clients array: one object per CSV row, keyed by semantic field name.
+  // If a dropdown is set to "— None —" (value === ''), that field becomes ''.
+  // Rows with no name, no address, AND no city are filtered out entirely.
+  clients = csvData.rows.map(row => ({
+    name:    nameIdx    !== '' ? row[csvData.headers[nameIdx]]    : '',
+    address: addressIdx !== '' ? row[csvData.headers[addressIdx]] : '',
+    city:    cityIdx    !== '' ? row[csvData.headers[cityIdx]]    : '',
+    state:   stateIdx   !== '' ? row[csvData.headers[stateIdx]]   : '',
+    zip:     zipIdx     !== '' ? row[csvData.headers[zipIdx]]     : ''
+  })).filter(c => c.name || c.address || c.city);
+  
+  // Transition from the upload card to the geocoding card
+  document.getElementById('uploadSection').style.display = 'none';
+  document.getElementById('geocodingSection').style.display = 'block';
+  
+  // Small timeout lets the DOM repaint before the synchronous-looking geocoding loop starts.
+  setTimeout(startGeocoding, 500);
+}
+
+
+// ── sleep(ms) ─────────────────────────────────────────────────────────────────
+// Returns a Promise that resolves after `ms` milliseconds.
+// Used with `await sleep(ms)` to add throttling delays between API calls
+// and to implement longer "pause every N requests" intervals.
+//
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+
+// ── log(msg, cls) ─────────────────────────────────────────────────────────────
+// Appends a coloured line of text to the dark terminal log box (#log).
+// After appending, scrolls the box to the bottom so the latest entry is visible.
+//
+// Parameters:
+//   msg {string} — the message to display
+//   cls {string} — optional CSS class for colouring (log-ok, log-fail, log-skip, log-info)
+//
+function log(msg, cls='') {
+  const box = document.getElementById('log');
+  const line = document.createElement('div');
+  if (cls) line.className = cls;
+  line.textContent = msg;
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight; // Auto-scroll to the new entry
+}
+
+
+// ── buildQuery(c) ─────────────────────────────────────────────────────────────
+// Constructs a URL-encoded geocoding query string from a client's address fields.
+// Returns null if neither address nor city is present (nothing to geocode).
+//
+// Address cleaning performed:
+//   • Trims whitespace
+//   • Strips everything after the first newline (e.g. suite/unit on line 2)
+//   • Removes trailing commas
+//   • Collapses multiple internal spaces to one
+//
+// Parameters:
+//   c {object} — a client object with { name, address, city, state, zip }
+//
+// Returns:
+//   string|null — URL-encoded query string, or null if address data is missing
+//
+function buildQuery(c) {
+  if (!c.address && !c.city) return null;
+  let parts = [];
+  if (c.address) parts.push(
+    c.address.trim()
+      .replace(/\n.*/, '')      // Strip second line (e.g. "Suite 200\n...")
+      .replace(/,\s*$/, '')     // Remove trailing comma
+      .replace(/\s+/g, ' ')     // Normalise multiple spaces
+  );
+  if (c.city)  parts.push(c.city);
+  if (c.state) parts.push(c.state);
+  if (c.zip)   parts.push(c.zip);
+  return encodeURIComponent(parts.join(', ')); // e.g. "123%20Main%20St%2C%20Springfield%2C%20IL%2062701"
+}
+
+
+// ── geocode(client, retryCount) ───────────────────────────────────────────────
+// Sends a geocoding request to the Nominatim API (via local proxy) for a single
+// client address and returns the coordinates, or null on failure.
+//
+// Flow:
+//   1. Build the query string; bail out early if no address data.
+//   2. Send GET request to the proxy (http://localhost:3000/geocode?q=...) or
+//      directly to Nominatim (when useProxy = false).
+//   3. HTTP 429 (rate-limit): back off and retry up to 3 times (10s, 20s, 30s).
+//   4. Other HTTP errors: retry up to 2 times with a 5-second delay.
+//   5. If the full address returns no results, fall back to city + state only
+//      and flag the result as approximate.
+//   6. Network errors (e.g. proxy not running) are caught; retried up to 2 times.
+//
+// Parameters:
+//   client     {object} — { name, address, city, state, zip }
+//   retryCount {number} — current retry attempt (default 0, max 2–3 depending on error type)
+//
+// Returns:
+//   Promise<{lat, lon, display, approximate?}|null>
+//
+async function geocode(client, retryCount = 0) {
+  const query = buildQuery(client);
+  if (!query) return null; // Nothing to geocode
+
+  // Toggle between proxy (recommended — avoids CORS) and direct Nominatim access.
+  // For deployment: set useProxy = false only if running from a server that can
+  // set a valid User-Agent and isn't subject to browser CORS restrictions.
+  const useProxy = true;
+  const url = useProxy
+    ? `http://localhost:3000/geocode?q=${query}&countrycodes=us`
+    : `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1&countrycodes=us`;
+  
+  try {
+    // When hitting Nominatim directly, supply required headers per their usage policy.
+    // The proxy handles these headers server-side, so they're not needed in proxy mode.
+    const headers = useProxy ? {} : { 'Accept-Language': 'en', 'User-Agent': 'CSV-Geocoder/1.0' };
+    const res = await fetch(url, { headers });
+    
+    // ── Handle HTTP 429 (Too Many Requests / Rate Limited) ───────────────────
+    // Nominatim enforces 1 request/second; our delays are conservative (5s+),
+    // but 429s can still occur under load.  Back off with escalating waits.
+    if (res.status === 429) {
+      if (retryCount < 3) {
+        const waitTime = (retryCount + 1) * 10000; // 10s on first retry, 20s, 30s
+        log(`⏳ Rate limited, waiting ${waitTime/1000}s...`, 'log-skip');
+        await sleep(waitTime);
+        return geocode(client, retryCount + 1); // Recursive retry
+      }
+      return null; // Exhausted retries — give up on this record
+    }
+    
+    // ── Handle other non-OK HTTP responses (5xx server errors, etc.) ─────────
+    if (!res.ok) {
+      if (retryCount < 2) {
+        await sleep(5000); // Wait 5 seconds before retrying
+        return geocode(client, retryCount + 1);
+      }
+      return null;
+    }
+    
+    // ── Parse successful JSON response ───────────────────────────────────────
+    const data = await res.json();
+    if (data && data.length > 0) {
+      // data[0] is the best match; return lat/lon as floats plus the display name
+      return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon), display: data[0].display_name };
+    }
+
+    // ── Fallback: city + state only ──────────────────────────────────────────
+    // If the full address query returned no results, try a less specific query
+    // using just city and state.  The result is flagged as approximate so it
+    // appears as "(~city)" in the output.
+    if (client.city && client.state) {
+      const fallbackQuery = encodeURIComponent(client.city + ', ' + client.state);
+      const fallbackUrl = useProxy
+        ? `http://localhost:3000/geocode?q=${fallbackQuery}&countrycodes=us`
+        : `https://nominatim.openstreetmap.org/search?q=${fallbackQuery}&format=json&limit=1&countrycodes=us`;
+      const res2 = await fetch(fallbackUrl, { headers });
+      if (res2.ok) {
+        const data2 = await res2.json();
+        if (data2 && data2.length > 0) {
+          return {
+            lat: parseFloat(data2[0].lat),
+            lon: parseFloat(data2[0].lon),
+            display: data2[0].display_name,
+            approximate: true // Flag so GeoJSON consumer knows this is a city-level match
+          };
+        }
+      }
+    }
+  } catch(e) {
+    // ── Network / fetch errors ────────────────────────────────────────────────
+    // The most common cause is the proxy server not being started.
+    if (useProxy && e.message.includes('Failed to fetch')) {
+      log(`⚠ Proxy server not running! Start it with: node geocode-proxy-server.js`, 'log-fail');
+    }
+    // Retry up to 2 times for transient network issues
+    if (retryCount < 2) {
+      log(`⚠ Error, retrying... (${retryCount + 1}/2)`, 'log-skip');
+      await sleep(5000);
+      return geocode(client, retryCount + 1);
+    }
+  }
+  return null; // All attempts exhausted — record will be marked as FAIL
+}
+
+
+// ── startGeocoding() ──────────────────────────────────────────────────────────
+// Main geocoding loop. Iterates over the `clients` array, calls geocode() for
+// each record, updates the UI (progress bar, stats, log, results table) after
+// each one, and triggers the download button when all records have been processed.
+//
+// Rate-limiting strategy:
+//   • 5-second delay  (baseDelay)  after every request
+//   • 10-second pause (pauseDelay) after every 30th request
+//   Estimated total time is calculated and shown in the log at the start.
+//
+async function startGeocoding() {
+  if (running) return; // Prevent double-invocation
+  running = true;
+  results = []; cntOk = 0; cntFail = 0; cntSkip = 0; // Reset all state
+  updateStats(); // Reset counter display to 0
+
+  log(' Starting geocoding of ' + clients.length + ' records...', 'log-info');
+  
+  // ── Pre-calculate throttling parameters ──────────────────────────────────
+  const baseDelay  = 5000;  // 5 seconds between every request
+  const pauseCount = Math.floor(clients.length / 30); // Number of 10s pauses needed
+  const pauseDelay = 10000; // 10-second pause every 30 records
+  const estimatedMinutes = Math.ceil((clients.length * baseDelay + pauseCount * pauseDelay) / 60000);
+  
+  log(` Using ${baseDelay/1000}s delay between requests`, 'log-info');
+  log(` Adding ${pauseDelay/1000}s pause every 30 requests`, 'log-info');
+  log(` Estimated time: ~${estimatedMinutes} minute${estimatedMinutes > 1 ? 's' : ''}`, 'log-info');
+
+  // Reveal the results table card and clear any previous rows
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  document.getElementById('resultsCard').style.display = 'block';
+
+  // ── Main per-record loop ──────────────────────────────────────────────────
+  for (let i = 0; i < clients.length; i++) {
+    const c = clients[i];
+
+    // Update progress bar width (0–100%) and the descriptive progress text
+    const pct = Math.round((i / clients.length) * 100);
+    document.getElementById('bar').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `Processing ${i + 1} of ${clients.length} — ${c.name || 'Record ' + (i+1)}`;
+
+    // Default state before we know the outcome
+    let coord = null;
+    let status = 'fail';
+    let badgeClass = 'badge-fail';
+    let coords = '—'; // Display string for the Coords column
+
+    if (!c.address && !c.city) {
+      // ── SKIP: no address data to geocode ─────────────────────────────────
+      cntSkip++;
+      status = 'skip';
+      badgeClass = 'badge-skip';
+      log(`⚠ SKIP  ${c.name || 'Record ' + (i+1)} — no address`, 'log-skip');
+    } else {
+      // ── GEOCODE the address ───────────────────────────────────────────────
+      coord = await geocode(c);
+      
+      // Every 30th request (excluding the very last record), insert an extra
+      // 10-second pause to give the API breathing room.
+      if ((i + 1) % 30 === 0 && i + 1 < clients.length) {
+        log(`⏸ Pausing 10s after ${i + 1} requests...`, 'log-info');
+        await sleep(10000);
+      }
+      
+      // Standard per-request delay (always applied, even after a 429 retry)
+      await sleep(baseDelay);
+      
+      if (coord) {
+        // ── SUCCESS ──────────────────────────────────────────────────────────
+        cntOk++;
+        status = 'ok';
+        badgeClass = 'badge-ok';
+        // Show lat/lon to 5 decimal places; add "(~city)" flag if approximate
+        coords = `${coord.lat.toFixed(5)}, ${coord.lon.toFixed(5)}${coord.approximate ? ' (~city)' : ''}`;
+        log(`✓ OK    ${c.name || 'Record ' + (i+1)}`, 'log-ok');
+      } else {
+        // ── FAIL: geocode() returned null after all retries ──────────────────
+        cntFail++;
+        log(`✗ FAIL  ${c.name || 'Record ' + (i+1)}`, 'log-fail');
+      }
+    }
+
+    // Store the result for later GeoJSON export
+    results.push({ client: c, coord, status });
+    updateStats(); // Refresh the three counter boxes
+
+    // ── Append a row to the results table ────────────────────────────────────
+    const tr = document.createElement('tr');
+    // Reconstruct full address string for display, skipping empty parts
+    const fullAddr = [c.address, c.city, c.state, c.zip].filter(Boolean).join(', ');
+    tr.innerHTML = `
+      <td>${c.name || '—'}</td>
+      <td style="max-width:180px;word-break:break-word;">${fullAddr || '—'}</td>
+      <td style="font-family:monospace;font-size:12px;">${coords}</td>
+      <td><span class="badge ${badgeClass}">${status === 'ok' ? 'OK' : status === 'skip' ? 'SKIP' : 'FAIL'}</span></td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  // ── All records processed ─────────────────────────────────────────────────
+  document.getElementById('bar').style.width = '100%'; // Fill bar to 100%
+  document.getElementById('progressText').textContent = `Done! ${cntOk} geocoded, ${cntFail} failed, ${cntSkip} skipped.`;
+  log(`\n Complete! ${cntOk} geocoded, ${cntFail} failed, ${cntSkip} skipped.`, 'log-info');
+  document.getElementById('downloadBtn').style.display = 'inline-flex'; // Show download button
+  running = false; // Release the guard flag
+}
+
+
+// ── updateStats() ─────────────────────────────────────────────────────────────
+// Syncs the three stat counter boxes with the current module-level counts.
+// Called after every processed record so the UI reflects progress in real time.
+//
+function updateStats() {
+  document.getElementById('cntOk').textContent   = cntOk;
+  document.getElementById('cntFail').textContent = cntFail;
+  document.getElementById('cntSkip').textContent = cntSkip;
+}
+
+
+// ── downloadGeoJSON() ─────────────────────────────────────────────────────────
+// Builds a GeoJSON FeatureCollection from all successfully geocoded results and
+// triggers a browser file download of "geocoded_addresses.geojson".
+//
+// GeoJSON structure:
+//   {
+//     type: "FeatureCollection",
+//     features: [ Feature, ... ],   ← one per successfully geocoded record
+//     metadata: { ... }             ← run stats (total, geocoded, failed, skipped)
+//   }
+//
+// Each Feature:
+//   {
+//     type: "Feature",
+//     geometry: { type: "Point", coordinates: [lon, lat] },  ← GeoJSON is [lon, lat] order!
+//     properties: { name, address, city, state, zip, geocoded_display, approximate }
+//   }
+//
+function downloadGeoJSON() {
+  // Only include records with valid coordinates (status === 'ok')
+  const features = results
+    .filter(r => r.coord)
+    .map(r => ({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        // GeoJSON spec requires [longitude, latitude] (not lat/lon)
+        coordinates: [r.coord.lon, r.coord.lat]
+      },
+      properties: {
+        name:              r.client.name,
+        address:           r.client.address,
+        city:              r.client.city,
+        state:             r.client.state,
+        zip:               r.client.zip,
+        geocoded_display:  r.coord.display || '',     // Nominatim's human-readable match string
+        approximate:       r.coord.approximate || false // true = city-level fallback was used
+      }
+    }));
+
+  // Assemble the full GeoJSON document with run metadata
+  const geojson = {
+    type: 'FeatureCollection',
+    features,
+    metadata: {
+      generated: new Date().toISOString(), // ISO-8601 timestamp for when this file was created
+      total:     clients.length,
+      geocoded:  cntOk,
+      failed:    cntFail,
+      skipped:   cntSkip,
+      source:    'OpenStreetMap Nominatim'
+    }
+  };
+
+  // Serialise to JSON with 2-space indentation for human readability
+  const blob = new Blob([JSON.stringify(geojson, null, 2)], { type: 'application/geo+json' });
+
+  // Create a temporary object URL and click a hidden <a> tag to trigger the download.
+  // URL.revokeObjectURL() frees memory after the download has been initiated.
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'geocoded_addresses.geojson'; // Suggested filename for the download
+  a.click();
+  URL.revokeObjectURL(url); // Clean up the temporary URL
+}
+
+
+// ── resetTool() ───────────────────────────────────────────────────────────────
+// Returns the UI to its initial state so the user can geocode a new CSV file.
+// Clears all state variables and resets section visibility.
+//
+function resetTool() {
+  // Restore section visibility to initial state
+  document.getElementById('uploadSection').style.display  = 'block';
+  document.getElementById('geocodingSection').style.display = 'none';
+  document.getElementById('resultsCard').style.display    = 'none';
+  document.getElementById('fileInfoSection').style.display = 'none';
+
+  // Clear the file input so the same file can be re-selected if needed
+  document.getElementById('fileInput').value = '';
+
+  // Reset all module-level state
+  csvData = [];
+  clients = [];
+  results = [];
+}
+</script>
+</body>
+</html>
