@@ -124,14 +124,14 @@ canvas{
 button.pill{
   appearance: none;
   width: 100%;
-  border: 1px solid rgba(126, 145, 135, 0.28);
+  border: 1px solid rgba(76, 29, 149, 0.5);
   background: radial-gradient(
     120% 120% at 20% 0%,
-    #ffffff 0%,
-    #f4faf5 52%,
-    #f3f0fa 100%
+    #7c3aed 0%,
+    #5b21b6 50%,
+    #3b0764 100%
   );
-  color: #1f2937;
+  color: #f9fafb;
 
   padding: 10px 12px;
   border-radius: 12px;
@@ -144,8 +144,8 @@ button.pill{
   overflow: hidden;
 
   box-shadow:
-    0 10px 20px rgba(45, 74, 58, 0.08),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+    0 10px 20px rgba(59, 7, 100, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.15);
 
   transition:
     transform 140ms ease,
@@ -163,7 +163,7 @@ button.pill::after{
   background: linear-gradient(
     120deg,
     transparent 0%,
-    rgba(255,255,255,0.55) 45%,
+    rgba(255,255,255,0.25) 45%,
     transparent 70%
   );
   transform: translateX(-40%);
@@ -173,16 +173,16 @@ button.pill::after{
 
 button.pill:hover{
   transform: translateY(-2px);
-  border-color: rgba(96, 135, 115, 0.45);
+  border-color: rgba(124, 58, 237, 0.7);
   box-shadow:
-    0 16px 28px rgba(45, 74, 58, 0.12),
-    inset 0 1px 0 rgba(255,255,255,0.9);
-  filter: saturate(1.05);
+    0 16px 28px rgba(59, 7, 100, 0.35),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  filter: brightness(1.1) saturate(1.1);
   background: radial-gradient(
     120% 120% at 20% 0%,
-    #ffffff 0%,
-    #eef8f0 52%,
-    #eee8f8 100%
+    #8b5cf6 0%,
+    #6d28d9 50%,
+    #4c1d95 100%
   );
 }
 
