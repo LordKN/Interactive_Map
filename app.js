@@ -835,22 +835,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- helper: turn off selected overlay
   function turnOffSelectedOverlays() {
-    if (povertyLayer && povertyOn) {
-      map.removeLayer(povertyLayer);
-      povertyOn = false;
-      if (povertyLegend) {
-        map.removeControl(povertyLegend);
-        povertyLegend = null;
-      }
-      setButtonOff(document.getElementById("togglePoverty"), "Show Poverty");
-    }
-
-    if (routesLayer && routesOn) {
-      map.removeLayer(routesLayer);
-      routesOn = false;
-      setButtonOff(document.getElementById("toggleRoutes"), "Show Bus Routes");
-    }
-
     if (incomeLayer && incomeOn) {
       map.removeLayer(incomeLayer);
       incomeOn = false;
@@ -879,12 +863,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         over65Legend = null;
       }
       setButtonOff(document.getElementById("toggle65"), "Show Over 65");
-    }
-
-    if (clientsLayer && clientsOn) {
-      map.removeLayer(clientsLayer);
-      clientsOn = false;
-      setButtonOff(document.getElementById("toggleClients"), "Show Partners");
     }
   }
 
