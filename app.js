@@ -192,11 +192,11 @@ async function addTractLayer(map, geojsonPath = "tracts_acs_2024_elk_mar_sj.geoj
 // POVERTY (red ramp: darker = higher poverty)
 function povertyColor(pct) {
   if (!Number.isFinite(pct)) return "#cccccc";
-  if (pct < 10) return "#fee5d9";
-  if (pct < 20) return "#fcae91";
-  if (pct < 30) return "#fb6a4a";
-  if (pct < 40) return "#de2d26";
-  return "#a50f15";
+  if (pct < 10) return "#edf8e9";
+  if (pct < 20) return "#bae4b3";
+  if (pct < 30) return "#74c476";
+  if (pct < 40) return "#31a354";
+  return "#006d2c";
 }
 
 // INCOME (purple ramp: darker = higher income)
@@ -232,11 +232,11 @@ function over65Color(pct) {
 // FOOD INSECURITY INDEX (1–10, red-orange ramp: darker = more food insecure)
 function foodInsecurityColor(idx) {
   if (!Number.isFinite(idx)) return "#cccccc";
-  if (idx <= 2) return "#fff5f0";
-  if (idx <= 4) return "#fcbba1";
-  if (idx <= 6) return "#fb6a4a";
-  if (idx <= 8) return "#cb181d";
-  return "#67000d";
+  if (idx <= 2) return "#f2e5ff";
+  if (idx <= 4) return "#d6b3ff";
+  if (idx <= 6) return "#b266ff";
+  if (idx <= 8) return "#7a1fff";
+  return "#4b0082";
 }
 
 
