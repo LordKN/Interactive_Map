@@ -890,9 +890,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   btn_poverty.addEventListener("click", async () => {
     if (!povertyOn) {
       if (foodOn || walkOn) {
-        turnOffSelectedOverlays();
       } else {
-        turnOffAllOverlays();
+        
       }
 
       if (!povertyLayer) povertyLayer = await buildPovertyLayer();
@@ -926,9 +925,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     btnRoutes.addEventListener("click", async () => {
       if (!routesOn) {
         if (foodOn || walkOn) {
-          turnOffSelectedOverlays();
         } else {
-          turnOffAllOverlays();
         }
 
         if (!routesLayer) routesLayer = await addBusRoutesLayer(map);
@@ -1088,9 +1085,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   btnClients.addEventListener("click", async () => {
     if (!clientsOn) {
       if (foodOn || walkOn) {
-        turnOffSelectedOverlays();
+        
       } else {
-        turnOffAllOverlays();
+        
       }
 
       if (!clientsLayer) clientsLayer = await buildClientClusterLayer();
